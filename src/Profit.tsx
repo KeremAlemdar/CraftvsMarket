@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
-import { isConditionalExpression, isConstructorDeclaration } from 'typescript';
+import { isConstructorDeclaration } from 'typescript';
 import { clothArtifactDefault } from './crafting/artifacts/marketplace';
 import { clothArmorCraftSilverDefault, clothArmorRoyalCraftSilverDefault, clothArmorDruidCraftSilverDefault, clothArmorFiendCraftSilverDefault, clothArmorCultistCraftSilverDefault, clothArmorPurityCraftSilverDefault } from './crafting/clothArmor/craftSilver';
 import { clothArmorv1ScholarDefault, clothArmorv2ScholarDefault, clothArmorv3ScholarDefault, clothArmorv1ClericDefault, clothArmorv2ClericDefault, clothArmorv3ClericDefault, clothArmorv1MageDefault, clothArmorv2MageDefault, clothArmorv3MageDefault, clothArmorv1RoyalDefault, clothArmorv2RoyalDefault, clothArmorv3RoyalDefault, clothArmorv1DruidDefault, clothArmorv2DruidDefault, clothArmorv3DruidDefault, clothArmorv1FiendDefault, clothArmorv2FiendDefault, clothArmorv3FiendDefault, clothArmorv1CultistDefault, clothArmorv2CultistDefault, clothArmorv3CultistDefault, clothArmorv1PurityDefault, clothArmorv2PurityDefault, clothArmorv3PurityDefault } from './crafting/clothArmor/marketPlace';
@@ -8,7 +8,7 @@ import { fiberCraftSilverv1Default, fiberCraftSilverv2Default, clothCraftSilverD
 import { fiberDefault, clothDefault, hideDefault, leatherDefault, logDefault, plankDefault } from './crafting/Resources/marketPlace';
 import { bagCraftSilverDefault, satchelCraftSilverDefault } from './crafting/tools/craftSilver';
 import { bagDefault, satchelDefault } from './crafting/tools/marketPlace';
-import { arr, fiberCraftPricesv1Default, fiberCraftPricesv2Default, profitableFiberDefault, profitableFiberIndexDefault, profitableClothIndexDefault, clothCraftPricesDefault, profitableClothDefault, hideCraftPricesv1Default, hideCraftPricesv2Default, profitableHideDefault, profitableHideIndexDefault, profitableLeatherIndexDefault, leatherCraftPricesDefault, profitableLeatherDefault, logCraftPricesv1Default, logCraftPricesv2Default, profitableLogDefault, profitableLogIndexDefault, profitablePlankIndexDefault, plankCraftPricesDefault, profitablePlankDefault, bagCraftDefault, profitableBagDefault, profitableBagPercentageDefault, satchelCraftDefault, profitableSatchelDefault, profitableSatchelPercentageDefault, clothArmorv1ScholarCraftDefault, profitableClothArmorv1ScholarDefault, profitableClothArmorv1ScholarPercentageDefault, clothArmorv2ScholarCraftDefault, profitableClothArmorv2ScholarDefault, profitableClothArmorv2ScholarPercentageDefault, clothArmorv3ScholarCraftDefault, profitableClothArmorv3ScholarDefault, profitableClothArmorv3ScholarPercentageDefault, clothArmorv1ClericCraftDefault, profitableClothArmorv1ClericDefault, profitableClothArmorv1ClericPercentageDefault, clothArmorv2ClericCraftDefault, profitableClothArmorv2ClericDefault, profitableClothArmorv2ClericPercentageDefault, clothArmorv3ClericCraftDefault, profitableClothArmorv3ClericDefault, profitableClothArmorv3ClericPercentageDefault, clothArmorv1MageCraftDefault, profitableClothArmorv1MageDefault, profitableClothArmorv1MagePercentageDefault, clothArmorv2MageCraftDefault, profitableClothArmorv2MageDefault, profitableClothArmorv2MagePercentageDefault, clothArmorv3MageCraftDefault, profitableClothArmorv3MageDefault, profitableClothArmorv3MagePercentageDefault, clothArmorv1RoyalCraftDefault, profitableClothArmorv1RoyalDefault, profitableClothArmorv1RoyalPercentageDefault, clothArmorv2RoyalCraftDefault, profitableClothArmorv2RoyalDefault, profitableClothArmorv2RoyalPercentageDefault, clothArmorv3RoyalCraftDefault, profitableClothArmorv3RoyalDefault, profitableClothArmorv3RoyalPercentageDefault, clothArmorv1DruidCraftDefault, profitableClothArmorv1DruidDefault, profitableClothArmorv1DruidPercentageDefault, clothArmorv2DruidCraftDefault, profitableClothArmorv2DruidDefault, profitableClothArmorv2DruidPercentageDefault, clothArmorv3DruidCraftDefault, profitableClothArmorv3DruidDefault, profitableClothArmorv3DruidPercentageDefault, clothArmorv1FiendCraftDefault, profitableClothArmorv1FiendDefault, profitableClothArmorv1FiendPercentageDefault, clothArmorv2FiendCraftDefault, profitableClothArmorv2FiendDefault, profitableClothArmorv2FiendPercentageDefault, clothArmorv3FiendCraftDefault, profitableClothArmorv3FiendDefault, profitableClothArmorv3FiendPercentageDefault, clothArmorv1CultistCraftDefault, profitableClothArmorv1CultistDefault, profitableClothArmorv1CultistPercentageDefault, clothArmorv2CultistCraftDefault, profitableClothArmorv2CultistDefault, profitableClothArmorv2CultistPercentageDefault, clothArmorv3CultistCraftDefault, profitableClothArmorv3CultistDefault, profitableClothArmorv3CultistPercentageDefault, clothArmorv1PurityCraftDefault, profitableClothArmorv1PurityDefault, profitableClothArmorv1PurityPercentageDefault, clothArmorv2PurityCraftDefault, profitableClothArmorv2PurityDefault, profitableClothArmorv2PurityPercentageDefault, clothArmorv3PurityCraftDefault, profitableClothArmorv3PurityDefault, profitableClothArmorv3PurityPercentageDefault, item } from './types';
+import { arr, fiberCraftPricesv1Default, fiberCraftPricesv2Default, profitableFiberDefault, profitableFiberIndexDefault, profitableClothIndexDefault, clothCraftPricesDefault, profitableClothDefault, hideCraftPricesv1Default, hideCraftPricesv2Default, profitableHideDefault, profitableHideIndexDefault, profitableLeatherIndexDefault, leatherCraftPricesDefault, profitableLeatherDefault, logCraftPricesv1Default, logCraftPricesv2Default, profitableLogDefault, profitableLogIndexDefault, profitablePlankIndexDefault, plankCraftPricesDefault, profitablePlankDefault, bagCraftDefault, profitableBagDefault, profitableBagPercentageDefault, satchelCraftDefault, profitableSatchelDefault, profitableSatchelPercentageDefault, clothArmorv1ScholarCraftDefault, profitableClothArmorv1ScholarDefault, profitableClothArmorv1ScholarPercentageDefault, clothArmorv2ScholarCraftDefault, profitableClothArmorv2ScholarDefault, profitableClothArmorv2ScholarPercentageDefault, clothArmorv3ScholarCraftDefault, profitableClothArmorv3ScholarDefault, profitableClothArmorv3ScholarPercentageDefault, clothArmorv1ClericCraftDefault, profitableClothArmorv1ClericDefault, profitableClothArmorv1ClericPercentageDefault, clothArmorv2ClericCraftDefault, profitableClothArmorv2ClericDefault, profitableClothArmorv2ClericPercentageDefault, clothArmorv3ClericCraftDefault, profitableClothArmorv3ClericDefault, profitableClothArmorv3ClericPercentageDefault, clothArmorv1MageCraftDefault, profitableClothArmorv1MageDefault, profitableClothArmorv1MagePercentageDefault, clothArmorv2MageCraftDefault, profitableClothArmorv2MageDefault, profitableClothArmorv2MagePercentageDefault, clothArmorv3MageCraftDefault, profitableClothArmorv3MageDefault, profitableClothArmorv3MagePercentageDefault, clothArmorv1RoyalCraftDefault, profitableClothArmorv1RoyalDefault, profitableClothArmorv1RoyalPercentageDefault, clothArmorv2RoyalCraftDefault, profitableClothArmorv2RoyalDefault, profitableClothArmorv2RoyalPercentageDefault, clothArmorv3RoyalCraftDefault, profitableClothArmorv3RoyalDefault, profitableClothArmorv3RoyalPercentageDefault, clothArmorv1DruidCraftDefault, profitableClothArmorv1DruidDefault, profitableClothArmorv1DruidPercentageDefault, clothArmorv2DruidCraftDefault, profitableClothArmorv2DruidDefault, profitableClothArmorv2DruidPercentageDefault, clothArmorv3DruidCraftDefault, profitableClothArmorv3DruidDefault, profitableClothArmorv3DruidPercentageDefault, clothArmorv1FiendCraftDefault, profitableClothArmorv1FiendDefault, profitableClothArmorv1FiendPercentageDefault, clothArmorv2FiendCraftDefault, profitableClothArmorv2FiendDefault, profitableClothArmorv2FiendPercentageDefault, clothArmorv3FiendCraftDefault, profitableClothArmorv3FiendDefault, profitableClothArmorv3FiendPercentageDefault, clothArmorv1CultistCraftDefault, profitableClothArmorv1CultistDefault, profitableClothArmorv1CultistPercentageDefault, clothArmorv2CultistCraftDefault, profitableClothArmorv2CultistDefault, profitableClothArmorv2CultistPercentageDefault, clothArmorv3CultistCraftDefault, profitableClothArmorv3CultistDefault, profitableClothArmorv3CultistPercentageDefault, clothArmorv1PurityCraftDefault, profitableClothArmorv1PurityDefault, profitableClothArmorv1PurityPercentageDefault, clothArmorv2PurityCraftDefault, profitableClothArmorv2PurityDefault, profitableClothArmorv2PurityPercentageDefault, clothArmorv3PurityCraftDefault, profitableClothArmorv3PurityDefault, profitableClothArmorv3PurityPercentageDefault } from './types';
 // import {initializeApp} from 'firebase/app';
 // import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import "firebase/compat/firestore"
@@ -62,8 +62,6 @@ function Profit() {
     // sanctified_bindings
     const [clothArmorArtifacts, setClothArmorArtifacts] = useState<arr>(clothArtifactDefault) as any;
     //Fiber
-    const [fiber, setFiber] = useState<item>() as any;
-
     const [fiberCraftPricesv1, setFiberCraftPricesv1] = useState<arr>(fiberCraftPricesv1Default) as any;
     const [fiberCraftPricesv2, setFiberCraftPricesv2] = useState<arr>(fiberCraftPricesv2Default) as any;
     const [fiberCraftSilverv1, setFiberCraftSilverv1] = useState<arr>(fiberCraftSilverv1Default) as any;
@@ -71,15 +69,7 @@ function Profit() {
     const [profitableFiber, setProfitableFiber] = useState<arr>(profitableFiberDefault) as any;
     const [profitableFiberIndex, setprofitableFiberIndex] = useState<arr>(profitableFiberIndexDefault) as any;
     const [fiberPrices, setFiberPrices] = useState<arr>(fiberDefault) as any;
-    // setFiber([
-    //     fiberCraftPricesv1,
-    //     fiberCraftPricesv2,
-    //     fiberCraftSilverv1,
-    //     fiberCraftSilverv2,
-    //     profitableFiber,
-    //     profitableFiberIndex,
-    //     fiberPrices
-    // ])
+
     //Cloth
     const [profitableClothIndex, setProfitableClothIndex] = useState<arr>(profitableClothIndexDefault) as any;
     const [clothCraftPrices, setClothCraftPricesv1] = useState<arr>(clothCraftPricesDefault) as any;
@@ -1557,18 +1547,15 @@ function Profit() {
         toolsCraftMount();
         // setTableReady(true);
     }
-    // const seeResource = async () => {
-    //     resourceMount();
-    //     console.log(profitableFiber);
-    //     setResourceReady(true);
-    // }
-    // const seeProfitable = async () => {
-    //     setProfitableReady(true);
-    // }
-
-    const denemePrint = () => {
-        // console.log(fiber);
+    const seeResource = async () => {
+        resourceMount();
+        console.log(profitableFiber);
+        setResourceReady(true);
     }
+    const seeProfitable = async () => {
+        setProfitableReady(true);
+    }
+
     useEffect(() => {
         componentDidMount();
     }, []);
@@ -1599,12 +1586,11 @@ function Profit() {
                 <div>profitable</div>
                 {printMultidimenstionalArray(profitableFiber)}</div>) : (<div>baban</div>)}
 
-            {/* <button onClick={seeResource}>see resources</button> */}
+            <button onClick={seeResource}>see resources</button>
 
             <button onClick={makeRecipes}>make recipes</button>
 
-            {/* <button onClick={seeProfitable}>see profitable</button> */}
-            <button onClick={denemePrint}>see fiber</button>
+            <button onClick={seeProfitable}>see profitable</button>
 
             {profitableReady ? (<div>
                 <div>BAG </div>
@@ -1700,6 +1686,7 @@ function Profit() {
             {printMultidimenstionalArray(profitableClothArmorv1DruidPercentage)}
             {printMultidimenstionalArray(profitableClothArmorv2DruidPercentage)}
             {printMultidimenstionalArray(profitableClothArmorv3DruidPercentage)} */}
+
         </div>
     );
 }
