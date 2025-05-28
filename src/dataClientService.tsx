@@ -76,31 +76,31 @@ function dataClientService() {
                 else {
                     myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T" + i + "_" + itemName + itemLevel + ".json?locations=" + location;
                 }
-                await limiter.schedule(() => axios.get(myURL)
-                    .then(res => {
-                        if (res.status === 200) {
-                            console.log("SUCCESSFULL");
-                        }
-                        else {
-                            console.log("ERROR");
-                        }
-                        console.log(res.data[0].sell_price_min);
-                        if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-                            bigger = res.data[0].sell_price_min;
-                        }
-                        else {
-                            bigger = res.data[0].buy_price_min;
-                        }
-                        if (bigger === 0) {
-                            bigger = 99999999;
-                        }
-                        prices.arr[i][j] = bigger;
-                    }))
+                // await limiter.schedule(() => axios.get(myURL)
+                //     .then(res => {
+                //         if (res.status === 200) {
+                //             console.log("SUCCESSFULL");
+                //         }
+                //         else {
+                //             console.log("ERROR");
+                //         }
+                //         console.log(res.data[0].sell_price_min);
+                //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
+                //             bigger = res.data[0].sell_price_min;
+                //         }
+                //         else {
+                //             bigger = res.data[0].buy_price_min;
+                //         }
+                //         if (bigger === 0) {
+                //             bigger = 99999999;
+                //         }
+                //         prices.arr[i][j] = bigger;
+                //     }))
             }
         }
-        await database.put('/' + itemName + '.json', prices).then(response => {
-            console.log(response);
-        })
+        // await database.put('/' + itemName + '.json', prices).then(response => {
+        //     console.log(response);
+        // })
     }
     const databaseArtifactGüncelleme = async (location: string, itemName: string[], starting: number, artifactNumber: number) => {
         var myURL = "";
@@ -109,32 +109,32 @@ function dataClientService() {
         for (let i = starting; i < 9; i++) {
             for (let j = 0; j < artifactNumber; j++) {
                 myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T" + i + "_ARTEFACT_" + itemName[j] + ".json?locations=" + location;
-                await limiter.schedule(() => axios.get(myURL)
-                    .then(res => {
-                        if (res.status === 200) {
-                            console.log("SUCCESSFULL");
-                        }
-                        else {
-                            console.log("ERROR");
-                        }
-                        console.log(res.data[0].sell_price_min);
-                        if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-                            bigger = res.data[0].sell_price_min;
-                        }
-                        else {
-                            bigger = res.data[0].buy_price_min;
-                        }
-                        if (bigger === 0) {
-                            bigger = 99999999;
-                        }
-                        prices.arr[j][i] = bigger;
-                    }))
+                // await limiter.schedule(() => axios.get(myURL)
+                //     .then(res => {
+                //         if (res.status === 200) {
+                //             console.log("SUCCESSFULL");
+                //         }
+                //         else {
+                //             console.log("ERROR");
+                //         }
+                //         console.log(res.data[0].sell_price_min);
+                //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
+                //             bigger = res.data[0].sell_price_min;
+                //         }
+                //         else {
+                //             bigger = res.data[0].buy_price_min;
+                //         }
+                //         if (bigger === 0) {
+                //             bigger = 99999999;
+                //         }
+                //         prices.arr[j][i] = bigger;
+                //     }))
             }
         }
         console.log(prices);
-        await database.put('/ARTIFACT' + '.json', prices).then(response => {
-            console.log(response);
-        })
+        // await database.put('/ARTIFACT' + '.json', prices).then(response => {
+        //     console.log(response);
+        // })
     }
     const databaseClothArmorArtifactGüncelleme = async () => {
         const names = [
@@ -175,29 +175,29 @@ function dataClientService() {
         var bigger;
         for (let i = 0; i < heartNumber; i++) {
             var myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T1_FACTION_" + name[i] + ".json?locations=" + location;
-            await limiter.schedule(() => axios.get(myURL)
-                .then(res => {
-                    if (res.status === 200) {
-                        console.log("SUCCESSFULL");
-                    }
-                    else {
-                        console.log("ERROR");
-                    }
-                    if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-                        bigger = res.data[0].sell_price_min;
-                    }
-                    else {
-                        bigger = res.data[0].buy_price_min;
-                    }
-                    if (bigger === 0) {
-                        bigger = 99999999;
-                    }
-                    heartArr[i] = bigger;
-                }))
+            // await limiter.schedule(() => axios.get(myURL)
+            //     .then(res => {
+            //         if (res.status === 200) {
+            //             console.log("SUCCESSFULL");
+            //         }
+            //         else {
+            //             console.log("ERROR");
+            //         }
+            //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
+            //             bigger = res.data[0].sell_price_min;
+            //         }
+            //         else {
+            //             bigger = res.data[0].buy_price_min;
+            //         }
+            //         if (bigger === 0) {
+            //             bigger = 99999999;
+            //         }
+            //         heartArr[i] = bigger;
+            //     }))
         }
-        await database.put('/HEART' + '.json', heartArr).then(response => {
-            console.log(response);
-        })
+        // await database.put('/HEART' + '.json', heartArr).then(response => {
+        //     console.log(response);
+        // })
     }
     return (
         <div className="profit">

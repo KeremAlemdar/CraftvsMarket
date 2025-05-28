@@ -41,6 +41,86 @@ export const logCraftPricesv1Default: arr = {
         [0, 0, 0, 0],
     ]
 }
+
+export interface MarketApiResponseItem {
+    item_id: string;
+    city: string;
+    quality: number;
+    sell_price_min: number;
+    sell_price_min_date: string;
+    sell_price_max: number;
+    sell_price_max_date: string;
+    buy_price_min: number;
+    buy_price_min_date: string;
+    buy_price_max: number;
+    buy_price_max_date: string;
+}
+
+export type PriceMatrix = number[][]; // Represents [tier][enchantment]
+
+// Keeping the original 'arr' type for now to minimize breakage in Profit.tsx state variables
+// export type arr = { arr: PriceMatrix; } 
+// It's already: export type arr = { arr: number[][]; } which is fine for now.
+
+export interface ItemTierPrices { // This will eventually replace the direct use of 'arr' for state
+    prices: PriceMatrix;
+    lastUpdated?: string;
+}
+
+export interface CraftingMaterial {
+    uniqueNameBase: string; // e.g., "CLOTH", "FIBER", "KEEPER_ROBE_ARTIFACT"
+    tier: number;
+    count: number;
+    // Enchantment of the material itself is not stored here;
+    // it's determined at calculation time based on the parent item's enchantment
+    // or if the material is an artifact (always .0) or special raw resource.
+}
+
+export interface Recipe {
+    materials: CraftingMaterial[];
+    craftingFocusCost?: number;
+    silverCost?: number; 
+    quantityProduced?: number; 
+}
+
+export enum ItemCategory {
+    RESOURCE_RAW = "RESOURCE_RAW",
+    RESOURCE_REFINED = "RESOURCE_REFINED",
+    ARTIFACT = "ARTIFACT",
+    EQUIPMENT_TOOL = "EQUIPMENT_TOOL",
+    EQUIPMENT_ARMOR_CLOTH = "EQUIPMENT_ARMOR_CLOTH",
+    EQUIPMENT_ARMOR_LEATHER = "EQUIPMENT_ARMOR_LEATHER",
+    EQUIPMENT_ARMOR_PLATE = "EQUIPMENT_ARMOR_PLATE",
+    // Add more categories as needed
+}
+
+export interface ItemDefinition {
+    uniqueNameBase: string; 
+    displayName: string;    
+    category: ItemCategory;
+    tiers: number[]; 
+    isLeveledResource?: boolean; 
+    maxEnchantmentLvl?: number; // Max enchantment level (0-4)
+    recipe?: (tier: number) => Recipe; 
+    artifactNameBase?: string; 
+    isArtifact?: boolean; // Helper to quickly identify artifact items
+}
+
+export interface CalculatedItemProfitInfo {
+    uniqueName: string; 
+    marketPrice: number;
+    craftingCost: number;
+    profit: number;
+    profitPercentage: number;
+    city?: string;
+    quality?: number;
+}
+
+export interface TierProfitability {
+    [tier: number]: {
+        [enchantment: number]: CalculatedItemProfitInfo;
+    };
+}
 export const logCraftPricesv2Default: arr = {
     arr: [
         [0, 0, 0, 0],

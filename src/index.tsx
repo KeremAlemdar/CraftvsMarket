@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ProfitCalculatorProvider } from './context/ProfitCalculatorContext';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ProfitCalculatorProvider>
+      <App />
+    </ProfitCalculatorProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -8,7 +8,7 @@ import { fiberCraftSilverv1Default, fiberCraftSilverv2Default, clothCraftSilverD
 import { fiberDefault, clothDefault, hideDefault, leatherDefault, logDefault, plankDefault } from './crafting/Resources/marketPlace';
 import { bagCraftSilverDefault, satchelCraftSilverDefault } from './crafting/tools/craftSilver';
 import { bagDefault, satchelDefault } from './crafting/tools/marketPlace';
-import { arr, fiberCraftPricesv1Default, fiberCraftPricesv2Default, profitableFiberDefault, profitableFiberIndexDefault, profitableClothIndexDefault, clothCraftPricesDefault, profitableClothDefault, hideCraftPricesv1Default, hideCraftPricesv2Default, profitableHideDefault, profitableHideIndexDefault, profitableLeatherIndexDefault, leatherCraftPricesDefault, profitableLeatherDefault, logCraftPricesv1Default, logCraftPricesv2Default, profitableLogDefault, profitableLogIndexDefault, profitablePlankIndexDefault, plankCraftPricesDefault, profitablePlankDefault, bagCraftDefault, profitableBagDefault, profitableBagPercentageDefault, satchelCraftDefault, profitableSatchelDefault, profitableSatchelPercentageDefault, clothArmorv1ScholarCraftDefault, profitableClothArmorv1ScholarDefault, profitableClothArmorv1ScholarPercentageDefault, clothArmorv2ScholarCraftDefault, profitableClothArmorv2ScholarDefault, profitableClothArmorv2ScholarPercentageDefault, clothArmorv3ScholarCraftDefault, profitableClothArmorv3ScholarDefault, profitableClothArmorv3ScholarPercentageDefault, clothArmorv1ClericCraftDefault, profitableClothArmorv1ClericDefault, profitableClothArmorv1ClericPercentageDefault, clothArmorv2ClericCraftDefault, profitableClothArmorv2ClericDefault, profitableClothArmorv2ClericPercentageDefault, clothArmorv3ClericCraftDefault, profitableClothArmorv3ClericDefault, profitableClothArmorv3ClericPercentageDefault, clothArmorv1MageCraftDefault, profitableClothArmorv1MageDefault, profitableClothArmorv1MagePercentageDefault, clothArmorv2MageCraftDefault, profitableClothArmorv2MageDefault, profitableClothArmorv2MagePercentageDefault, clothArmorv3MageCraftDefault, profitableClothArmorv3MageDefault, profitableClothArmorv3MagePercentageDefault, clothArmorv1RoyalCraftDefault, profitableClothArmorv1RoyalDefault, profitableClothArmorv1RoyalPercentageDefault, clothArmorv2RoyalCraftDefault, profitableClothArmorv2RoyalDefault, profitableClothArmorv2RoyalPercentageDefault, clothArmorv3RoyalCraftDefault, profitableClothArmorv3RoyalDefault, profitableClothArmorv3RoyalPercentageDefault, clothArmorv1DruidCraftDefault, profitableClothArmorv1DruidDefault, profitableClothArmorv1DruidPercentageDefault, clothArmorv2DruidCraftDefault, profitableClothArmorv2DruidDefault, profitableClothArmorv2DruidPercentageDefault, clothArmorv3DruidCraftDefault, profitableClothArmorv3DruidDefault, profitableClothArmorv3DruidPercentageDefault, clothArmorv1FiendCraftDefault, profitableClothArmorv1FiendDefault, profitableClothArmorv1FiendPercentageDefault, clothArmorv2FiendCraftDefault, profitableClothArmorv2FiendDefault, profitableClothArmorv2FiendPercentageDefault, clothArmorv3FiendCraftDefault, profitableClothArmorv3FiendDefault, profitableClothArmorv3FiendPercentageDefault, clothArmorv1CultistCraftDefault, profitableClothArmorv1CultistDefault, profitableClothArmorv1CultistPercentageDefault, clothArmorv2CultistCraftDefault, profitableClothArmorv2CultistDefault, profitableClothArmorv2CultistPercentageDefault, clothArmorv3CultistCraftDefault, profitableClothArmorv3CultistDefault, profitableClothArmorv3CultistPercentageDefault, clothArmorv1PurityCraftDefault, profitableClothArmorv1PurityDefault, profitableClothArmorv1PurityPercentageDefault, clothArmorv2PurityCraftDefault, profitableClothArmorv2PurityDefault, profitableClothArmorv2PurityPercentageDefault, clothArmorv3PurityCraftDefault, profitableClothArmorv3PurityDefault, profitableClothArmorv3PurityPercentageDefault } from './types';
+import { arr, fiberCraftPricesv1Default, fiberCraftPricesv2Default, profitableFiberDefault, profitableFiberIndexDefault, profitableClothIndexDefault, clothCraftPricesDefault, profitableClothDefault, hideCraftPricesv1Default, hideCraftPricesv2Default, profitableHideDefault, profitableHideIndexDefault, profitableLeatherIndexDefault, leatherCraftPricesDefault, profitableLeatherDefault, logCraftPricesv1Default, logCraftPricesv2Default, profitableLogDefault, profitableLogIndexDefault, profitablePlankIndexDefault, plankCraftPricesDefault, profitablePlankDefault, bagCraftDefault, profitableBagDefault, profitableBagPercentageDefault, satchelCraftDefault, profitableSatchelDefault, profitableSatchelPercentageDefault, clothArmorv1ScholarCraftDefault, profitableClothArmorv1ScholarDefault, profitableClothArmorv1ScholarPercentageDefault, clothArmorv2ScholarCraftDefault, profitableClothArmorv2ScholarDefault, profitableClothArmorv2ScholarPercentageDefault, clothArmorv3ScholarCraftDefault, profitableClothArmorv3ScholarDefault, profitableClothArmorv3ScholarPercentageDefault, clothArmorv1ClericCraftDefault, profitableClothArmorv1ClericDefault, profitableClothArmorv1ClericPercentageDefault, clothArmorv2ClericCraftDefault, profitableClothArmorv2ClericDefault, profitableClothArmorv2ClericPercentageDefault, clothArmorv3ClericCraftDefault, profitableClothArmorv3ClericDefault, profitableClothArmorv3ClericPercentageDefault, clothArmorv1MageCraftDefault, profitableClothArmorv1MageDefault, profitableClothArmorv1MagePercentageDefault, clothArmorv2MageCraftDefault, profitableClothArmorv2MageDefault, profitableClothArmorv2MagePercentageDefault, clothArmorv3MageCraftDefault, profitableClothArmorv3MageDefault, profitableClothArmorv3MagePercentageDefault, clothArmorv1RoyalCraftDefault, profitableClothArmorv1RoyalDefault, profitableClothArmorv1RoyalPercentageDefault, clothArmorv2RoyalCraftDefault, profitableClothArmorv2RoyalDefault, profitableClothArmorv2RoyalPercentageDefault, clothArmorv3RoyalCraftDefault, profitableClothArmorv3RoyalDefault, profitableClothArmorv3RoyalPercentageDefault, clothArmorv1DruidCraftDefault, profitableClothArmorv1DruidDefault, profitableClothArmorv1DruidPercentageDefault, clothArmorv2DruidCraftDefault, profitableClothArmorv2DruidDefault, profitableClothArmorv2DruidPercentageDefault, clothArmorv3DruidCraftDefault, profitableClothArmorv3DruidDefault, profitableClothArmorv3DruidPercentageDefault, clothArmorv1FiendCraftDefault, profitableClothArmorv1FiendDefault, profitableClothArmorv1FiendPercentageDefault, clothArmorv2FiendCraftDefault, profitableClothArmorv2FiendDefault, profitableClothArmorv2FiendPercentageDefault, clothArmorv3FiendCraftDefault, profitableClothArmorv3FiendDefault, profitableClothArmorv3FiendPercentageDefault, clothArmorv1CultistCraftDefault, profitableClothArmorv1CultistDefault, profitableClothArmorv1CultistPercentageDefault, clothArmorv2CultistCraftDefault, profitableClothArmorv2CultistDefault, profitableClothArmorv2CultistPercentageDefault, clothArmorv3CultistCraftDefault, profitableClothArmorv3CultistDefault, profitableClothArmorv3CultistPercentageDefault, clothArmorv1PurityCraftDefault, profitableClothArmorv1PurityDefault, profitableClothArmorv1PurityPercentageDefault, clothArmorv2PurityCraftDefault, profitableClothArmorv2PurityDefault, profitableClothArmorv2PurityPercentageDefault, clothArmorv3PurityCraftDefault, profitableClothArmorv3PurityDefault, profitableClothArmorv3PurityPercentageDefault, fiberDefault } from './types';
 // import {initializeApp} from 'firebase/app';
 // import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import "firebase/compat/firestore"
@@ -16,6 +16,10 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import database from './database';
 import Bottleneck from "bottleneck";
+import { useProfitCalculator } from './context/ProfitCalculatorContext';
+import { ActionType } from './context/ProfitCalculatorContext';
+import * as firebaseService from './services/firebaseService';
+
 
 // const FIREBASE_PROJECT_ID="albiononline-6ec2d"
 // const FIREBASE_API_KEY="AIzaSyAU75eMjFmfCnu10h1Dz-N9nzJ_yUtS5l0"
@@ -40,6 +44,7 @@ import Bottleneck from "bottleneck";
 
 
 function Profit() {
+    const { state, dispatch } = useProfitCalculator();
     const [hearts, setHearts] = useState() as any;
     const Bottleneck = require("bottleneck/es5");
     const Beastheart = 48467;
@@ -60,7 +65,7 @@ function Profit() {
     // sanctified_mask
     // sanctified_belt
     // sanctified_bindings
-    const [clothArmorArtifacts, setClothArmorArtifacts] = useState<arr>(clothArtifactDefault) as any;
+    // const [clothArmorArtifacts, setClothArmorArtifacts] = useState<arr>(clothArtifactDefault) as any; // Removed
     //Fiber
     const [fiberCraftPricesv1, setFiberCraftPricesv1] = useState<arr>(fiberCraftPricesv1Default) as any;
     const [fiberCraftPricesv2, setFiberCraftPricesv2] = useState<arr>(fiberCraftPricesv2Default) as any;
@@ -68,14 +73,14 @@ function Profit() {
     const [fiberCraftSilverv2, setFiberCraftSilverv2] = useState<arr>(fiberCraftSilverv2Default) as any;
     const [profitableFiber, setProfitableFiber] = useState<arr>(profitableFiberDefault) as any;
     const [profitableFiberIndex, setprofitableFiberIndex] = useState<arr>(profitableFiberIndexDefault) as any;
-    const [fiberPrices, setFiberPrices] = useState<arr>(fiberDefault) as any;
+    // const [fiberPrices, setFiberPrices] = useState<arr>(fiberDefault) as any; // Removed
 
     //Cloth
     const [profitableClothIndex, setProfitableClothIndex] = useState<arr>(profitableClothIndexDefault) as any;
     const [clothCraftPrices, setClothCraftPricesv1] = useState<arr>(clothCraftPricesDefault) as any;
     const [clothCraftSilver, setClothCraftSilverv1] = useState<arr>(clothCraftSilverDefault) as any;
     const [profitableCloth, setProfitableCloth] = useState<arr>(profitableClothDefault) as any;
-    const [clothPrices, setClothPrices] = useState<arr>(clothDefault) as any;
+    // const [clothPrices, setClothPrices] = useState<arr>(clothDefault) as any; // Removed
 
     //Hide
     const [hideCraftPricesv1, setHideCraftPricesv1] = useState<arr>(hideCraftPricesv1Default) as any;
@@ -84,13 +89,13 @@ function Profit() {
     const [hideCraftSilverv2, setHideCraftSilverv2] = useState<arr>(hideCraftSilverv2Default) as any;
     const [profitableHide, setProfitableHide] = useState<arr>(profitableHideDefault) as any;
     const [profitableHideIndex, setprofitableHideIndex] = useState<arr>(profitableHideIndexDefault) as any;
-    const [hidePrices, setHidePrices] = useState<arr>(hideDefault) as any;
+    // const [hidePrices, setHidePrices] = useState<arr>(hideDefault) as any; // Removed
     //Leather
     const [profitableLeatherIndex, setProfitableLeatherIndex] = useState<arr>(profitableLeatherIndexDefault) as any;
     const [leatherCraftPrices, setLeatherCraftPricesv1] = useState<arr>(leatherCraftPricesDefault) as any;
     const [leatherCraftSilver, setLeatherCraftSilver1] = useState<arr>(leatherCraftSilverDefault) as any;
     const [profitableLeather, setProfitableLeather] = useState<arr>(profitableLeatherDefault) as any;
-    const [leatherPrices, setLeatherPrices] = useState<arr>(leatherDefault) as any;
+    // const [leatherPrices, setLeatherPrices] = useState<arr>(leatherDefault) as any; // Removed
 
     //Log
     const [logCraftPricesv1, setLogCraftPricesv1] = useState<arr>(logCraftPricesv1Default) as any;
@@ -99,23 +104,23 @@ function Profit() {
     const [logCraftSilverv2, setLogCraftSilverv2] = useState<arr>(logCraftSilverv2Default) as any;
     const [profitableLog, setProfitableLog] = useState<arr>(profitableLogDefault) as any;
     const [profitableLogIndex, setprofitableLogIndex] = useState<arr>(profitableLogIndexDefault) as any;
-    const [logPrices, setLogPrices] = useState<arr>(logDefault) as any;
+    // const [logPrices, setLogPrices] = useState<arr>(logDefault) as any; // Removed
 
     //Plank
     const [profitablePlankIndex, setProfitablePlankIndex] = useState<arr>(profitablePlankIndexDefault) as any;
     const [plankCraftPrices, setPlankCraftPricesv1] = useState<arr>(plankCraftPricesDefault) as any;
     const [plankCraftSilver, setPlankCraftSilverv1] = useState<arr>(plankCraftSilverDefault) as any;
     const [profitablePlank, setProfitablePlank] = useState<arr>(profitablePlankDefault) as any;
-    const [plankPrices, setPlankPrices] = useState<arr>(plankDefault) as any;
+    // const [plankPrices, setPlankPrices] = useState<arr>(plankDefault) as any; // Removed
     //Bag
-    const [bagPrices, setBagPrices] = useState<arr>(bagDefault) as any;
+    // const [bagPrices, setBagPrices] = useState<arr>(bagDefault) as any; // Removed
     const [bagCraftSilver, setBagCraftSilver] = useState<arr>(bagCraftSilverDefault) as any;
     const [bagCraft, setBagCraft] = useState<arr>(bagCraftDefault) as any;
     const [profitableBag, setProfitableBag] = useState<arr>(profitableBagDefault) as any;
     const [profitableBagPercentage, setProfitableBagPercentage] = useState<arr>(profitableBagPercentageDefault) as any;
 
     //Satchel
-    const [satchelPrices, setSatchelPrices] = useState<arr>(satchelDefault) as any;
+    // const [satchelPrices, setSatchelPrices] = useState<arr>(satchelDefault) as any; // Removed
     const [satchelCraftSilver, setSatchelCraftSilver] = useState<arr>(satchelCraftSilverDefault) as any;
     const [satchelCraft, setSatchelCraft] = useState<arr>(satchelCraftDefault) as any;
     const [profitableSatchel, setProfitableSatchel] = useState<arr>(profitableSatchelDefault) as any;
@@ -123,136 +128,136 @@ function Profit() {
 
     //Scholar cowl robe sandals
     //head
-    const [clothArmorv1ScholarPrices, setClothArmorv1ScholarPrices] = useState<arr>(clothArmorv1ScholarDefault) as any;
+    // const [clothArmorv1ScholarPrices, setClothArmorv1ScholarPrices] = useState<arr>(clothArmorv1ScholarDefault) as any; // Removed
     const [clothArmorv1ScholarCraft, setClothArmorv1ScholarCraft] = useState<arr>(clothArmorv1ScholarCraftDefault) as any;
     const [profitableClothArmorv1Scholar, setProfitableClothArmorv1Scholar] = useState<arr>(profitableClothArmorv1ScholarDefault) as any;
     const [profitableClothArmorv1ScholarPercentage, setProfitableClothArmorv1ScholarPercentage] = useState<arr>(profitableClothArmorv1ScholarPercentageDefault) as any;
     //jacket
-    const [clothArmorv2ScholarPrices, setClothArmorv2ScholarPrices] = useState<arr>(clothArmorv2ScholarDefault) as any;
+    // const [clothArmorv2ScholarPrices, setClothArmorv2ScholarPrices] = useState<arr>(clothArmorv2ScholarDefault) as any; // Removed
     const [clothArmorv2ScholarCraft, setClothArmorv2ScholarCraft] = useState<arr>(clothArmorv2ScholarCraftDefault) as any;
     const [profitableClothArmorv2Scholar, setProfitableClothArmorv2Scholar] = useState<arr>(profitableClothArmorv2ScholarDefault) as any;
     const [profitableClothArmorv2ScholarPercentage, setProfitableClothArmorv2ScholarPercentage] = useState<arr>(profitableClothArmorv2ScholarPercentageDefault) as any;
     //boots
-    const [clothArmorv3ScholarPrices, setClothArmorv3ScholarPrices] = useState<arr>(clothArmorv3ScholarDefault) as any;
+    // const [clothArmorv3ScholarPrices, setClothArmorv3ScholarPrices] = useState<arr>(clothArmorv3ScholarDefault) as any; // Removed
     const [clothArmorv3ScholarCraft, setClothArmorv3ScholarCraft] = useState<arr>(clothArmorv3ScholarCraftDefault) as any;
     const [profitableClothArmorv3Scholar, setProfitableClothArmorv3Scholar] = useState<arr>(profitableClothArmorv3ScholarDefault) as any;
     const [profitableClothArmorv3ScholarPercentage, setProfitableClothArmorv3ScholarPercentage] = useState<arr>(profitableClothArmorv3ScholarPercentageDefault) as any;
 
     const [clothArmorScholarCraftSilver, setClothArmorScholarCraftSilver] = useState<arr>(clothArmorCraftSilverDefault) as any;
     //Cleric cowl robe sandals
-    const [clothArmorv1ClericPrices, setClothArmorv1ClericPrices] = useState<arr>(clothArmorv1ClericDefault) as any;
+    // const [clothArmorv1ClericPrices, setClothArmorv1ClericPrices] = useState<arr>(clothArmorv1ClericDefault) as any; // Removed
     const [clothArmorv1ClericCraft, setClothArmorv1ClericCraft] = useState<arr>(clothArmorv1ClericCraftDefault) as any;
     const [profitableClothArmorv1Cleric, setProfitableClothArmorv1Cleric] = useState<arr>(profitableClothArmorv1ClericDefault) as any;
     const [profitableClothArmorv1ClericPercentage, setProfitableClothArmorv1ClericPercentage] = useState<arr>(profitableClothArmorv1ClericPercentageDefault) as any;
     //jacket
-    const [clothArmorv2ClericPrices, setClothArmorv2ClericPrices] = useState<arr>(clothArmorv2ClericDefault) as any;
+    // const [clothArmorv2ClericPrices, setClothArmorv2ClericPrices] = useState<arr>(clothArmorv2ClericDefault) as any; // Removed
     const [clothArmorv2ClericCraft, setClothArmorv2ClericCraft] = useState<arr>(clothArmorv2ClericCraftDefault) as any;
     const [profitableClothArmorv2Cleric, setProfitableClothArmorv2Cleric] = useState<arr>(profitableClothArmorv2ClericDefault) as any;
     const [profitableClothArmorv2ClericPercentage, setProfitableClothArmorv2ClericPercentage] = useState<arr>(profitableClothArmorv2ClericPercentageDefault) as any;
     //boots
-    const [clothArmorv3ClericPrices, setClothArmorv3ClericPrices] = useState<arr>(clothArmorv3ClericDefault) as any;
+    // const [clothArmorv3ClericPrices, setClothArmorv3ClericPrices] = useState<arr>(clothArmorv3ClericDefault) as any; // Removed
     const [clothArmorv3ClericCraft, setClothArmorv3ClericCraft] = useState<arr>(clothArmorv3ClericCraftDefault) as any;
     const [profitableClothArmorv3Cleric, setProfitableClothArmorv3Cleric] = useState<arr>(profitableClothArmorv3ClericDefault) as any;
     const [profitableClothArmorv3ClericPercentage, setProfitableClothArmorv3ClericPercentage] = useState<arr>(profitableClothArmorv3ClericPercentageDefault) as any;
 
     const [clothArmorClericCraftSilver, setClothArmorClericCraftSilver] = useState<arr>(clothArmorCraftSilverDefault) as any;
     //Mage cowl robe sandals
-    const [clothArmorv1MagePrices, setClothArmorv1MagePrices] = useState<arr>(clothArmorv1MageDefault) as any;
+    // const [clothArmorv1MagePrices, setClothArmorv1MagePrices] = useState<arr>(clothArmorv1MageDefault) as any; // Removed
     const [clothArmorv1MageCraft, setClothArmorv1MageCraft] = useState<arr>(clothArmorv1MageCraftDefault) as any;
     const [profitableClothArmorv1Mage, setProfitableClothArmorv1Mage] = useState<arr>(profitableClothArmorv1MageDefault) as any;
     const [profitableClothArmorv1MagePercentage, setProfitableClothArmorv1MagePercentage] = useState<arr>(profitableClothArmorv1MagePercentageDefault) as any;
     //jacket
-    const [clothArmorv2MagePrices, setClothArmorv2MagePrices] = useState<arr>(clothArmorv2MageDefault) as any;
+    // const [clothArmorv2MagePrices, setClothArmorv2MagePrices] = useState<arr>(clothArmorv2MageDefault) as any; // Removed
     const [clothArmorv2MageCraft, setClothArmorv2MageCraft] = useState<arr>(clothArmorv2MageCraftDefault) as any;
     const [profitableClothArmorv2Mage, setProfitableClothArmorv2Mage] = useState<arr>(profitableClothArmorv2MageDefault) as any;
     const [profitableClothArmorv2MagePercentage, setProfitableClothArmorv2MagePercentage] = useState<arr>(profitableClothArmorv2MagePercentageDefault) as any;
     //boots
-    const [clothArmorv3MagePrices, setClothArmorv3MagePrices] = useState<arr>(clothArmorv3MageDefault) as any;
+    // const [clothArmorv3MagePrices, setClothArmorv3MagePrices] = useState<arr>(clothArmorv3MageDefault) as any; // Removed
     const [clothArmorv3MageCraft, setClothArmorv3MageCraft] = useState<arr>(clothArmorv3MageCraftDefault) as any;
     const [profitableClothArmorv3Mage, setProfitableClothArmorv3Mage] = useState<arr>(profitableClothArmorv3MageDefault) as any;
     const [profitableClothArmorv3MagePercentage, setProfitableClothArmorv3MagePercentage] = useState<arr>(profitableClothArmorv3MagePercentageDefault) as any;
 
     const [clothArmorMageCraftSilver, setClothArmorMageCraftSilver] = useState<arr>(clothArmorCraftSilverDefault) as any;
     //Royal cowl robe sandals
-    const [clothArmorv1RoyalPrices, setClothArmorv1RoyalPrices] = useState<arr>(clothArmorv1RoyalDefault) as any;
+    // const [clothArmorv1RoyalPrices, setClothArmorv1RoyalPrices] = useState<arr>(clothArmorv1RoyalDefault) as any; // Removed
     const [clothArmorv1RoyalCraft, setClothArmorv1RoyalCraft] = useState<arr>(clothArmorv1RoyalCraftDefault) as any;
     const [profitableClothArmorv1Royal, setProfitableClothArmorv1Royal] = useState<arr>(profitableClothArmorv1RoyalDefault) as any;
     const [profitableClothArmorv1RoyalPercentage, setProfitableClothArmorv1RoyalPercentage] = useState<arr>(profitableClothArmorv1RoyalPercentageDefault) as any;
     //jacket
-    const [clothArmorv2RoyalPrices, setClothArmorv2RoyalPrices] = useState<arr>(clothArmorv2RoyalDefault) as any;
+    // const [clothArmorv2RoyalPrices, setClothArmorv2RoyalPrices] = useState<arr>(clothArmorv2RoyalDefault) as any; // Removed
     const [clothArmorv2RoyalCraft, setClothArmorv2RoyalCraft] = useState<arr>(clothArmorv2RoyalCraftDefault) as any;
     const [profitableClothArmorv2Royal, setProfitableClothArmorv2Royal] = useState<arr>(profitableClothArmorv2RoyalDefault) as any;
     const [profitableClothArmorv2RoyalPercentage, setProfitableClothArmorv2RoyalPercentage] = useState<arr>(profitableClothArmorv2RoyalPercentageDefault) as any;
     //boots
-    const [clothArmorv3RoyalPrices, setClothArmorv3RoyalPrices] = useState<arr>(clothArmorv3RoyalDefault) as any;
+    // const [clothArmorv3RoyalPrices, setClothArmorv3RoyalPrices] = useState<arr>(clothArmorv3RoyalDefault) as any; // Removed
     const [clothArmorv3RoyalCraft, setClothArmorv3RoyalCraft] = useState<arr>(clothArmorv3RoyalCraftDefault) as any;
     const [profitableClothArmorv3Royal, setProfitableClothArmorv3Royal] = useState<arr>(profitableClothArmorv3RoyalDefault) as any;
     const [profitableClothArmorv3RoyalPercentage, setProfitableClothArmorv3RoyalPercentage] = useState<arr>(profitableClothArmorv3RoyalPercentageDefault) as any;
 
     const [clothArmorRoyalCraftSilver, setClothArmorRoyalCraftSilver] = useState<arr>(clothArmorRoyalCraftSilverDefault) as any;
     //Druid cowl robe sandals Druidic preserved beak, feathers ,bindings
-    const [clothArmorv1DruidPrices, setClothArmorv1DruidPrices] = useState<arr>(clothArmorv1DruidDefault) as any;
+    // const [clothArmorv1DruidPrices, setClothArmorv1DruidPrices] = useState<arr>(clothArmorv1DruidDefault) as any; // Removed
     const [clothArmorv1DruidCraft, setClothArmorv1DruidCraft] = useState<arr>(clothArmorv1DruidCraftDefault) as any;
     const [profitableClothArmorv1Druid, setProfitableClothArmorv1Druid] = useState<arr>(profitableClothArmorv1DruidDefault) as any;
     const [profitableClothArmorv1DruidPercentage, setProfitableClothArmorv1DruidPercentage] = useState<arr>(profitableClothArmorv1DruidPercentageDefault) as any;
     //jacket
-    const [clothArmorv2DruidPrices, setClothArmorv2DruidPrices] = useState<arr>(clothArmorv2DruidDefault) as any;
+    // const [clothArmorv2DruidPrices, setClothArmorv2DruidPrices] = useState<arr>(clothArmorv2DruidDefault) as any; // Removed
     const [clothArmorv2DruidCraft, setClothArmorv2DruidCraft] = useState<arr>(clothArmorv2DruidCraftDefault) as any;
     const [profitableClothArmorv2Druid, setProfitableClothArmorv2Druid] = useState<arr>(profitableClothArmorv2DruidDefault) as any;
     const [profitableClothArmorv2DruidPercentage, setProfitableClothArmorv2DruidPercentage] = useState<arr>(profitableClothArmorv2DruidPercentageDefault) as any;
     //boots
-    const [clothArmorv3DruidPrices, setClothArmorv3DruidPrices] = useState<arr>(clothArmorv3DruidDefault) as any;
+    // const [clothArmorv3DruidPrices, setClothArmorv3DruidPrices] = useState<arr>(clothArmorv3DruidDefault) as any; // Removed
     const [clothArmorv3DruidCraft, setClothArmorv3DruidCraft] = useState<arr>(clothArmorv3DruidCraftDefault) as any;
     const [profitableClothArmorv3Druid, setProfitableClothArmorv3Druid] = useState<arr>(profitableClothArmorv3DruidDefault) as any;
     const [profitableClothArmorv3DruidPercentage, setProfitableClothArmorv3DruidPercentage] = useState<arr>(profitableClothArmorv3DruidPercentageDefault) as any;
 
     const [clothArmorDruidCraftSilver, setClothArmorDruidCraftSilver] = useState<arr>(clothArmorDruidCraftSilverDefault) as any;
     //Fiend cowl robe sandals Infernal visor, cloth folds, cloth bindings
-    const [clothArmorv1FiendPrices, setClothArmorv1FiendPrices] = useState<arr>(clothArmorv1FiendDefault) as any;
+    // const [clothArmorv1FiendPrices, setClothArmorv1FiendPrices] = useState<arr>(clothArmorv1FiendDefault) as any; // Removed
     const [clothArmorv1FiendCraft, setClothArmorv1FiendCraft] = useState<arr>(clothArmorv1FiendCraftDefault) as any;
     const [profitableClothArmorv1Fiend, setProfitableClothArmorv1Fiend] = useState<arr>(profitableClothArmorv1FiendDefault) as any;
     const [profitableClothArmorv1FiendPercentage, setProfitableClothArmorv1FiendPercentage] = useState<arr>(profitableClothArmorv1FiendPercentageDefault) as any;
     //jacket
-    const [clothArmorv2FiendPrices, setClothArmorv2FiendPrices] = useState<arr>(clothArmorv2FiendDefault) as any;
+    // const [clothArmorv2FiendPrices, setClothArmorv2FiendPrices] = useState<arr>(clothArmorv2FiendDefault) as any; // Removed
     const [clothArmorv2FiendCraft, setClothArmorv2FiendCraft] = useState<arr>(clothArmorv2FiendCraftDefault) as any;
     const [profitableClothArmorv2Fiend, setProfitableClothArmorv2Fiend] = useState<arr>(profitableClothArmorv2FiendDefault) as any;
     const [profitableClothArmorv2FiendPercentage, setProfitableClothArmorv2FiendPercentage] = useState<arr>(profitableClothArmorv2FiendPercentageDefault) as any;
     //boots
-    const [clothArmorv3FiendPrices, setClothArmorv3FiendPrices] = useState<arr>(clothArmorv3FiendDefault) as any;
+    // const [clothArmorv3FiendPrices, setClothArmorv3FiendPrices] = useState<arr>(clothArmorv3FiendDefault) as any; // Removed
     const [clothArmorv3FiendCraft, setClothArmorv3FiendCraft] = useState<arr>(clothArmorv3FiendCraftDefault) as any;
     const [profitableClothArmorv3Fiend, setProfitableClothArmorv3Fiend] = useState<arr>(profitableClothArmorv3FiendDefault) as any;
     const [profitableClothArmorv3FiendPercentage, setProfitableClothArmorv3FiendPercentage] = useState<arr>(profitableClothArmorv3FiendPercentageDefault) as any;
 
     const [clothArmorFiendCraftSilver, setClothArmorFiendCraftSilver] = useState<arr>(clothArmorFiendCraftSilverDefault) as any;
     //Cultist cowl robe sandals Alluring padding, amulet, bindings
-    const [clothArmorv1CultistPrices, setClothArmorv1CultistPrices] = useState<arr>(clothArmorv1CultistDefault) as any;
+    // const [clothArmorv1CultistPrices, setClothArmorv1CultistPrices] = useState<arr>(clothArmorv1CultistDefault) as any; // Removed
     const [clothArmorv1CultistCraft, setClothArmorv1CultistCraft] = useState<arr>(clothArmorv1CultistCraftDefault) as any;
     const [profitableClothArmorv1Cultist, setProfitableClothArmorv1Cultist] = useState<arr>(profitableClothArmorv1CultistDefault) as any;
     const [profitableClothArmorv1CultistPercentage, setProfitableClothArmorv1CultistPercentage] = useState<arr>(profitableClothArmorv1CultistPercentageDefault) as any;
     //jacket
-    const [clothArmorv2CultistPrices, setClothArmorv2CultistPrices] = useState<arr>(clothArmorv2CultistDefault) as any;
+    // const [clothArmorv2CultistPrices, setClothArmorv2CultistPrices] = useState<arr>(clothArmorv2CultistDefault) as any; // Removed
     const [clothArmorv2CultistCraft, setClothArmorv2CultistCraft] = useState<arr>(clothArmorv2CultistCraftDefault) as any;
     const [profitableClothArmorv2Cultist, setProfitableClothArmorv2Cultist] = useState<arr>(profitableClothArmorv2CultistDefault) as any;
     const [profitableClothArmorv2CultistPercentage, setProfitableClothArmorv2CultistPercentage] = useState<arr>(profitableClothArmorv2CultistPercentageDefault) as any;
     //boots
-    const [clothArmorv3CultistPrices, setClothArmorv3CultistPrices] = useState<arr>(clothArmorv3CultistDefault) as any;
+    // const [clothArmorv3CultistPrices, setClothArmorv3CultistPrices] = useState<arr>(clothArmorv3CultistDefault) as any; // Removed
     const [clothArmorv3CultistCraft, setClothArmorv3CultistCraft] = useState<arr>(clothArmorv3CultistCraftDefault) as any;
     const [profitableClothArmorv3Cultist, setProfitableClothArmorv3Cultist] = useState<arr>(profitableClothArmorv3CultistDefault) as any;
     const [profitableClothArmorv3CultistPercentage, setProfitableClothArmorv3CultistPercentage] = useState<arr>(profitableClothArmorv3CultistPercentageDefault) as any;
 
     const [clothArmorCultistCraftSilver, setClothArmorCultistCraftSilver] = useState<arr>(clothArmorCultistCraftSilverDefault) as any;
     //Purity cowl robe sandals Sanctified  mask, belt, bindings
-    const [clothArmorv1PurityPrices, setClothArmorv1PurityPrices] = useState<arr>(clothArmorv1PurityDefault) as any;
+    // const [clothArmorv1PurityPrices, setClothArmorv1PurityPrices] = useState<arr>(clothArmorv1PurityDefault) as any; // Removed
     const [clothArmorv1PurityCraft, setClothArmorv1PurityCraft] = useState<arr>(clothArmorv1PurityCraftDefault) as any;
     const [profitableClothArmorv1Purity, setProfitableClothArmorv1Purity] = useState<arr>(profitableClothArmorv1PurityDefault) as any;
     const [profitableClothArmorv1PurityPercentage, setProfitableClothArmorv1PurityPercentage] = useState<arr>(profitableClothArmorv1PurityPercentageDefault) as any;
     //jacket
-    const [clothArmorv2PurityPrices, setClothArmorv2PurityPrices] = useState<arr>(clothArmorv2PurityDefault) as any;
+    // const [clothArmorv2PurityPrices, setClothArmorv2PurityPrices] = useState<arr>(clothArmorv2PurityDefault) as any; // Removed
     const [clothArmorv2PurityCraft, setClothArmorv2PurityCraft] = useState<arr>(clothArmorv2PurityCraftDefault) as any;
     const [profitableClothArmorv2Purity, setProfitableClothArmorv2Purity] = useState<arr>(profitableClothArmorv2PurityDefault) as any;
     const [profitableClothArmorv2PurityPercentage, setProfitableClothArmorv2PurityPercentage] = useState<arr>(profitableClothArmorv2PurityPercentageDefault) as any;
     //boots
-    const [clothArmorv3PurityPrices, setClothArmorv3PurityPrices] = useState<arr>(clothArmorv3PurityDefault) as any;
+    // const [clothArmorv3PurityPrices, setClothArmorv3PurityPrices] = useState<arr>(clothArmorv3PurityDefault) as any; // Removed
     const [clothArmorv3PurityCraft, setClothArmorv3PurityCraft] = useState<arr>(clothArmorv3PurityCraftDefault) as any;
     const [profitableClothArmorv3Purity, setProfitableClothArmorv3Purity] = useState<arr>(profitableClothArmorv3PurityDefault) as any;
     const [profitableClothArmorv3PurityPercentage, setProfitableClothArmorv3PurityPercentage] = useState<arr>(profitableClothArmorv3PurityPercentageDefault) as any;
@@ -1189,25 +1194,25 @@ function Profit() {
         var bigger;
         for (let i = 0; i < heartNumber; i++) {
             var myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T1_FACTION_" + name[i] + ".json?locations=" + location;
-            await limiter.schedule(() => axios.get(myURL)
-                .then(res => {
-                    if (res.status === 200) {
-                        console.log("SUCCESSFULL");
-                    }
-                    else {
-                        console.log("ERROR");
-                    }
-                    if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-                        bigger = res.data[0].sell_price_min;
-                    }
-                    else {
-                        bigger = res.data[0].buy_price_min;
-                    }
-                    if (bigger === 0) {
-                        bigger = 99999999;
-                    }
-                    heartArr[i] = bigger;
-                }))
+            // await limiter.schedule(() => axios.get(myURL)
+            //     .then(res => {
+            //         if (res.status === 200) {
+            //             console.log("SUCCESSFULL");
+            //         }
+            //         else {
+            //             console.log("ERROR");
+            //         }
+            //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
+            //             bigger = res.data[0].sell_price_min;
+            //         }
+            //         else {
+            //             bigger = res.data[0].buy_price_min;
+            //         }
+            //         if (bigger === 0) {
+            //             bigger = 99999999;
+            //         }
+            //         heartArr[i] = bigger;
+            //     }))
         }
         setHearts(heartArr);
     }
@@ -1231,33 +1236,33 @@ function Profit() {
                     myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T" + i + "_" + itemName + itemLevel + ".json?locations=" + location;
                 }
                 console.log(myURL);
-                await limiter.schedule(() => axios.get(myURL)
-                    .then(res => {
-                        if (res.status === 200) {
-                            console.log("SUCCESSFULL");
-                        }
-                        else {
-                            console.log("ERROR");
-                        }
-                        console.log(res.data[0].sell_price_min);
-                        if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-                            bigger = res.data[0].sell_price_min;
-                        }
-                        else {
-                            bigger = res.data[0].buy_price_min;
-                        }
-                        if (bigger === 0) {
-                            bigger = 99999999;
-                        }
-                        prices.arr[i][j] = bigger;
-                    }))
+                // await limiter.schedule(() => axios.get(myURL)
+                //     .then(res => {
+                //         if (res.status === 200) {
+                //             console.log("SUCCESSFULL");
+                //         }
+                //         else {
+                //             console.log("ERROR");
+                //         }
+                //         console.log(res.data[0].sell_price_min);
+                //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
+                //             bigger = res.data[0].sell_price_min;
+                //         }
+                //         else {
+                //             bigger = res.data[0].buy_price_min;
+                //         }
+                //         if (bigger === 0) {
+                //             bigger = 99999999;
+                //         }
+                //         prices.arr[i][j] = bigger;
+                //     }))
             }
         }
         console.log(itemName);
         console.log(prices);
-        await database.put('/' + itemName + '.json', prices).then(response => {
-            console.log(response);
-        })
+        // await database.put('/' + itemName + '.json', prices).then(response => {
+        //     console.log(response);
+        // })
     }
     const databaseArtifactGüncelleme = async (location: string, itemName: string[], prices: arr, starting: number, artifactNumber: number) => {
         var myURL = "";
@@ -1265,32 +1270,32 @@ function Profit() {
         for (let i = starting; i < 9; i++) {
             for (let j = 0; j < artifactNumber; j++) {
                 myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T" + i + "_ARTEFACT_" + itemName[j] + ".json?locations=" + location;
-                await limiter.schedule(() => axios.get(myURL)
-                    .then(res => {
-                        if (res.status === 200) {
-                            console.log("SUCCESSFULL");
-                        }
-                        else {
-                            console.log("ERROR");
-                        }
-                        console.log(res.data[0].sell_price_min);
-                        if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-                            bigger = res.data[0].sell_price_min;
-                        }
-                        else {
-                            bigger = res.data[0].buy_price_min;
-                        }
-                        if (bigger === 0) {
-                            bigger = 99999999;
-                        }
-                        prices.arr[j][i] = bigger;
-                    }))
+                // await limiter.schedule(() => axios.get(myURL)
+                //     .then(res => {
+                //         if (res.status === 200) {
+                //             console.log("SUCCESSFULL");
+                //         }
+                //         else {
+                //             console.log("ERROR");
+                //         }
+                //         console.log(res.data[0].sell_price_min);
+                //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
+                //             bigger = res.data[0].sell_price_min;
+                //         }
+                //         else {
+                //             bigger = res.data[0].buy_price_min;
+                //         }
+                //         if (bigger === 0) {
+                //             bigger = 99999999;
+                //         }
+                //         prices.arr[j][i] = bigger;
+                //     }))
             }
         }
         console.log(prices);
-        await database.put('/ARTIFACT' + '.json', prices).then(response => {
-            console.log(response);
-        })
+        // await database.put('/ARTIFACT' + '.json', prices).then(response => {
+        //     console.log(response);
+        // })
     }
     const databaseClothArmorArtifactGüncelleme = async () => {
         const names = [
@@ -1322,21 +1327,21 @@ function Profit() {
         // database.post('/marks.json',bagPrices).then(response =>{
         //     console.log(response);
         // })
-        database.put('/marks.json', bagPrices).then(response => {
-            console.log(response);
-        })
+        // database.put('/marks.json', bagPrices).then(response => {
+        //     console.log(response);
+        // })
     }
     const getDataHandler = () => {
-        database.get('marks.json')
-            .then(response => {
-                console.log(response);
-            })
+        // database.get('marks.json')
+        //     .then(response => {
+        //         console.log(response);
+        //     })
     }
 
     const deleteDatabase = async (itemName: string) => {
-        await database.delete('/' + itemName + '.json').then(response => {
-            console.log(response);
-        })
+        // await database.delete('/' + itemName + '.json').then(response => {
+        //     console.log(response);
+        // })
     }
     const deleteClothArmor = () => {
         deleteDatabase("HEAD_CLOTH_SET1");
@@ -1368,165 +1373,427 @@ function Profit() {
     }
     // works well getresources getclothmarketprices gettoolsmarketprices
     const getResources = async () => {
-        // console.log(clothPrices);
-        await database.get('CLOTH.json')
-            .then(response => {
-                setClothPrices(response.data);
-            })
-        await database.get('FIBER.json')
-            .then(response => {
-                setFiberPrices(response.data);
-            })
-        await database.get('LEATHER.json')
-            .then(response => {
-                setLeatherPrices(response.data);
-            })
-        await database.get('HIDE.json')
-            .then(response => {
-                setHidePrices(response.data);
-            })
-        await database.get('WOOD.json')
-            .then(response => {
-                setLogPrices(response.data);
-            })
-        await database.get('PLANKS.json')
-            .then(response => {
-                setPlankPrices(response.data);
-            })
+        // Refactored Cloth Price Fetching
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "CLOTH" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const clothData = await firebaseService.readData("CLOTH");
+            if (clothData && clothData.arr) {
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES,
+                    payload: { uniqueNameBase: "CLOTH", prices: clothData.arr, lastUpdated: new Date().toISOString() }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Cloth prices or data is empty." });
+            }
+        } catch (error) {
+            console.error("Error fetching Cloth prices:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error fetching Cloth prices." });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "CLOTH" } });
+        }
+        
+        // Refactored Fiber Price Fetching
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "FIBER" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const fiberData = await firebaseService.readData("FIBER");
+            if (fiberData && fiberData.arr) {
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES,
+                    payload: { uniqueNameBase: "FIBER", prices: fiberData.arr, lastUpdated: new Date().toISOString() }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Fiber prices or data is empty." });
+            }
+        } catch (error) {
+            console.error("Error fetching Fiber prices:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error fetching Fiber prices." });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "FIBER" } });
+        }
+
+        // Refactored Leather Price Fetching
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "LEATHER" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const leatherData = await firebaseService.readData("LEATHER");
+            if (leatherData && leatherData.arr) {
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES,
+                    payload: { uniqueNameBase: "LEATHER", prices: leatherData.arr, lastUpdated: new Date().toISOString() }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Leather prices or data is empty." });
+            }
+        } catch (error) {
+            console.error("Error fetching Leather prices:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error fetching Leather prices." });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "LEATHER" } });
+        }
+
+        // Refactored Hide Price Fetching
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "HIDE" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const hideData = await firebaseService.readData("HIDE");
+            if (hideData && hideData.arr) {
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES,
+                    payload: { uniqueNameBase: "HIDE", prices: hideData.arr, lastUpdated: new Date().toISOString() }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Hide prices or data is empty." });
+            }
+        } catch (error) {
+            console.error("Error fetching Hide prices:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error fetching Hide prices." });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "HIDE" } });
+        }
+
+        // Refactored Wood (Log) Price Fetching
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "WOOD" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const woodData = await firebaseService.readData("WOOD");
+            if (woodData && woodData.arr) {
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES,
+                    payload: { uniqueNameBase: "WOOD", prices: woodData.arr, lastUpdated: new Date().toISOString() }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Wood prices or data is empty." });
+            }
+        } catch (error) {
+            console.error("Error fetching Wood prices:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error fetching Wood prices." });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "WOOD" } });
+        }
+
+        // Refactored Planks Price Fetching
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "PLANKS" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const planksData = await firebaseService.readData("PLANKS");
+            if (planksData && planksData.arr) {
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES,
+                    payload: { uniqueNameBase: "PLANKS", prices: planksData.arr, lastUpdated: new Date().toISOString() }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Planks prices or data is empty." });
+            }
+        } catch (error) {
+            console.error("Error fetching Planks prices:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error fetching Planks prices." });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "PLANKS" } });
+        }
     }
     const getClothArmorMarketPrices = async () => {
-        await database.get("HEAD_CLOTH_SET1.json")
-            .then(response => {
-                setClothArmorv1ScholarPrices(response.data);
-            })
-        await database.get("ARMOR_CLOTH_SET1.json")
-            .then(response => {
-                setClothArmorv2ScholarPrices(response.data);
-            })
-        await database.get("SHOES_CLOTH_SET1.json")
-            .then(response => {
-                setClothArmorv3ScholarPrices(response.data);
-            })
-        await database.get("HEAD_CLOTH_SET2.json")
-            .then(response => {
-                setClothArmorv1ClericPrices(response.data);
-            })
-        await database.get("ARMOR_CLOTH_SET2.json")
-            .then(response => {
-                setClothArmorv2ClericPrices(response.data);
-            })
-        await database.get("SHOES_CLOTH_SET2.json")
-            .then(response => {
-                setClothArmorv3ClericPrices(response.data);
-            })
-        await database.get("HEAD_CLOTH_SET3.json")
-            .then(response => {
-                setClothArmorv1MagePrices(response.data);
-            })
-        await database.get("ARMOR_CLOTH_SET3.json")
-            .then(response => {
-                setClothArmorv2MagePrices(response.data);
-            })
-        await database.get("SHOES_CLOTH_SET3.json")
-            .then(response => {
-                setClothArmorv3MagePrices(response.data);
-            })
-        await database.get("HEAD_CLOTH_KEEPER.json")
-            .then(response => {
-                setClothArmorv1DruidPrices(response.data);
-            })
-        await database.get("ARMOR_CLOTH_KEEPER.json")
-            .then(response => {
-                setClothArmorv2DruidPrices(response.data);
-            })
-        await database.get("SHOES_CLOTH_KEEPER.json")
-            .then(response => {
-                setClothArmorv3DruidPrices(response.data);
-            })
-        await database.get("HEAD_CLOTH_HELL.json")
-            .then(response => {
-                setClothArmorv1FiendPrices(response.data);
-            })
-        await database.get("ARMOR_CLOTH_HELL.json")
-            .then(response => {
-                setClothArmorv2FiendPrices(response.data);
-            })
-        await database.get("SHOES_CLOTH_HELL.json")
-            .then(response => {
-                setClothArmorv3FiendPrices(response.data);
-            })
-        await database.get("HEAD_CLOTH_MORGANA.json")
-            .then(response => {
-                setClothArmorv1CultistPrices(response.data);
-            })
-        await database.get("ARMOR_CLOTH_MORGANA.json")
-            .then(response => {
-                setClothArmorv2CultistPrices(response.data);
-            })
-        await database.get("SHOES_CLOTH_MORGANA.json")
-            .then(response => {
-                setClothArmorv3CultistPrices(response.data);
-            })
-        await database.get("HEAD_CLOTH_AVALON.json")
-            .then(response => {
-                setClothArmorv1PurityPrices(response.data);
-            })
-        await database.get("ARMOR_CLOTH_AVALON.json")
-            .then(response => {
-                setClothArmorv2PurityPrices(response.data);
-            })
-        await database.get("SHOES_CLOTH_AVALON.json")
-            .then(response => {
-                setClothArmorv3PurityPrices(response.data);
-            })
+        const armorToFetch = [
+            { firebaseKey: "HEAD_CLOTH_SET1", uniqueNameBase: "HEAD_CLOTH_SET1" },
+            { firebaseKey: "ARMOR_CLOTH_SET1", uniqueNameBase: "ARMOR_CLOTH_SET1" },
+            { firebaseKey: "SHOES_CLOTH_SET1", uniqueNameBase: "SHOES_CLOTH_SET1" },
+            { firebaseKey: "HEAD_CLOTH_SET2", uniqueNameBase: "HEAD_CLOTH_SET2" },
+            { firebaseKey: "ARMOR_CLOTH_SET2", uniqueNameBase: "ARMOR_CLOTH_SET2" },
+            { firebaseKey: "SHOES_CLOTH_SET2", uniqueNameBase: "SHOES_CLOTH_SET2" },
+            { firebaseKey: "HEAD_CLOTH_KEEPER", uniqueNameBase: "HEAD_CLOTH_KEEPER" },
+            { firebaseKey: "ARMOR_CLOTH_KEEPER", uniqueNameBase: "ARMOR_CLOTH_KEEPER" },
+            { firebaseKey: "SHOES_CLOTH_KEEPER", uniqueNameBase: "SHOES_CLOTH_KEEPER" },
+            { firebaseKey: "HEAD_CLOTH_SET3", uniqueNameBase: "HEAD_CLOTH_SET3" }, // Mage Cowl
+            { firebaseKey: "ARMOR_CLOTH_SET3", uniqueNameBase: "ARMOR_CLOTH_SET3" }, // Mage Robe
+            { firebaseKey: "SHOES_CLOTH_SET3", uniqueNameBase: "SHOES_CLOTH_SET3" }, // Mage Sandals
+            { firebaseKey: "HEAD_CLOTH_ROYAL", uniqueNameBase: "HEAD_CLOTH_ROYAL" },
+            { firebaseKey: "ARMOR_CLOTH_ROYAL", uniqueNameBase: "ARMOR_CLOTH_ROYAL" },
+            { firebaseKey: "SHOES_CLOTH_ROYAL", uniqueNameBase: "SHOES_CLOTH_ROYAL" },
+            { firebaseKey: "HEAD_CLOTH_HELL", uniqueNameBase: "HEAD_CLOTH_HELL" },
+            { firebaseKey: "ARMOR_CLOTH_HELL", uniqueNameBase: "ARMOR_CLOTH_HELL" },
+            { firebaseKey: "SHOES_CLOTH_HELL", uniqueNameBase: "SHOES_CLOTH_HELL" },
+            { firebaseKey: "HEAD_CLOTH_MORGANA", uniqueNameBase: "HEAD_CLOTH_MORGANA" },
+            { firebaseKey: "ARMOR_CLOTH_MORGANA", uniqueNameBase: "ARMOR_CLOTH_MORGANA" },
+            { firebaseKey: "SHOES_CLOTH_MORGANA", uniqueNameBase: "SHOES_CLOTH_MORGANA" },
+            { firebaseKey: "HEAD_CLOTH_AVALON", uniqueNameBase: "HEAD_CLOTH_AVALON" },
+            { firebaseKey: "ARMOR_CLOTH_AVALON", uniqueNameBase: "ARMOR_CLOTH_AVALON" },
+            { firebaseKey: "SHOES_CLOTH_AVALON", uniqueNameBase: "SHOES_CLOTH_AVALON" },
+        ];
+
+        for (const item of armorToFetch) {
+            dispatch({ type: ActionType.SET_LOADING, payload: { key: item.uniqueNameBase } });
+            dispatch({ type: ActionType.CLEAR_ERROR });
+            try {
+                const itemData = await firebaseService.readData(item.firebaseKey);
+                if (itemData && itemData.arr) {
+                    dispatch({
+                        type: ActionType.SET_ITEM_MARKET_PRICES,
+                        payload: { uniqueNameBase: item.uniqueNameBase, prices: itemData.arr, lastUpdated: new Date().toISOString() }
+                    });
+                } else {
+                    dispatch({ type: ActionType.SET_ERROR, payload: `Failed to load ${item.uniqueNameBase} prices or data is empty.` });
+                }
+            } catch (error) {
+                console.error(`Error fetching ${item.uniqueNameBase} prices:`, error);
+                dispatch({ type: ActionType.SET_ERROR, payload: `Error fetching ${item.uniqueNameBase} prices.` });
+            } finally {
+                dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: item.uniqueNameBase } });
+            }
+        }
+
+        // Keep existing fetches for non-refactored items
+        // await database.get("HEAD_CLOTH_SET3.json") // Mage Cowl
+        //     .then(response => {
+        //         setClothArmorv1MagePrices(response.data);
+        //     })
+        // await database.get("ARMOR_CLOTH_SET3.json") // Mage Robe
+        //     .then(response => {
+        //         setClothArmorv2MagePrices(response.data);
+        //     })
+        // await database.get("SHOES_CLOTH_SET3.json") // Mage Sandals
+        //     .then(response => {
+        //         setClothArmorv3MagePrices(response.data);
+        //     })
+        // await database.get("HEAD_CLOTH_ROYAL.json")
+        //     .then(response => {
+        //         setClothArmorv1RoyalPrices(response.data);
+        //     })
+        // await database.get("ARMOR_CLOTH_ROYAL.json")
+        //     .then(response => {
+        //         setClothArmorv2RoyalPrices(response.data);
+        //     })
+        // await database.get("SHOES_CLOTH_ROYAL.json")
+        //     .then(response => {
+        //         setClothArmorv3RoyalPrices(response.data);
+        //     })
+        // await database.get("HEAD_CLOTH_HELL.json")
+        //     .then(response => {
+        //         setClothArmorv1FiendPrices(response.data);
+        //     })
+        // await database.get("ARMOR_CLOTH_HELL.json")
+        //     .then(response => {
+        //         setClothArmorv2FiendPrices(response.data);
+        //     })
+        // await database.get("SHOES_CLOTH_HELL.json")
+        //     .then(response => {
+        //         setClothArmorv3FiendPrices(response.data);
+        //     })
+        // await database.get("HEAD_CLOTH_MORGANA.json")
+        //     .then(response => {
+        //         setClothArmorv1CultistPrices(response.data);
+        //     })
+        // await database.get("ARMOR_CLOTH_MORGANA.json")
+        //     .then(response => {
+        //         setClothArmorv2CultistPrices(response.data);
+        //     })
+        // await database.get("SHOES_CLOTH_MORGANA.json")
+        //     .then(response => {
+        //         setClothArmorv3CultistPrices(response.data);
+        //     })
+        // await database.get("HEAD_CLOTH_AVALON.json")
+        //     .then(response => {
+        //         setClothArmorv1PurityPrices(response.data);
+        //     })
+        // await database.get("ARMOR_CLOTH_AVALON.json")
+        //     .then(response => {
+        //         setClothArmorv2PurityPrices(response.data);
+        //     })
+        // await database.get("SHOES_CLOTH_AVALON.json")
+        //     .then(response => {
+        //         setClothArmorv3PurityPrices(response.data);
+        //     })
     }
     const getToolsMarketPrices = async () => {
-        await database.get('BAG.json')
-            .then(response => {
-                setBagPrices(response.data);
-            })
-        await database.get('BAG_INSIGHT.json')
-            .then(response => {
-                setSatchelPrices(response.data);
-            })
+        // Refactored Bag Price Fetching
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "BAG" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const bagData = await firebaseService.readData("BAG");
+            if (bagData && bagData.arr) {
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES,
+                    payload: { uniqueNameBase: "BAG", prices: bagData.arr, lastUpdated: new Date().toISOString() }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Bag prices or data is empty." });
+            }
+        } catch (error) {
+            console.error("Error fetching Bag prices:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error fetching Bag prices." });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "BAG" } });
+        }
+
+        // Refactored Satchel Price Fetching
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "SATCHEL_INSIGHT" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const satchelData = await firebaseService.readData("BAG_INSIGHT"); // Firebase key is BAG_INSIGHT
+            if (satchelData && satchelData.arr) {
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES,
+                    payload: { uniqueNameBase: "SATCHEL_INSIGHT", prices: satchelData.arr, lastUpdated: new Date().toISOString() }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Satchel prices or data is empty." });
+            }
+        } catch (error) {
+            console.error("Error fetching Satchel prices:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error fetching Satchel prices." });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "SATCHEL_INSIGHT" } });
+        }
     }
     const getArtifactPrices = async () => {
-        await database.get('ARTIFACT.json')
-            .then(response => {
-                setClothArmorArtifacts(response.data);
-            })
+        const artifactCollectionKey = "CLOTH_ARMOR_ARTIFACT_PRICES";
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: artifactCollectionKey } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const artifactData = await firebaseService.readData("ARTIFACT"); // Firebase key is ARTIFACT.json
+            if (artifactData && artifactData.arr) { 
+                dispatch({
+                    type: ActionType.SET_ITEM_MARKET_PRICES, 
+                    payload: { 
+                        uniqueNameBase: artifactCollectionKey, 
+                        prices: artifactData.arr, 
+                        lastUpdated: new Date().toISOString() 
+                    }
+                });
+            } else {
+                dispatch({ type: ActionType.SET_ERROR, payload: `Failed to load ${artifactCollectionKey} or data is empty.` });
+            }
+        } catch (error) {
+            console.error(`Error fetching ${artifactCollectionKey}:`, error);
+            dispatch({ type: ActionType.SET_ERROR, payload: `Error fetching ${artifactCollectionKey}.` });
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: artifactCollectionKey } });
+        }
     }
     const printPrices = () => {
-        console.log(clothArmorv1ScholarPrices.arr[5][1]);
-        console.log(clothArmorv2ScholarPrices.arr[5][1]);
-        console.log(clothArmorv3ScholarPrices.arr[5][1]);
-        console.log(clothArmorv1ClericPrices.arr[5][1]);
-        console.log(clothArmorv2ClericPrices.arr[5][1]);
-        console.log(clothArmorv3ClericPrices.arr[5][1]);
-        console.log(clothArmorv1MagePrices.arr[5][1]);
-        console.log(clothArmorv2MagePrices.arr[5][1]);
-        console.log(clothArmorv3MagePrices.arr[5][1]);
-        console.log(clothArmorv1PurityPrices.arr[5][1]);
-        console.log(clothArmorv2PurityPrices.arr[5][1]);
-        console.log(clothArmorv3PurityPrices.arr[5][1]);
-        console.log(clothArmorv1CultistPrices.arr[5][1]);
-        console.log(clothArmorv2CultistPrices.arr[5][1]);
-        console.log(clothArmorv3CultistPrices.arr[5][1]);
-        console.log(clothArmorv1FiendPrices.arr[5][1]);
-        console.log(clothArmorv2FiendPrices.arr[5][1]);
-        console.log(clothArmorv3FiendPrices.arr[5][1]);
-        console.log(clothArmorv1DruidPrices.arr[5][1]);
-        console.log(clothArmorv2DruidPrices.arr[5][1]);
-        console.log(clothArmorv3DruidPrices.arr[5][1]);
-        console.log(bagPrices.arr[5][1]);
-        console.log(satchelPrices.arr[5][1]);
-        console.log(clothPrices.arr[5][1]);
-        console.log(fiberPrices.arr[5][1]);
-        console.log(hidePrices.arr[5][1]);
-        console.log(leatherPrices.arr[5][1]);
-        console.log(logPrices.arr[5][1]);
-        console.log(plankPrices.arr[5][1]);
-        console.log(clothArmorArtifacts.arr[5][1]);
+        // console.log(clothArmorv1ScholarPrices.arr[5][1]); // Replaced
+        const scholarCowlPrices = state.marketPrices.get("HEAD_CLOTH_SET1");
+        if (scholarCowlPrices && scholarCowlPrices.prices[5]) console.log(scholarCowlPrices.prices[5][1]);
+        // console.log(clothArmorv2ScholarPrices.arr[5][1]); // Replaced
+        const scholarRobePrices = state.marketPrices.get("ARMOR_CLOTH_SET1");
+        if (scholarRobePrices && scholarRobePrices.prices[5]) console.log(scholarRobePrices.prices[5][1]);
+        // console.log(clothArmorv3ScholarPrices.arr[5][1]); // Replaced
+        const scholarSandalsPrices = state.marketPrices.get("SHOES_CLOTH_SET1");
+        if (scholarSandalsPrices && scholarSandalsPrices.prices[5]) console.log(scholarSandalsPrices.prices[5][1]);
+        
+        // console.log(clothArmorv1ClericPrices.arr[5][1]); // Replaced
+        const clericCowlPrices = state.marketPrices.get("HEAD_CLOTH_SET2");
+        if (clericCowlPrices && clericCowlPrices.prices[5]) console.log(clericCowlPrices.prices[5][1]);
+        // console.log(clothArmorv2ClericPrices.arr[5][1]); // Replaced
+        const clericRobePrices = state.marketPrices.get("ARMOR_CLOTH_SET2");
+        if (clericRobePrices && clericRobePrices.prices[5]) console.log(clericRobePrices.prices[5][1]);
+        // console.log(clothArmorv3ClericPrices.arr[5][1]); // Replaced
+        const clericSandalsPrices = state.marketPrices.get("SHOES_CLOTH_SET2");
+        if (clericSandalsPrices && clericSandalsPrices.prices[5]) console.log(clericSandalsPrices.prices[5][1]);
+
+        // console.log(clothArmorv1MagePrices.arr[5][1]); // Replaced
+        const mageCowlPrices = state.marketPrices.get("HEAD_CLOTH_SET3");
+        if (mageCowlPrices && mageCowlPrices.prices[5]) console.log(mageCowlPrices.prices[5][1]);
+        // console.log(clothArmorv2MagePrices.arr[5][1]); // Replaced
+        const mageRobePrices = state.marketPrices.get("ARMOR_CLOTH_SET3");
+        if (mageRobePrices && mageRobePrices.prices[5]) console.log(mageRobePrices.prices[5][1]);
+        // console.log(clothArmorv3MagePrices.arr[5][1]); // Replaced
+        const mageSandalsPrices = state.marketPrices.get("SHOES_CLOTH_SET3");
+        if (mageSandalsPrices && mageSandalsPrices.prices[5]) console.log(mageSandalsPrices.prices[5][1]);
+
+        // console.log(clothArmorv1RoyalPrices.arr[5][1]); // Replaced
+        const royalCowlPrices = state.marketPrices.get("HEAD_CLOTH_ROYAL");
+        if (royalCowlPrices && royalCowlPrices.prices[5]) console.log(royalCowlPrices.prices[5][1]);
+        // console.log(clothArmorv2RoyalPrices.arr[5][1]); // Replaced
+        const royalRobePrices = state.marketPrices.get("ARMOR_CLOTH_ROYAL");
+        if (royalRobePrices && royalRobePrices.prices[5]) console.log(royalRobePrices.prices[5][1]);
+        // console.log(clothArmorv3RoyalPrices.arr[5][1]); // Replaced
+        const royalSandalsPrices = state.marketPrices.get("SHOES_CLOTH_ROYAL");
+        if (royalSandalsPrices && royalSandalsPrices.prices[5]) console.log(royalSandalsPrices.prices[5][1]);
+
+        // console.log(clothArmorv1PurityPrices.arr[5][1]); // Replaced
+        const purityCowlPrices = state.marketPrices.get("HEAD_CLOTH_AVALON");
+        if (purityCowlPrices && purityCowlPrices.prices[5]) console.log(purityCowlPrices.prices[5][1]);
+        // console.log(clothArmorv2PurityPrices.arr[5][1]); // Replaced
+        const purityRobePrices = state.marketPrices.get("ARMOR_CLOTH_AVALON");
+        if (purityRobePrices && purityRobePrices.prices[5]) console.log(purityRobePrices.prices[5][1]);
+        // console.log(clothArmorv3PurityPrices.arr[5][1]); // Replaced
+        const puritySandalsPrices = state.marketPrices.get("SHOES_CLOTH_AVALON");
+        if (puritySandalsPrices && puritySandalsPrices.prices[5]) console.log(puritySandalsPrices.prices[5][1]);
+
+        // console.log(clothArmorv1CultistPrices.arr[5][1]); // Replaced
+        const cultistCowlPrices = state.marketPrices.get("HEAD_CLOTH_MORGANA");
+        if (cultistCowlPrices && cultistCowlPrices.prices[5]) console.log(cultistCowlPrices.prices[5][1]);
+        // console.log(clothArmorv2CultistPrices.arr[5][1]); // Replaced
+        const cultistRobePrices = state.marketPrices.get("ARMOR_CLOTH_MORGANA");
+        if (cultistRobePrices && cultistRobePrices.prices[5]) console.log(cultistRobePrices.prices[5][1]);
+        // console.log(clothArmorv3CultistPrices.arr[5][1]); // Replaced
+        const cultistSandalsPrices = state.marketPrices.get("SHOES_CLOTH_MORGANA");
+        if (cultistSandalsPrices && cultistSandalsPrices.prices[5]) console.log(cultistSandalsPrices.prices[5][1]);
+
+        // console.log(clothArmorv1FiendPrices.arr[5][1]); // Replaced
+        const fiendCowlPrices = state.marketPrices.get("HEAD_CLOTH_HELL");
+        if (fiendCowlPrices && fiendCowlPrices.prices[5]) console.log(fiendCowlPrices.prices[5][1]);
+        // console.log(clothArmorv2FiendPrices.arr[5][1]); // Replaced
+        const fiendRobePrices = state.marketPrices.get("ARMOR_CLOTH_HELL");
+        if (fiendRobePrices && fiendRobePrices.prices[5]) console.log(fiendRobePrices.prices[5][1]);
+        // console.log(clothArmorv3FiendPrices.arr[5][1]); // Replaced
+        const fiendSandalsPrices = state.marketPrices.get("SHOES_CLOTH_HELL");
+        if (fiendSandalsPrices && fiendSandalsPrices.prices[5]) console.log(fiendSandalsPrices.prices[5][1]);
+        
+        // console.log(clothArmorv1DruidPrices.arr[5][1]); // Replaced
+        const druidCowlPrices = state.marketPrices.get("HEAD_CLOTH_KEEPER");
+        if (druidCowlPrices && druidCowlPrices.prices[5]) console.log(druidCowlPrices.prices[5][1]);
+        // console.log(clothArmorv2DruidPrices.arr[5][1]); // Replaced
+        const druidRobePrices = state.marketPrices.get("ARMOR_CLOTH_KEEPER");
+        if (druidRobePrices && druidRobePrices.prices[5]) console.log(druidRobePrices.prices[5][1]);
+        // console.log(clothArmorv3DruidPrices.arr[5][1]); // Replaced
+        const druidSandalsPrices = state.marketPrices.get("SHOES_CLOTH_KEEPER");
+        if (druidSandalsPrices && druidSandalsPrices.prices[5]) console.log(druidSandalsPrices.prices[5][1]);
+
+        // console.log(bagPrices.arr[5][1]); // Replaced
+        const bagMarketPrices = state.marketPrices.get("BAG");
+        if (bagMarketPrices && bagMarketPrices.prices[5]) {
+            console.log(bagMarketPrices.prices[5][1]);
+        }
+        // console.log(satchelPrices.arr[5][1]); // Replaced
+        const satchelMarketPrices = state.marketPrices.get("SATCHEL_INSIGHT");
+        if (satchelMarketPrices && satchelMarketPrices.prices[5]) {
+            console.log(satchelMarketPrices.prices[5][1]);
+        }
+        // console.log(clothPrices.arr[5][1]); // Replaced
+        const clothMarketPrices = state.marketPrices.get("CLOTH");
+        if (clothMarketPrices && clothMarketPrices.prices[5]) {
+            console.log(clothMarketPrices.prices[5][1]);
+        }
+        // console.log(fiberPrices.arr[5][1]); // Replaced
+        const fiberMarketPrices = state.marketPrices.get("FIBER");
+        if (fiberMarketPrices && fiberMarketPrices.prices[5]) { // Check if row 5 exists
+             console.log(fiberMarketPrices.prices[5][1]);
+        }
+        // console.log(hidePrices.arr[5][1]); // Replaced
+        const hideMarketPrices = state.marketPrices.get("HIDE");
+        if (hideMarketPrices && hideMarketPrices.prices[5]) {
+            console.log(hideMarketPrices.prices[5][1]);
+        }
+        // console.log(leatherPrices.arr[5][1]); // Replaced
+        const leatherMarketPrices = state.marketPrices.get("LEATHER");
+        if (leatherMarketPrices && leatherMarketPrices.prices[5]) {
+            console.log(leatherMarketPrices.prices[5][1]);
+        }
+        // console.log(logPrices.arr[5][1]); // Replaced
+        const logMarketPrices = state.marketPrices.get("WOOD"); // Assuming "WOOD" is the key for logPrices
+        if (logMarketPrices && logMarketPrices.prices[5]) {
+            console.log(logMarketPrices.prices[5][1]);
+        }
+        // console.log(plankPrices.arr[5][1]); // Replaced
+        const plankMarketPrices = state.marketPrices.get("PLANKS");
+        if (plankMarketPrices && plankMarketPrices.prices[5]) {
+            console.log(plankMarketPrices.prices[5][1]);
+        }
+        // console.log(clothArmorArtifacts.arr[5][1]); // Replaced
+        const artifactPrices = state.marketPrices.get("CLOTH_ARMOR_ARTIFACT_PRICES");
+        if (artifactPrices && artifactPrices.prices[5]) console.log(artifactPrices.prices[5][1]);
         console.log(hearts.arr[3]);
     }
     const componentDidMount = async () => {
@@ -1576,7 +1843,7 @@ function Profit() {
 
             {/* {tableReady ? (<div>fiber marketplace</div>) : (<div>baban</div>)} */}
             {resourceReady ? (<div>
-                {printMultidimenstionalArray(fiberPrices)}
+                {state.marketPrices.get("FIBER") ? printMultidimenstionalArray({ arr: state.marketPrices.get("FIBER")!.prices }) : <div>Loading Fiber prices...</div>}
                 <div>fiber craft v1</div>
                 {printMultidimenstionalArray(fiberCraftPricesv1)}
                 <div>fiber craft v2</div>

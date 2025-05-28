@@ -7,7 +7,6 @@ import {
   Route,
 } from "react-router-dom";
 import Profit from './Profit';
-import Hack from './hack';
 import DataClientService from './dataClientService';
 function App() {
   // const [employees, setEmployees] = useState<EmployeeType[]>();
@@ -16,7 +15,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/">
-            <Hack />
+            <Profit />
           </Route>
         </Switch>
       </Router>
