@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -7,9 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 import Profit from './Profit';
-import DataClientService from './dataClientService';
+
 function App() {
-  // const [employees, setEmployees] = useState<EmployeeType[]>();
   return (
     <div className="App">
       <Router>

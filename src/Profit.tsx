@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component, useEffect, useState, useMemo } from 'react';
 import { isConstructorDeclaration } from 'typescript';
 import { clothArtifactDefault } from './crafting/artifacts/marketplace';
 import { clothArmorCraftSilverDefault, clothArmorRoyalCraftSilverDefault, clothArmorDruidCraftSilverDefault, clothArmorFiendCraftSilverDefault, clothArmorCultistCraftSilverDefault, clothArmorPurityCraftSilverDefault } from './crafting/clothArmor/craftSilver';
@@ -8,7 +8,8 @@ import { fiberCraftSilverv1Default, fiberCraftSilverv2Default, clothCraftSilverD
 import { fiberDefault, clothDefault, hideDefault, leatherDefault, logDefault, plankDefault } from './crafting/Resources/marketPlace';
 import { bagCraftSilverDefault, satchelCraftSilverDefault } from './crafting/tools/craftSilver';
 import { bagDefault, satchelDefault } from './crafting/tools/marketPlace';
-import { arr, fiberCraftPricesv1Default, fiberCraftPricesv2Default, profitableFiberDefault, profitableFiberIndexDefault, profitableClothIndexDefault, clothCraftPricesDefault, profitableClothDefault, hideCraftPricesv1Default, hideCraftPricesv2Default, profitableHideDefault, profitableHideIndexDefault, profitableLeatherIndexDefault, leatherCraftPricesDefault, profitableLeatherDefault, logCraftPricesv1Default, logCraftPricesv2Default, profitableLogDefault, profitableLogIndexDefault, profitablePlankIndexDefault, plankCraftPricesDefault, profitablePlankDefault, bagCraftDefault, profitableBagDefault, profitableBagPercentageDefault, satchelCraftDefault, profitableSatchelDefault, profitableSatchelPercentageDefault, clothArmorv1ScholarCraftDefault, profitableClothArmorv1ScholarDefault, profitableClothArmorv1ScholarPercentageDefault, clothArmorv2ScholarCraftDefault, profitableClothArmorv2ScholarDefault, profitableClothArmorv2ScholarPercentageDefault, clothArmorv3ScholarCraftDefault, profitableClothArmorv3ScholarDefault, profitableClothArmorv3ScholarPercentageDefault, clothArmorv1ClericCraftDefault, profitableClothArmorv1ClericDefault, profitableClothArmorv1ClericPercentageDefault, clothArmorv2ClericCraftDefault, profitableClothArmorv2ClericDefault, profitableClothArmorv2ClericPercentageDefault, clothArmorv3ClericCraftDefault, profitableClothArmorv3ClericDefault, profitableClothArmorv3ClericPercentageDefault, clothArmorv1MageCraftDefault, profitableClothArmorv1MageDefault, profitableClothArmorv1MagePercentageDefault, clothArmorv2MageCraftDefault, profitableClothArmorv2MageDefault, profitableClothArmorv2MagePercentageDefault, clothArmorv3MageCraftDefault, profitableClothArmorv3MageDefault, profitableClothArmorv3MagePercentageDefault, clothArmorv1RoyalCraftDefault, profitableClothArmorv1RoyalDefault, profitableClothArmorv1RoyalPercentageDefault, clothArmorv2RoyalCraftDefault, profitableClothArmorv2RoyalDefault, profitableClothArmorv2RoyalPercentageDefault, clothArmorv3RoyalCraftDefault, profitableClothArmorv3RoyalDefault, profitableClothArmorv3RoyalPercentageDefault, clothArmorv1DruidCraftDefault, profitableClothArmorv1DruidDefault, profitableClothArmorv1DruidPercentageDefault, clothArmorv2DruidCraftDefault, profitableClothArmorv2DruidDefault, profitableClothArmorv2DruidPercentageDefault, clothArmorv3DruidCraftDefault, profitableClothArmorv3DruidDefault, profitableClothArmorv3DruidPercentageDefault, clothArmorv1FiendCraftDefault, profitableClothArmorv1FiendDefault, profitableClothArmorv1FiendPercentageDefault, clothArmorv2FiendCraftDefault, profitableClothArmorv2FiendDefault, profitableClothArmorv2FiendPercentageDefault, clothArmorv3FiendCraftDefault, profitableClothArmorv3FiendDefault, profitableClothArmorv3FiendPercentageDefault, clothArmorv1CultistCraftDefault, profitableClothArmorv1CultistDefault, profitableClothArmorv1CultistPercentageDefault, clothArmorv2CultistCraftDefault, profitableClothArmorv2CultistDefault, profitableClothArmorv2CultistPercentageDefault, clothArmorv3CultistCraftDefault, profitableClothArmorv3CultistDefault, profitableClothArmorv3CultistPercentageDefault, clothArmorv1PurityCraftDefault, profitableClothArmorv1PurityDefault, profitableClothArmorv1PurityPercentageDefault, clothArmorv2PurityCraftDefault, profitableClothArmorv2PurityDefault, profitableClothArmorv2PurityPercentageDefault, clothArmorv3PurityCraftDefault, profitableClothArmorv3PurityDefault, profitableClothArmorv3PurityPercentageDefault, fiberDefault } from './types';
+// types import updated below
+// import { arr, fiberCraftPricesv1Default, fiberCraftPricesv2Default, profitableFiberDefault, profitableFiberIndexDefault, profitableClothIndexDefault, clothCraftPricesDefault, profitableClothDefault, hideCraftPricesv1Default, hideCraftPricesv2Default, profitableHideDefault, profitableHideIndexDefault, profitableLeatherIndexDefault, leatherCraftPricesDefault, profitableLeatherDefault, logCraftPricesv1Default, logCraftPricesv2Default, profitableLogDefault, profitableLogIndexDefault, profitablePlankIndexDefault, plankCraftPricesDefault, profitablePlankDefault, bagCraftDefault, profitableBagDefault, profitableBagPercentageDefault, satchelCraftDefault, profitableSatchelDefault, profitableSatchelPercentageDefault, clothArmorv1ScholarCraftDefault, profitableClothArmorv1ScholarDefault, profitableClothArmorv1ScholarPercentageDefault, clothArmorv2ScholarCraftDefault, profitableClothArmorv2ScholarDefault, profitableClothArmorv2ScholarPercentageDefault, clothArmorv3ScholarCraftDefault, profitableClothArmorv3ScholarDefault, profitableClothArmorv3ScholarPercentageDefault, clothArmorv1ClericCraftDefault, profitableClothArmorv1ClericDefault, profitableClothArmorv1ClericPercentageDefault, clothArmorv2ClericCraftDefault, profitableClothArmorv2ClericDefault, profitableClothArmorv2ClericPercentageDefault, clothArmorv3ClericCraftDefault, profitableClothArmorv3ClericDefault, profitableClothArmorv3ClericPercentageDefault, clothArmorv1MageCraftDefault, profitableClothArmorv1MageDefault, profitableClothArmorv1MagePercentageDefault, clothArmorv2MageCraftDefault, profitableClothArmorv2MageDefault, profitableClothArmorv2MagePercentageDefault, clothArmorv3MageCraftDefault, profitableClothArmorv3MageDefault, profitableClothArmorv3MagePercentageDefault, clothArmorv1RoyalCraftDefault, profitableClothArmorv1RoyalDefault, profitableClothArmorv1RoyalPercentageDefault, clothArmorv2RoyalCraftDefault, profitableClothArmorv2RoyalDefault, profitableClothArmorv2RoyalPercentageDefault, clothArmorv3RoyalCraftDefault, profitableClothArmorv3RoyalDefault, profitableClothArmorv3RoyalPercentageDefault, clothArmorv1DruidCraftDefault, profitableClothArmorv1DruidDefault, profitableClothArmorv1DruidPercentageDefault, clothArmorv2DruidCraftDefault, profitableClothArmorv2DruidDefault, profitableClothArmorv2DruidPercentageDefault, clothArmorv3DruidCraftDefault, profitableClothArmorv3DruidDefault, profitableClothArmorv3DruidPercentageDefault, clothArmorv1FiendCraftDefault, profitableClothArmorv1FiendDefault, profitableClothArmorv1FiendPercentageDefault, clothArmorv2FiendCraftDefault, profitableClothArmorv2FiendDefault, profitableClothArmorv2FiendPercentageDefault, clothArmorv3FiendCraftDefault, profitableClothArmorv3FiendDefault, profitableClothArmorv3FiendPercentageDefault, clothArmorv1CultistCraftDefault, profitableClothArmorv1CultistDefault, profitableClothArmorv1CultistPercentageDefault, clothArmorv2CultistCraftDefault, profitableClothArmorv2CultistDefault, profitableClothArmorv2CultistPercentageDefault, clothArmorv3CultistCraftDefault, profitableClothArmorv3CultistDefault, profitableClothArmorv3CultistPercentageDefault, clothArmorv1PurityCraftDefault, profitableClothArmorv1PurityDefault, profitableClothArmorv1PurityPercentageDefault, clothArmorv2PurityCraftDefault, profitableClothArmorv2PurityDefault, profitableClothArmorv2PurityPercentageDefault, clothArmorv3PurityCraftDefault, profitableClothArmorv3PurityDefault, profitableClothArmorv3PurityPercentageDefault, fiberDefault } from './types';
 // import {initializeApp} from 'firebase/app';
 // import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import "firebase/compat/firestore"
@@ -16,9 +17,14 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import database from './database';
 import Bottleneck from "bottleneck";
-import { useProfitCalculator } from './context/ProfitCalculatorContext';
-import { ActionType } from './context/ProfitCalculatorContext';
+import { useProfitCalculator, ActionType } from './context/ProfitCalculatorContext'; // Combined ActionType import
 import * as firebaseService from './services/firebaseService';
+import * as albionDataService from './services/albionDataService';
+import { ALL_ITEM_DEFINITIONS } from './config/items'; 
+import { calculateCraftingCost, calculateProfitDetails, MarketPriceSource } from './utils/calculations';
+import { ItemDefinition, CalculatedItemProfitInfo, PriceMatrix } from './types'; 
+import ProfitDisplayTable from './components/ProfitDisplayTable';
+import { printMultidimenstionalArray } from './utils/uiUtils';
 
 
 // const FIREBASE_PROJECT_ID="albiononline-6ec2d"
@@ -45,1335 +51,131 @@ import * as firebaseService from './services/firebaseService';
 
 function Profit() {
     const { state, dispatch } = useProfitCalculator();
-    const [hearts, setHearts] = useState() as any;
     const Bottleneck = require("bottleneck/es5");
-    const Beastheart = 48467;
-    const Vineheart = 57000;
-    const Treeheart = 42000;
-    const tomeOfInsight = 28748;
-    const Rockheart = 0;
-    // royalArtifacts
-    // druidic_preserved_beak
-    // druidic_preserved_feathers
-    // druidic_preserved_bindings
-    // infernal_visor
-    // infernal_cloth_folds
-    // infernal_cloth_bindings
-    // alluring_padding
-    // alluring_amulet
-    // alluring_bindings
-    // sanctified_mask
-    // sanctified_belt
-    // sanctified_bindings
-    // const [clothArmorArtifacts, setClothArmorArtifacts] = useState<arr>(clothArtifactDefault) as any; // Removed
-    //Fiber
-    const [fiberCraftPricesv1, setFiberCraftPricesv1] = useState<arr>(fiberCraftPricesv1Default) as any;
-    const [fiberCraftPricesv2, setFiberCraftPricesv2] = useState<arr>(fiberCraftPricesv2Default) as any;
-    const [fiberCraftSilverv1, setFiberCraftSilverv1] = useState<arr>(fiberCraftSilverv1Default) as any;
-    const [fiberCraftSilverv2, setFiberCraftSilverv2] = useState<arr>(fiberCraftSilverv2Default) as any;
-    const [profitableFiber, setProfitableFiber] = useState<arr>(profitableFiberDefault) as any;
-    const [profitableFiberIndex, setprofitableFiberIndex] = useState<arr>(profitableFiberIndexDefault) as any;
-    // const [fiberPrices, setFiberPrices] = useState<arr>(fiberDefault) as any; // Removed
+    const Beastheart = 48467; // TODO: Move to config or context if still needed
+    const Vineheart = 57000; // TODO: Move to config or context if still needed
+    const Treeheart = 42000; // TODO: Move to config or context if still needed
+    const tomeOfInsight = 28748; // TODO: Move to config or context if still needed
+    const Rockheart = 0; // TODO: Move to config or context if still needed
 
-    //Cloth
-    const [profitableClothIndex, setProfitableClothIndex] = useState<arr>(profitableClothIndexDefault) as any;
-    const [clothCraftPrices, setClothCraftPricesv1] = useState<arr>(clothCraftPricesDefault) as any;
-    const [clothCraftSilver, setClothCraftSilverv1] = useState<arr>(clothCraftSilverDefault) as any;
-    const [profitableCloth, setProfitableCloth] = useState<arr>(profitableClothDefault) as any;
-    // const [clothPrices, setClothPrices] = useState<arr>(clothDefault) as any; // Removed
-
-    //Hide
-    const [hideCraftPricesv1, setHideCraftPricesv1] = useState<arr>(hideCraftPricesv1Default) as any;
-    const [hideCraftPricesv2, setHideCraftPricesv2] = useState<arr>(hideCraftPricesv2Default) as any;
-    const [hideCraftSilverv1, setHideCraftSilverv1] = useState<arr>(hideCraftSilverv1Default) as any;
-    const [hideCraftSilverv2, setHideCraftSilverv2] = useState<arr>(hideCraftSilverv2Default) as any;
-    const [profitableHide, setProfitableHide] = useState<arr>(profitableHideDefault) as any;
-    const [profitableHideIndex, setprofitableHideIndex] = useState<arr>(profitableHideIndexDefault) as any;
-    // const [hidePrices, setHidePrices] = useState<arr>(hideDefault) as any; // Removed
-    //Leather
-    const [profitableLeatherIndex, setProfitableLeatherIndex] = useState<arr>(profitableLeatherIndexDefault) as any;
-    const [leatherCraftPrices, setLeatherCraftPricesv1] = useState<arr>(leatherCraftPricesDefault) as any;
-    const [leatherCraftSilver, setLeatherCraftSilver1] = useState<arr>(leatherCraftSilverDefault) as any;
-    const [profitableLeather, setProfitableLeather] = useState<arr>(profitableLeatherDefault) as any;
-    // const [leatherPrices, setLeatherPrices] = useState<arr>(leatherDefault) as any; // Removed
-
-    //Log
-    const [logCraftPricesv1, setLogCraftPricesv1] = useState<arr>(logCraftPricesv1Default) as any;
-    const [logCraftPricesv2, setLogCraftPricesv2] = useState<arr>(logCraftPricesv2Default) as any;
-    const [logCraftSilverv1, setLogCraftSilverv1] = useState<arr>(logCraftSilverv1Default) as any;
-    const [logCraftSilverv2, setLogCraftSilverv2] = useState<arr>(logCraftSilverv2Default) as any;
-    const [profitableLog, setProfitableLog] = useState<arr>(profitableLogDefault) as any;
-    const [profitableLogIndex, setprofitableLogIndex] = useState<arr>(profitableLogIndexDefault) as any;
-    // const [logPrices, setLogPrices] = useState<arr>(logDefault) as any; // Removed
-
-    //Plank
-    const [profitablePlankIndex, setProfitablePlankIndex] = useState<arr>(profitablePlankIndexDefault) as any;
-    const [plankCraftPrices, setPlankCraftPricesv1] = useState<arr>(plankCraftPricesDefault) as any;
-    const [plankCraftSilver, setPlankCraftSilverv1] = useState<arr>(plankCraftSilverDefault) as any;
-    const [profitablePlank, setProfitablePlank] = useState<arr>(profitablePlankDefault) as any;
-    // const [plankPrices, setPlankPrices] = useState<arr>(plankDefault) as any; // Removed
-    //Bag
-    // const [bagPrices, setBagPrices] = useState<arr>(bagDefault) as any; // Removed
-    const [bagCraftSilver, setBagCraftSilver] = useState<arr>(bagCraftSilverDefault) as any;
-    const [bagCraft, setBagCraft] = useState<arr>(bagCraftDefault) as any;
-    const [profitableBag, setProfitableBag] = useState<arr>(profitableBagDefault) as any;
-    const [profitableBagPercentage, setProfitableBagPercentage] = useState<arr>(profitableBagPercentageDefault) as any;
-
-    //Satchel
-    // const [satchelPrices, setSatchelPrices] = useState<arr>(satchelDefault) as any; // Removed
-    const [satchelCraftSilver, setSatchelCraftSilver] = useState<arr>(satchelCraftSilverDefault) as any;
-    const [satchelCraft, setSatchelCraft] = useState<arr>(satchelCraftDefault) as any;
-    const [profitableSatchel, setProfitableSatchel] = useState<arr>(profitableSatchelDefault) as any;
-    const [profitableSatchelPercentage, setProfitableSatchelPercentage] = useState<arr>(profitableSatchelPercentageDefault) as any;
-
-    //Scholar cowl robe sandals
-    //head
-    // const [clothArmorv1ScholarPrices, setClothArmorv1ScholarPrices] = useState<arr>(clothArmorv1ScholarDefault) as any; // Removed
-    const [clothArmorv1ScholarCraft, setClothArmorv1ScholarCraft] = useState<arr>(clothArmorv1ScholarCraftDefault) as any;
-    const [profitableClothArmorv1Scholar, setProfitableClothArmorv1Scholar] = useState<arr>(profitableClothArmorv1ScholarDefault) as any;
-    const [profitableClothArmorv1ScholarPercentage, setProfitableClothArmorv1ScholarPercentage] = useState<arr>(profitableClothArmorv1ScholarPercentageDefault) as any;
-    //jacket
-    // const [clothArmorv2ScholarPrices, setClothArmorv2ScholarPrices] = useState<arr>(clothArmorv2ScholarDefault) as any; // Removed
-    const [clothArmorv2ScholarCraft, setClothArmorv2ScholarCraft] = useState<arr>(clothArmorv2ScholarCraftDefault) as any;
-    const [profitableClothArmorv2Scholar, setProfitableClothArmorv2Scholar] = useState<arr>(profitableClothArmorv2ScholarDefault) as any;
-    const [profitableClothArmorv2ScholarPercentage, setProfitableClothArmorv2ScholarPercentage] = useState<arr>(profitableClothArmorv2ScholarPercentageDefault) as any;
-    //boots
-    // const [clothArmorv3ScholarPrices, setClothArmorv3ScholarPrices] = useState<arr>(clothArmorv3ScholarDefault) as any; // Removed
-    const [clothArmorv3ScholarCraft, setClothArmorv3ScholarCraft] = useState<arr>(clothArmorv3ScholarCraftDefault) as any;
-    const [profitableClothArmorv3Scholar, setProfitableClothArmorv3Scholar] = useState<arr>(profitableClothArmorv3ScholarDefault) as any;
-    const [profitableClothArmorv3ScholarPercentage, setProfitableClothArmorv3ScholarPercentage] = useState<arr>(profitableClothArmorv3ScholarPercentageDefault) as any;
-
-    const [clothArmorScholarCraftSilver, setClothArmorScholarCraftSilver] = useState<arr>(clothArmorCraftSilverDefault) as any;
-    //Cleric cowl robe sandals
-    // const [clothArmorv1ClericPrices, setClothArmorv1ClericPrices] = useState<arr>(clothArmorv1ClericDefault) as any; // Removed
-    const [clothArmorv1ClericCraft, setClothArmorv1ClericCraft] = useState<arr>(clothArmorv1ClericCraftDefault) as any;
-    const [profitableClothArmorv1Cleric, setProfitableClothArmorv1Cleric] = useState<arr>(profitableClothArmorv1ClericDefault) as any;
-    const [profitableClothArmorv1ClericPercentage, setProfitableClothArmorv1ClericPercentage] = useState<arr>(profitableClothArmorv1ClericPercentageDefault) as any;
-    //jacket
-    // const [clothArmorv2ClericPrices, setClothArmorv2ClericPrices] = useState<arr>(clothArmorv2ClericDefault) as any; // Removed
-    const [clothArmorv2ClericCraft, setClothArmorv2ClericCraft] = useState<arr>(clothArmorv2ClericCraftDefault) as any;
-    const [profitableClothArmorv2Cleric, setProfitableClothArmorv2Cleric] = useState<arr>(profitableClothArmorv2ClericDefault) as any;
-    const [profitableClothArmorv2ClericPercentage, setProfitableClothArmorv2ClericPercentage] = useState<arr>(profitableClothArmorv2ClericPercentageDefault) as any;
-    //boots
-    // const [clothArmorv3ClericPrices, setClothArmorv3ClericPrices] = useState<arr>(clothArmorv3ClericDefault) as any; // Removed
-    const [clothArmorv3ClericCraft, setClothArmorv3ClericCraft] = useState<arr>(clothArmorv3ClericCraftDefault) as any;
-    const [profitableClothArmorv3Cleric, setProfitableClothArmorv3Cleric] = useState<arr>(profitableClothArmorv3ClericDefault) as any;
-    const [profitableClothArmorv3ClericPercentage, setProfitableClothArmorv3ClericPercentage] = useState<arr>(profitableClothArmorv3ClericPercentageDefault) as any;
-
-    const [clothArmorClericCraftSilver, setClothArmorClericCraftSilver] = useState<arr>(clothArmorCraftSilverDefault) as any;
-    //Mage cowl robe sandals
-    // const [clothArmorv1MagePrices, setClothArmorv1MagePrices] = useState<arr>(clothArmorv1MageDefault) as any; // Removed
-    const [clothArmorv1MageCraft, setClothArmorv1MageCraft] = useState<arr>(clothArmorv1MageCraftDefault) as any;
-    const [profitableClothArmorv1Mage, setProfitableClothArmorv1Mage] = useState<arr>(profitableClothArmorv1MageDefault) as any;
-    const [profitableClothArmorv1MagePercentage, setProfitableClothArmorv1MagePercentage] = useState<arr>(profitableClothArmorv1MagePercentageDefault) as any;
-    //jacket
-    // const [clothArmorv2MagePrices, setClothArmorv2MagePrices] = useState<arr>(clothArmorv2MageDefault) as any; // Removed
-    const [clothArmorv2MageCraft, setClothArmorv2MageCraft] = useState<arr>(clothArmorv2MageCraftDefault) as any;
-    const [profitableClothArmorv2Mage, setProfitableClothArmorv2Mage] = useState<arr>(profitableClothArmorv2MageDefault) as any;
-    const [profitableClothArmorv2MagePercentage, setProfitableClothArmorv2MagePercentage] = useState<arr>(profitableClothArmorv2MagePercentageDefault) as any;
-    //boots
-    // const [clothArmorv3MagePrices, setClothArmorv3MagePrices] = useState<arr>(clothArmorv3MageDefault) as any; // Removed
-    const [clothArmorv3MageCraft, setClothArmorv3MageCraft] = useState<arr>(clothArmorv3MageCraftDefault) as any;
-    const [profitableClothArmorv3Mage, setProfitableClothArmorv3Mage] = useState<arr>(profitableClothArmorv3MageDefault) as any;
-    const [profitableClothArmorv3MagePercentage, setProfitableClothArmorv3MagePercentage] = useState<arr>(profitableClothArmorv3MagePercentageDefault) as any;
-
-    const [clothArmorMageCraftSilver, setClothArmorMageCraftSilver] = useState<arr>(clothArmorCraftSilverDefault) as any;
-    //Royal cowl robe sandals
-    // const [clothArmorv1RoyalPrices, setClothArmorv1RoyalPrices] = useState<arr>(clothArmorv1RoyalDefault) as any; // Removed
-    const [clothArmorv1RoyalCraft, setClothArmorv1RoyalCraft] = useState<arr>(clothArmorv1RoyalCraftDefault) as any;
-    const [profitableClothArmorv1Royal, setProfitableClothArmorv1Royal] = useState<arr>(profitableClothArmorv1RoyalDefault) as any;
-    const [profitableClothArmorv1RoyalPercentage, setProfitableClothArmorv1RoyalPercentage] = useState<arr>(profitableClothArmorv1RoyalPercentageDefault) as any;
-    //jacket
-    // const [clothArmorv2RoyalPrices, setClothArmorv2RoyalPrices] = useState<arr>(clothArmorv2RoyalDefault) as any; // Removed
-    const [clothArmorv2RoyalCraft, setClothArmorv2RoyalCraft] = useState<arr>(clothArmorv2RoyalCraftDefault) as any;
-    const [profitableClothArmorv2Royal, setProfitableClothArmorv2Royal] = useState<arr>(profitableClothArmorv2RoyalDefault) as any;
-    const [profitableClothArmorv2RoyalPercentage, setProfitableClothArmorv2RoyalPercentage] = useState<arr>(profitableClothArmorv2RoyalPercentageDefault) as any;
-    //boots
-    // const [clothArmorv3RoyalPrices, setClothArmorv3RoyalPrices] = useState<arr>(clothArmorv3RoyalDefault) as any; // Removed
-    const [clothArmorv3RoyalCraft, setClothArmorv3RoyalCraft] = useState<arr>(clothArmorv3RoyalCraftDefault) as any;
-    const [profitableClothArmorv3Royal, setProfitableClothArmorv3Royal] = useState<arr>(profitableClothArmorv3RoyalDefault) as any;
-    const [profitableClothArmorv3RoyalPercentage, setProfitableClothArmorv3RoyalPercentage] = useState<arr>(profitableClothArmorv3RoyalPercentageDefault) as any;
-
-    const [clothArmorRoyalCraftSilver, setClothArmorRoyalCraftSilver] = useState<arr>(clothArmorRoyalCraftSilverDefault) as any;
-    //Druid cowl robe sandals Druidic preserved beak, feathers ,bindings
-    // const [clothArmorv1DruidPrices, setClothArmorv1DruidPrices] = useState<arr>(clothArmorv1DruidDefault) as any; // Removed
-    const [clothArmorv1DruidCraft, setClothArmorv1DruidCraft] = useState<arr>(clothArmorv1DruidCraftDefault) as any;
-    const [profitableClothArmorv1Druid, setProfitableClothArmorv1Druid] = useState<arr>(profitableClothArmorv1DruidDefault) as any;
-    const [profitableClothArmorv1DruidPercentage, setProfitableClothArmorv1DruidPercentage] = useState<arr>(profitableClothArmorv1DruidPercentageDefault) as any;
-    //jacket
-    // const [clothArmorv2DruidPrices, setClothArmorv2DruidPrices] = useState<arr>(clothArmorv2DruidDefault) as any; // Removed
-    const [clothArmorv2DruidCraft, setClothArmorv2DruidCraft] = useState<arr>(clothArmorv2DruidCraftDefault) as any;
-    const [profitableClothArmorv2Druid, setProfitableClothArmorv2Druid] = useState<arr>(profitableClothArmorv2DruidDefault) as any;
-    const [profitableClothArmorv2DruidPercentage, setProfitableClothArmorv2DruidPercentage] = useState<arr>(profitableClothArmorv2DruidPercentageDefault) as any;
-    //boots
-    // const [clothArmorv3DruidPrices, setClothArmorv3DruidPrices] = useState<arr>(clothArmorv3DruidDefault) as any; // Removed
-    const [clothArmorv3DruidCraft, setClothArmorv3DruidCraft] = useState<arr>(clothArmorv3DruidCraftDefault) as any;
-    const [profitableClothArmorv3Druid, setProfitableClothArmorv3Druid] = useState<arr>(profitableClothArmorv3DruidDefault) as any;
-    const [profitableClothArmorv3DruidPercentage, setProfitableClothArmorv3DruidPercentage] = useState<arr>(profitableClothArmorv3DruidPercentageDefault) as any;
-
-    const [clothArmorDruidCraftSilver, setClothArmorDruidCraftSilver] = useState<arr>(clothArmorDruidCraftSilverDefault) as any;
-    //Fiend cowl robe sandals Infernal visor, cloth folds, cloth bindings
-    // const [clothArmorv1FiendPrices, setClothArmorv1FiendPrices] = useState<arr>(clothArmorv1FiendDefault) as any; // Removed
-    const [clothArmorv1FiendCraft, setClothArmorv1FiendCraft] = useState<arr>(clothArmorv1FiendCraftDefault) as any;
-    const [profitableClothArmorv1Fiend, setProfitableClothArmorv1Fiend] = useState<arr>(profitableClothArmorv1FiendDefault) as any;
-    const [profitableClothArmorv1FiendPercentage, setProfitableClothArmorv1FiendPercentage] = useState<arr>(profitableClothArmorv1FiendPercentageDefault) as any;
-    //jacket
-    // const [clothArmorv2FiendPrices, setClothArmorv2FiendPrices] = useState<arr>(clothArmorv2FiendDefault) as any; // Removed
-    const [clothArmorv2FiendCraft, setClothArmorv2FiendCraft] = useState<arr>(clothArmorv2FiendCraftDefault) as any;
-    const [profitableClothArmorv2Fiend, setProfitableClothArmorv2Fiend] = useState<arr>(profitableClothArmorv2FiendDefault) as any;
-    const [profitableClothArmorv2FiendPercentage, setProfitableClothArmorv2FiendPercentage] = useState<arr>(profitableClothArmorv2FiendPercentageDefault) as any;
-    //boots
-    // const [clothArmorv3FiendPrices, setClothArmorv3FiendPrices] = useState<arr>(clothArmorv3FiendDefault) as any; // Removed
-    const [clothArmorv3FiendCraft, setClothArmorv3FiendCraft] = useState<arr>(clothArmorv3FiendCraftDefault) as any;
-    const [profitableClothArmorv3Fiend, setProfitableClothArmorv3Fiend] = useState<arr>(profitableClothArmorv3FiendDefault) as any;
-    const [profitableClothArmorv3FiendPercentage, setProfitableClothArmorv3FiendPercentage] = useState<arr>(profitableClothArmorv3FiendPercentageDefault) as any;
-
-    const [clothArmorFiendCraftSilver, setClothArmorFiendCraftSilver] = useState<arr>(clothArmorFiendCraftSilverDefault) as any;
-    //Cultist cowl robe sandals Alluring padding, amulet, bindings
-    // const [clothArmorv1CultistPrices, setClothArmorv1CultistPrices] = useState<arr>(clothArmorv1CultistDefault) as any; // Removed
-    const [clothArmorv1CultistCraft, setClothArmorv1CultistCraft] = useState<arr>(clothArmorv1CultistCraftDefault) as any;
-    const [profitableClothArmorv1Cultist, setProfitableClothArmorv1Cultist] = useState<arr>(profitableClothArmorv1CultistDefault) as any;
-    const [profitableClothArmorv1CultistPercentage, setProfitableClothArmorv1CultistPercentage] = useState<arr>(profitableClothArmorv1CultistPercentageDefault) as any;
-    //jacket
-    // const [clothArmorv2CultistPrices, setClothArmorv2CultistPrices] = useState<arr>(clothArmorv2CultistDefault) as any; // Removed
-    const [clothArmorv2CultistCraft, setClothArmorv2CultistCraft] = useState<arr>(clothArmorv2CultistCraftDefault) as any;
-    const [profitableClothArmorv2Cultist, setProfitableClothArmorv2Cultist] = useState<arr>(profitableClothArmorv2CultistDefault) as any;
-    const [profitableClothArmorv2CultistPercentage, setProfitableClothArmorv2CultistPercentage] = useState<arr>(profitableClothArmorv2CultistPercentageDefault) as any;
-    //boots
-    // const [clothArmorv3CultistPrices, setClothArmorv3CultistPrices] = useState<arr>(clothArmorv3CultistDefault) as any; // Removed
-    const [clothArmorv3CultistCraft, setClothArmorv3CultistCraft] = useState<arr>(clothArmorv3CultistCraftDefault) as any;
-    const [profitableClothArmorv3Cultist, setProfitableClothArmorv3Cultist] = useState<arr>(profitableClothArmorv3CultistDefault) as any;
-    const [profitableClothArmorv3CultistPercentage, setProfitableClothArmorv3CultistPercentage] = useState<arr>(profitableClothArmorv3CultistPercentageDefault) as any;
-
-    const [clothArmorCultistCraftSilver, setClothArmorCultistCraftSilver] = useState<arr>(clothArmorCultistCraftSilverDefault) as any;
-    //Purity cowl robe sandals Sanctified  mask, belt, bindings
-    // const [clothArmorv1PurityPrices, setClothArmorv1PurityPrices] = useState<arr>(clothArmorv1PurityDefault) as any; // Removed
-    const [clothArmorv1PurityCraft, setClothArmorv1PurityCraft] = useState<arr>(clothArmorv1PurityCraftDefault) as any;
-    const [profitableClothArmorv1Purity, setProfitableClothArmorv1Purity] = useState<arr>(profitableClothArmorv1PurityDefault) as any;
-    const [profitableClothArmorv1PurityPercentage, setProfitableClothArmorv1PurityPercentage] = useState<arr>(profitableClothArmorv1PurityPercentageDefault) as any;
-    //jacket
-    // const [clothArmorv2PurityPrices, setClothArmorv2PurityPrices] = useState<arr>(clothArmorv2PurityDefault) as any; // Removed
-    const [clothArmorv2PurityCraft, setClothArmorv2PurityCraft] = useState<arr>(clothArmorv2PurityCraftDefault) as any;
-    const [profitableClothArmorv2Purity, setProfitableClothArmorv2Purity] = useState<arr>(profitableClothArmorv2PurityDefault) as any;
-    const [profitableClothArmorv2PurityPercentage, setProfitableClothArmorv2PurityPercentage] = useState<arr>(profitableClothArmorv2PurityPercentageDefault) as any;
-    //boots
-    // const [clothArmorv3PurityPrices, setClothArmorv3PurityPrices] = useState<arr>(clothArmorv3PurityDefault) as any; // Removed
-    const [clothArmorv3PurityCraft, setClothArmorv3PurityCraft] = useState<arr>(clothArmorv3PurityCraftDefault) as any;
-    const [profitableClothArmorv3Purity, setProfitableClothArmorv3Purity] = useState<arr>(profitableClothArmorv3PurityDefault) as any;
-    const [profitableClothArmorv3PurityPercentage, setProfitableClothArmorv3PurityPercentage] = useState<arr>(profitableClothArmorv3PurityPercentageDefault) as any;
-
-    const [clothArmorPurityCraftSilver, setClothArmorPurityCraftSilver] = useState<arr>(clothArmorPurityCraftSilverDefault) as any;
-
-
-    const [tableReady, setTableReady] = useState(false);
-    const [resourceReady, setResourceReady] = useState(false);
-    const [profitableReady, setProfitableReady] = useState(false);
-    const limiter = new Bottleneck({
+    const [tableReady, setTableReady] = useState(false); // TODO: Evaluate if still needed
+    const [resourceReady, setResourceReady] = useState(false); // Used for displaying resource details
+    const [profitableReady, setProfitableReady] = useState(false); 
+    const limiter = new Bottleneck({ // This seems to be for outgoing API calls, which were removed. Potentially remove if not used by new service layer. // TODO: This limiter is not used anywhere now. Consider removing.
         maxConcurrent: 1,
         minTime: 1000
     });
-    // const onInputchange = (e: any) => {
-    // };
-    const printMultidimenstionalArray = (e: arr) => {
-        if (e != null) {
-            return (
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Tier 0</th>
-                            <th>Tier 1</th>
-                            <th>Tier 2</th>
-                            <th>Tier 3</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {e.arr.slice(1, e.arr.length).map((item, index) => {
-                            return (
-                                <tr>
-                                    <td>{item[0]}</td>
-                                    <td>{item[1]}</td>
-                                    <td>{item[2]}</td>
-                                    <td>{item[3]}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            )
+
+    const getPriceFromState: MarketPriceSource = (uniqueNameBase, tier, enchantment) => {
+        const itemPriceData = state.marketPrices.get(uniqueNameBase);
+        if (itemPriceData && itemPriceData.prices && itemPriceData.prices[tier] !== undefined && itemPriceData.prices[tier][enchantment] !== undefined) {
+            const price = itemPriceData.prices[tier][enchantment];
+            return price === 99999999 ? null : price;
         }
+        return null;
     };
-    // const fiberCrafts = () => {
-    //     for (let i = 0; i < 9; i++) {
-    //         for (let j = 0; j < 4; j++) {
-    //             let multiplier = 1;
-    //             if (i === 4) {
-    //                 switch (j) {
-    //                     case 1:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         break;
-    //                     case 2:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         break;
-    //                     case 3:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 5) {
-    //                 switch (j) {
-    //                     case 0:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 6) {
-    //                 switch (j) {
-    //                     case 0:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 7) {
-    //                 switch (j) {
-    //                     case 0:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 8) {
-    //                 switch (j) {
-    //                     case 0:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         fiberCraftPricesv1.arr[i][j] = fiberCraftSilverv1.arr[i][j] + multiplier * profitableFiber.arr[i][j - 1];
-    //                         fiberCraftPricesv2.arr[i][j] = fiberCraftSilverv2.arr[i][j] + multiplier * profitableFiber.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             if (i < 4 || (i === 4 && j === 0)) {
-    //                 profitableFiber.arr[i][j] = fiberPrices.arr[i][j];
-    //                 profitableFiberIndex.arr[i][j] = 1;
-    //             }
-    //             else {
-    //                 var profitIndex;
-    //                 var profitableOne;
-    //                 if (fiberCraftPricesv1.arr[i][j] < fiberCraftPricesv2.arr[i][j]) {
-    //                     profitIndex = 3;
-    //                     profitableOne = fiberCraftPricesv1.arr[i][j];
-    //                 }
-    //                 else {
-    //                     profitIndex = 2;
-    //                     profitableOne = fiberCraftPricesv2.arr[i][j];
-    //                 }
-    //                 if (profitableOne < fiberPrices.arr[i][j]) {
-    //                     profitableFiberIndex.arr[i][j] = profitIndex;
-    //                     profitableFiber.arr[i][j] = profitableOne;
-    //                 }
-    //                 else {
-    //                     profitableFiber.arr[i][j] = fiberPrices.arr[i][j];
-    //                     profitableFiberIndex.arr[i][j] = 1;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // };
-    // const hideCrafts = () => {
-    //     for (let i = 0; i < 9; i++) {
-    //         for (let j = 0; j < 4; j++) {
-    //             let multiplier = 1;
-    //             if (i === 4) {
-    //                 switch (j) {
-    //                     case 1:
-    //                         hideCraftPricesv1.arr[i][j] = 1771 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 1771 + multiplier * profitableHide.arr[i][j - 1];
-    //                         break;
-    //                     case 2:
-    //                         hideCraftPricesv1.arr[i][j] = 3542 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 3542 + multiplier * profitableHide.arr[i][j - 1];
-    //                         break;
-    //                     case 3:
-    //                         hideCraftPricesv1.arr[i][j] = 7084 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 7084 + multiplier * profitableHide.arr[i][j - 1];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 5) {
-    //                 switch (j) {
-    //                     case 0:
-    //                         hideCraftPricesv1.arr[i][j] = 1051 + multiplier * profitableHide.arr[i - 1][j];
-    //                         hideCraftPricesv2.arr[i][j] = 1051 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         hideCraftPricesv1.arr[i][j] = 1574 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 2090 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         hideCraftPricesv1.arr[i][j] = 3148 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 4191 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         hideCraftPricesv1.arr[i][j] = 6297 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 8372 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 6) {
-    //                 switch (j) {
-    //                     case 0:
-    //                         hideCraftPricesv1.arr[i][j] = 1570 + multiplier * profitableHide.arr[i - 1][j];
-    //                         hideCraftPricesv2.arr[i][j] = 1570 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         hideCraftPricesv1.arr[i][j] = 2361 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 3140 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         hideCraftPricesv1.arr[i][j] = 4723 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 6281 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         hideCraftPricesv1.arr[i][j] = 9446 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 12563 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 7) {
-    //                 switch (j) {
-    //                     case 0:
-    //                         hideCraftPricesv1.arr[i][j] = 2513 + multiplier * profitableHide.arr[i - 1][j];
-    //                         hideCraftPricesv2.arr[i][j] = 2513 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         hideCraftPricesv1.arr[i][j] = 3779 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 5025 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         hideCraftPricesv1.arr[i][j] = 7557 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 10050 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         hideCraftPricesv1.arr[i][j] = 15114 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 20101 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 8) {
-    //                 switch (j) {
-    //                     case 0:
-    //                         hideCraftPricesv1.arr[i][j] = 5025 + multiplier * profitableHide.arr[i - 1][j];
-    //                         hideCraftPricesv2.arr[i][j] = 5025 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         hideCraftPricesv1.arr[i][j] = 7557 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 10050 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         hideCraftPricesv1.arr[i][j] = 15114 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 20101 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         hideCraftPricesv1.arr[i][j] = 30229 + multiplier * profitableHide.arr[i][j - 1];
-    //                         hideCraftPricesv2.arr[i][j] = 40203 + multiplier * profitableHide.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             if (i < 4 || (i === 4 && j === 0)) {
-    //                 profitableHide.arr[i][j] = hidePrices.arr[i][j];
-    //                 profitableHideIndex.arr[i][j] = 1;
-    //             }
-    //             else {
-    //                 var profitIndex;
-    //                 var profitableOne;
-    //                 if (hideCraftPricesv1.arr[i][j] < hideCraftPricesv2.arr[i][j]) {
-    //                     profitIndex = 3;
-    //                     profitableOne = hideCraftPricesv1.arr[i][j];
-    //                 }
-    //                 else {
-    //                     profitIndex = 2;
-    //                     profitableOne = hideCraftPricesv2.arr[i][j];
-    //                 }
-    //                 if (profitableOne < hidePrices.arr[i][j]) {
-    //                     profitableHideIndex.arr[i][j] = profitIndex;
-    //                     profitableHide.arr[i][j] = profitableOne;
-    //                 }
-    //                 else {
-    //                     profitableHide.arr[i][j] = hidePrices.arr[i][j];
-    //                     profitableHideIndex.arr[i][j] = 1;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // };
-    // const clothCrafts = () => {
-    //     for (let i = 0; i < 9; i++) {
-    //         for (let j = 0; j < 4; j++) {
-    //             let multiplier;
-    //             if (i < 2) {
 
-    //             }
-    //             else if (i === 2) {
-    //                 clothCraftPrices.arr[i][j] = profitableFiber.arr[i][j];
-    //             }
-    //             else if (i === 3) {
-    //                 clothCraftPrices.arr[i][j] = 11 + profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //             }
-    //             else if (i === 4) {
-    //                 multiplier = 2;
-    //                 switch (j) {
-    //                     case 0:
-    //                         clothCraftPrices.arr[i][j] = 25 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         clothCraftPrices.arr[i][j] = 53 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         clothCraftPrices.arr[i][j] = 95 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         clothCraftPrices.arr[i][j] = 179 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 5) {
-    //                 multiplier = 3;
-    //                 switch (j) {
-    //                     case 0:
-    //                         clothCraftPrices.arr[i][j] = 53 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         clothCraftPrices.arr[i][j] = 109 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         clothCraftPrices.arr[i][j] = 207 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         clothCraftPrices.arr[i][j] = 403 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 6) {
-    //                 multiplier = 4;
-    //                 switch (j) {
-    //                     case 0:
-    //                         clothCraftPrices.arr[i][j] = 109 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         clothCraftPrices.arr[i][j] = 221 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         clothCraftPrices.arr[i][j] = 431 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         clothCraftPrices.arr[i][j] = 851 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 7) {
-    //                 multiplier = 5;
-    //                 switch (j) {
-    //                     case 0:
-    //                         clothCraftPrices.arr[i][j] = 221 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         clothCraftPrices.arr[i][j] = 445 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         clothCraftPrices.arr[i][j] = 879 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         clothCraftPrices.arr[i][j] = 1747 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 8) {
-    //                 multiplier = 5;
-    //                 switch (j) {
-    //                     case 0:
-    //                         clothCraftPrices.arr[i][j] = 445 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         clothCraftPrices.arr[i][j] = 893 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         clothCraftPrices.arr[i][j] = 1775 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         clothCraftPrices.arr[i][j] = 3539 + multiplier * profitableFiber.arr[i][j] + profitableCloth.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             if (profitableFiber.arr[i][j] > Vineheart) {
-    //                 clothCraftPrices.arr[i][j] = clothCraftPrices.arr[i][j] - profitableFiber.arr[i][j] + Vineheart;
-    //             }
-    //             if (clothCraftPrices.arr[i][j] < clothPrices.arr[i][j]) {
-    //                 profitableClothIndex.arr[i][j] = 2;
-    //                 profitableCloth.arr[i][j] = clothCraftPrices.arr[i][j];
-    //             }
-    //             else {
-    //                 profitableClothIndex.arr[i][j] = 1;
-    //                 profitableCloth.arr[i][j] = clothPrices.arr[i][j];
-    //             }
-    //         }
-    //     }
-    // };
-    // const leatherCrafts = () => {
-    //     for (let i = 0; i < 9; i++) {
-    //         for (let j = 0; j < 4; j++) {
-    //             let multiplier;
-    //             if (i < 2) {
+    const calculateAllProfits = () => {
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "profitCalculation" } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
 
-    //             }
-    //             else if (i === 2) {
-    //                 leatherCraftPrices.arr[i][j] = profitableHide.arr[i][j];
-    //             }
-    //             else if (i === 3) {
-    //                 leatherCraftPrices.arr[i][j] = 9 + profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //             }
-    //             else if (i === 4) {
-    //                 multiplier = 2;
-    //                 switch (j) {
-    //                     case 0:
-    //                         leatherCraftPrices.arr[i][j] = 21 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         leatherCraftPrices.arr[i][j] = 45 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         leatherCraftPrices.arr[i][j] = 81 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         leatherCraftPrices.arr[i][j] = 153 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 5) {
-    //                 multiplier = 3;
-    //                 switch (j) {
-    //                     case 0:
-    //                         leatherCraftPrices.arr[i][j] = 46 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         leatherCraftPrices.arr[i][j] = 93 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         leatherCraftPrices.arr[i][j] = 178 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         leatherCraftPrices.arr[i][j] = 345 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 6) {
-    //                 multiplier = 4;
-    //                 switch (j) {
-    //                     case 0:
-    //                         leatherCraftPrices.arr[i][j] = 94 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         leatherCraftPrices.arr[i][j] = 189 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         leatherCraftPrices.arr[i][j] = 370 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         leatherCraftPrices.arr[i][j] = 729 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 7) {
-    //                 multiplier = 5;
-    //                 switch (j) {
-    //                     case 0:
-    //                         leatherCraftPrices.arr[i][j] = 190 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         leatherCraftPrices.arr[i][j] = 381 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         leatherCraftPrices.arr[i][j] = 754 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         leatherCraftPrices.arr[i][j] = 1497 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             else if (i === 8) {
-    //                 multiplier = 5;
-    //                 switch (j) {
-    //                     case 0:
-    //                         leatherCraftPrices.arr[i][j] = 382 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 1:
-    //                         leatherCraftPrices.arr[i][j] = 765 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 2:
-    //                         leatherCraftPrices.arr[i][j] = 1522 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                     case 3:
-    //                         leatherCraftPrices.arr[i][j] = 3033 + multiplier * profitableHide.arr[i][j] + profitableLeather.arr[i - 1][j];
-    //                         break;
-    //                 }
-    //             }
-    //             if (profitableHide.arr[i][j] > Beastheart) {
-    //                 leatherCraftPrices.arr[i][j] = leatherCraftPrices.arr[i][j] - profitableHide.arr[i][j] + Beastheart;
-    //             }
-    //             if (leatherCraftPrices.arr[i][j] < leatherPrices.arr[i][j]) {
-    //                 profitableLeatherIndex.arr[i][j] = 2;
-    //                 profitableLeather.arr[i][j] = leatherCraftPrices.arr[i][j];
-    //             }
-    //             else {
-    //                 profitableLeatherIndex.arr[i][j] = 1;
-    //                 profitableLeather.arr[i][j] = leatherPrices.arr[i][j];
-    //             }
-    //         }
-    //     }
-    // };
-    const bagCrafts = () => {
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 4; j++) {
-                bagCraft.arr[i][j] = 8 * profitableCloth.arr[i][j] + 8 * profitableLeather.arr[i][j] + bagCraftSilver.arr[i][j];
-                profitableBag.arr[i][j] = (bagPrices.arr[i][j] * (96.5 / 100)) - (bagCraft.arr[i][j] * (56 / 100));
-                profitableBagPercentage.arr[i][j] = ((profitableBag.arr[i][j] * 100) / bagCraft.arr[i][j]).toFixed(2);
+        ALL_ITEM_DEFINITIONS.forEach((itemDef: ItemDefinition) => {
+            if (!itemDef.recipe) return; // Skip non-craftable items
+
+            const itemProfitsByTier = new Map<number, Map<number, CalculatedItemProfitInfo>>();
+
+            itemDef.tiers.forEach(tier => {
+                const profitsByEnchantment = new Map<number, CalculatedItemProfitInfo>();
+                const maxEnchant = itemDef.maxEnchantmentLvl !== undefined ? itemDef.maxEnchantmentLvl : 3;
+
+                for (let enchantment = 0; enchantment <= maxEnchant; enchantment++) {
+                    const marketSellPrice = getPriceFromState(itemDef.uniqueNameBase, tier, enchantment);
+                    const craftingCost = calculateCraftingCost(itemDef, tier, enchantment, getPriceFromState);
+
+                    if (marketSellPrice !== null && craftingCost !== null) {
+                        const profitDetails = calculateProfitDetails(marketSellPrice, craftingCost, { marketTaxRate: 0.045 }); 
+                        if (profitDetails) {
+                            profitsByEnchantment.set(enchantment, {
+                                uniqueName: `${itemDef.uniqueNameBase}_T${tier}${enchantment > 0 ? '.' + enchantment : ''}`,
+                                marketPrice: marketSellPrice,
+                                craftingCost: craftingCost,
+                                ...profitDetails,
+                            });
+                        }
+                    }
+                }
+                if (profitsByEnchantment.size > 0) {
+                    itemProfitsByTier.set(tier, profitsByEnchantment);
+                }
+            });
+
+            if (itemProfitsByTier.size > 0) {
+                dispatch({
+                    type: ActionType.UPDATE_ITEM_CALCULATED_PROFIT,
+                    payload: { uniqueNameBase: itemDef.uniqueNameBase, profits: itemProfitsByTier }
+                });
             }
-        }
+        });
+        dispatch({ type: ActionType.CALCULATION_COMPLETE });
     };
-    const satchelCrafts = () => {
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 4; j++) {
-                satchelCraft.arr[i][j] = 8 * profitableCloth.arr[i][j] + 8 * profitableLeather.arr[i][j] + satchelCraftSilver.arr[i][j] + tomeOfInsight;
-                profitableSatchel.arr[i][j] = (satchelPrices.arr[i][j] * (96.5 / 100)) - (((satchelCraft.arr[i][j] - tomeOfInsight) * (56 / 100)) + tomeOfInsight);
-                profitableSatchelPercentage.arr[i][j] = ((profitableSatchel.arr[i][j] * 100) / satchelCraft.arr[i][j]).toFixed(2);
-            }
-        }
 
-    }
-    const resourceV2Crafts = (prices: arr, craftPricesv1: arr, craftPricesv2: arr, craftSilverv1: arr, craftSilverv2: arr, profitable: arr, profitableIndex: arr) => {
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 4; j++) {
-                let multiplier = 1;
-                if (i === 4) {
-                    switch (j) {
-                        case 1:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            break;
-                        case 2:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            break;
-                        case 3:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            break;
-                    }
-                }
-                else if (i === 5) {
-                    switch (j) {
-                        case 0:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                    }
-                }
-                else if (i === 6) {
-                    switch (j) {
-                        case 0:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                    }
-                }
-                else if (i === 7) {
-                    switch (j) {
-                        case 0:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                    }
-                }
-                else if (i === 8) {
-                    switch (j) {
-                        case 0:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPricesv1.arr[i][j] = craftSilverv1.arr[i][j] + multiplier * profitable.arr[i][j - 1];
-                            craftPricesv2.arr[i][j] = craftSilverv2.arr[i][j] + multiplier * profitable.arr[i - 1][j];
-                            break;
-                    }
-                }
-                if (i < 4 || (i === 4 && j === 0)) {
-                    profitable.arr[i][j] = prices.arr[i][j];
-                    profitableIndex.arr[i][j] = 1;
-                }
-                else {
-                    var profitIndex;
-                    var profitableOne;
-                    console.log(craftPricesv1.arr[i][j]);
-                    console.log(craftPricesv2.arr[i][j]);
-                    console.log(prices.arr[i][j]);
-                    if (craftPricesv1.arr[i][j] < craftPricesv2.arr[i][j]) {
-                        profitIndex = 3;
-                        profitableOne = craftPricesv1.arr[i][j];
-                        console.log("3");
-                    }
-                    else {
-                        profitIndex = 2;
-                        profitableOne = craftPricesv2.arr[i][j];
-                        console.log("2");
+    // printMultidimenstionalArray function has been moved to src/utils/uiUtils.ts
+    // All old calculation functions (fiberCrafts, hideCrafts, clothCrafts, leatherCrafts, bagCrafts, satchelCrafts, resourceV2Crafts, resourceV1Crafts, another clothCrafts, clothArmorCraftMount, resourceMount, toolsCraftMount) are removed.
 
-                    }
-                    if (profitableOne < prices.arr[i][j]) {
-                        profitableIndex.arr[i][j] = profitIndex;
-                        profitable.arr[i][j] = profitableOne;
-                        console.log("profitable");
-
-                    }
-                    else {
-                        profitable.arr[i][j] = prices.arr[i][j];
-                        profitableIndex.arr[i][j] = 1;
-                        console.log("1");
-
-                    }
-                }
-            }
-        }
-    };
-    const resourceV1Crafts = (prices: arr, craftPrices: arr, craftSilver: arr, profitablev1: arr, profitablev2: arr, profitablev1Index: arr, heart: number) => {
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 4; j++) {
-                let multiplier;
-                if (i < 2) {
-
-                }
-                else if (i === 2) {
-                    craftPrices.arr[i][j] = profitablev2.arr[i][j];
-                }
-                else if (i === 3) {
-                    craftPrices.arr[i][j] = craftSilver.arr[i][j] + profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                }
-                else if (i === 4) {
-                    multiplier = 2;
-                    switch (j) {
-                        case 0:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                    }
-                }
-                else if (i === 5) {
-                    multiplier = 3;
-                    switch (j) {
-                        case 0:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                    }
-                }
-                else if (i === 6) {
-                    multiplier = 4;
-                    switch (j) {
-                        case 0:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                    }
-                }
-                else if (i === 7) {
-                    multiplier = 5;
-                    switch (j) {
-                        case 0:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                    }
-                }
-                else if (i === 8) {
-                    multiplier = 5;
-                    switch (j) {
-                        case 0:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 1:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 2:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                        case 3:
-                            craftPrices.arr[i][j] = craftSilver.arr[i][j] + multiplier * profitablev2.arr[i][j] + profitablev1.arr[i - 1][j];
-                            break;
-                    }
-                }
-                if (profitablev2.arr[i][j] > heart) {
-                    craftPrices.arr[i][j] = craftPrices.arr[i][j] - profitablev2.arr[i][j] + heart;
-                }
-                if (craftPrices.arr[i][j] < prices.arr[i][j]) {
-                    profitablev1Index.arr[i][j] = 2;
-                    profitablev1.arr[i][j] = craftPrices.arr[i][j];
-                }
-                else {
-                    profitablev1Index.arr[i][j] = 1;
-                    profitablev1.arr[i][j] = prices.arr[i][j];
-                }
-            }
-        }
-    };
-    const clothCrafts = (multiplier: number, clothArmorCraft: arr, clothCraftSilver: arr, profitableClothArmor: arr, clothArmorPrices: arr, profitableClothArmorPercentage: arr, artifact: number[]) => {
-        for (let i = 0; i < 9; i++) {
-            for (let j = 0; j < 4; j++) {
-                clothArmorCraft.arr[i][j] = 8 * profitableCloth.arr[i][j] + (clothCraftSilver.arr[i][j] * multiplier) + clothArmorArtifacts[i];
-                profitableClothArmor.arr[i][j] = (clothArmorPrices.arr[i][j] * (96.5 / 100)) - (clothArmorCraft.arr[i][j] * (56 / 100));
-                profitableClothArmorPercentage.arr[i][j] = ((profitableClothArmor.arr[i][j] * 100) / clothArmorCraft.arr[i][j]);
-
-                // profitableClothArmorPercentage.arr[i][j] = ((profitableClothArmor.arr[i][j] * 100) / clothArmorCraft.arr[i][j]).toFixed(2);
-            }
-        }
-    }
-    const clothArmorCraftMount = () => {
-        // ROYAL
-        // royalArtifacts
-        // DRUID
-        // druidic_preserved_beak
-        // druidic_preserved_feathers
-        // druidic_preserved_bindings
-        // FIEND
-        // infernal_visor
-        // infernal_cloth_folds
-        // infernal_cloth_bindings
-        // CULTIST
-        // alluring_padding
-        // alluring_amulet
-        // alluring_bindings
-        // PURITY
-        // sanctified_mask
-        // sanctified_belt
-        // sanctified_bindings
-        //CLOTH ARMOR
-        // SCHOLAR HEAD, JACKET, BOOTS
-        clothCrafts(1, clothArmorv1ScholarCraft, clothArmorCraftSilverDefault, profitableClothArmorv1Scholar, clothArmorv1ScholarPrices, profitableClothArmorv1ScholarPercentage, clothArmorArtifacts[0]);
-        clothCrafts(2, clothArmorv2ScholarCraft, clothArmorCraftSilverDefault, profitableClothArmorv2Scholar, clothArmorv2ScholarPrices, profitableClothArmorv2ScholarPercentage, clothArmorArtifacts[0]);
-        clothCrafts(1, clothArmorv3ScholarCraft, clothArmorCraftSilverDefault, profitableClothArmorv3Scholar, clothArmorv3ScholarPrices, profitableClothArmorv3ScholarPercentage, clothArmorArtifacts[0]);
-        //Cleric cowl robe sandals
-        clothCrafts(1, clothArmorv1ClericCraft, clothArmorCraftSilverDefault, profitableClothArmorv1Cleric, clothArmorv1ClericPrices, profitableClothArmorv1ClericPercentage, clothArmorArtifacts[0]);
-        clothCrafts(2, clothArmorv2ClericCraft, clothArmorCraftSilverDefault, profitableClothArmorv2Cleric, clothArmorv2ClericPrices, profitableClothArmorv2ClericPercentage, clothArmorArtifacts[0]);
-        clothCrafts(1, clothArmorv3ClericCraft, clothArmorCraftSilverDefault, profitableClothArmorv3Cleric, clothArmorv3ClericPrices, profitableClothArmorv3ClericPercentage, clothArmorArtifacts[0]);
-        //Mage cowl robe sandals
-        clothCrafts(1, clothArmorv1MageCraft, clothArmorCraftSilverDefault, profitableClothArmorv1Mage, clothArmorv1MagePrices, profitableClothArmorv1MagePercentage, clothArmorArtifacts[0]);
-        clothCrafts(2, clothArmorv2MageCraft, clothArmorCraftSilverDefault, profitableClothArmorv2Mage, clothArmorv2MagePrices, profitableClothArmorv2MagePercentage, clothArmorArtifacts[0]);
-        clothCrafts(1, clothArmorv3MageCraft, clothArmorCraftSilverDefault, profitableClothArmorv3Mage, clothArmorv3MagePrices, profitableClothArmorv3MagePercentage, clothArmorArtifacts[0]);
-        //Royal cowl robe sandals
-        clothCrafts(1, clothArmorv1RoyalCraft, clothArmorCraftSilverDefault, profitableClothArmorv1Royal, clothArmorv1RoyalPrices, profitableClothArmorv1RoyalPercentage, clothArmorArtifacts[1]);
-        clothCrafts(2, clothArmorv2RoyalCraft, clothArmorCraftSilverDefault, profitableClothArmorv2Royal, clothArmorv2RoyalPrices, profitableClothArmorv2RoyalPercentage, clothArmorArtifacts[1]);
-        clothCrafts(1, clothArmorv3RoyalCraft, clothArmorCraftSilverDefault, profitableClothArmorv3Royal, clothArmorv3RoyalPrices, profitableClothArmorv3RoyalPercentage, clothArmorArtifacts[1]);
-        //Druid cowl robe sandals Druidic preserved beak, feathers ,bindings
-        clothCrafts(1, clothArmorv1DruidCraft, clothArmorCraftSilverDefault, profitableClothArmorv1Druid, clothArmorv1DruidPrices, profitableClothArmorv1DruidPercentage, clothArmorArtifacts[2]);
-        clothCrafts(2, clothArmorv2DruidCraft, clothArmorCraftSilverDefault, profitableClothArmorv2Druid, clothArmorv2DruidPrices, profitableClothArmorv2DruidPercentage, clothArmorArtifacts[3]);
-        clothCrafts(1, clothArmorv3DruidCraft, clothArmorCraftSilverDefault, profitableClothArmorv3Druid, clothArmorv3DruidPrices, profitableClothArmorv3DruidPercentage, clothArmorArtifacts[4]);
-        //Fiend cowl robe sandals Infernal visor, cloth folds, cloth bindings
-        clothCrafts(1, clothArmorv1FiendCraft, clothArmorCraftSilverDefault, profitableClothArmorv1Fiend, clothArmorv1FiendPrices, profitableClothArmorv1FiendPercentage, clothArmorArtifacts[5]);
-        clothCrafts(2, clothArmorv2FiendCraft, clothArmorCraftSilverDefault, profitableClothArmorv2Fiend, clothArmorv2FiendPrices, profitableClothArmorv2FiendPercentage, clothArmorArtifacts[6]);
-        clothCrafts(1, clothArmorv3FiendCraft, clothArmorCraftSilverDefault, profitableClothArmorv3Fiend, clothArmorv3FiendPrices, profitableClothArmorv3FiendPercentage, clothArmorArtifacts[7]);
-        //Cultist cowl robe sandals Alluring padding, amulet, bindings
-        clothCrafts(1, clothArmorv1CultistCraft, clothArmorCraftSilverDefault, profitableClothArmorv1Cultist, clothArmorv1CultistPrices, profitableClothArmorv1CultistPercentage, clothArmorArtifacts[8]);
-        clothCrafts(2, clothArmorv2CultistCraft, clothArmorCraftSilverDefault, profitableClothArmorv2Cultist, clothArmorv2CultistPrices, profitableClothArmorv2CultistPercentage, clothArmorArtifacts[9]);
-        clothCrafts(1, clothArmorv3CultistCraft, clothArmorCraftSilverDefault, profitableClothArmorv3Cultist, clothArmorv3CultistPrices, profitableClothArmorv3CultistPercentage, clothArmorArtifacts[10]);
-        //Purity cowl robe sandals Sanctified  mask, belt, bindings
-        clothCrafts(1, clothArmorv1PurityCraft, clothArmorCraftSilverDefault, profitableClothArmorv1Purity, clothArmorv1PurityPrices, profitableClothArmorv1PurityPercentage, clothArmorArtifacts[11]);
-        clothCrafts(2, clothArmorv2PurityCraft, clothArmorCraftSilverDefault, profitableClothArmorv2Purity, clothArmorv2PurityPrices, profitableClothArmorv2PurityPercentage, clothArmorArtifacts[12]);
-        clothCrafts(1, clothArmorv3PurityCraft, clothArmorCraftSilverDefault, profitableClothArmorv3Purity, clothArmorv3PurityPrices, profitableClothArmorv3PurityPercentage, clothArmorArtifacts[13]);
-    }
-    const resourceMount = () => {
-        // // LEATHER HIDE
-        // resourceV2Crafts(hidePrices, hideCraftPricesv1, hideCraftPricesv2, hideCraftSilverv1, hideCraftSilverv2, profitableHide, profitableHideIndex);
-        // resourceV1Crafts(leatherPrices, leatherCraftPrices, leatherCraftSilver, profitableLeather, profitableHide, profitableLeatherIndex, Beastheart);
-
-        // // PLANK LOG
-        // resourceV2Crafts(logPrices, logCraftPricesv1, logCraftPricesv2, logCraftSilverv1, logCraftSilverv2, profitableLog, profitableLogIndex);
-        // resourceV1Crafts(plankPrices, plankCraftPrices, plankCraftSilver, profitablePlank, profitableLog, profitablePlankIndex, Treeheart);
-        // log is same as fiber
-        // plank is same as cloth
-        // CLOTH FIBER
-        resourceV2Crafts(fiberPrices, fiberCraftPricesv1, fiberCraftPricesv2, fiberCraftSilverv1, fiberCraftSilverv2, profitableFiber, profitableFiberIndex);
-        // resourceV1Crafts(clothPrices, clothCraftPrices, clothCraftSilver, profitableCloth, profitableFiber, profitableClothIndex, Vineheart);
-    }
-    const toolsCraftMount = () => {
-        bagCrafts();
-        satchelCrafts();
-    }
     const databaseToolsGüncelleme = async () => {
-        databaseGüncelleme("3003", "BAG", bagPrices, "", 1, "BAG");
-        databaseGüncelleme("3003", "BAG_INSIGHT", satchelPrices, "", 4, "SATCHEL");
+        // databaseGüncelleme("3003", "BAG", bagPrices, "", 1, "BAG"); 
+        // databaseGüncelleme("3003", "BAG_INSIGHT", satchelPrices, "", 4, "SATCHEL"); 
     }
     const databaseResourcev1Güncelleme = async () => {
-        databaseGüncelleme("3005", "WOOD", logPrices, "LEVEL", 1, "WOOD");
-        databaseGüncelleme("3005", "PLANKS", plankPrices, "LEVEL", 1, "PLANKS");
-        databaseGüncelleme("3005", "FIBER", fiberPrices, "LEVEL", 1, "FIBER");
+        // databaseGüncelleme("3005", "WOOD", logPrices, "LEVEL", 1, "WOOD"); 
+        // databaseGüncelleme("3005", "PLANKS", plankPrices, "LEVEL", 1, "PLANKS"); 
+        // databaseGüncelleme("3005", "FIBER", fiberPrices, "LEVEL", 1, "FIBER"); 
     }
     const databaseResourcev2Güncelleme = async () => {
-        databaseGüncelleme("3005", "HIDE", hidePrices, "LEVEL", 1, "HIDE");
-        databaseGüncelleme("3005", "LEATHER", leatherPrices, "LEVEL", 1, "LEATHER");
-        databaseGüncelleme("3005", "CLOTH", clothPrices, "LEVEL", 1, "CLOTH");
+        // databaseGüncelleme("3005", "HIDE", hidePrices, "LEVEL", 1, "HIDE"); 
+        // databaseGüncelleme("3005", "LEATHER", leatherPrices, "LEVEL", 1, "LEATHER"); 
+        // databaseGüncelleme("3005", "CLOTH", clothPrices, "LEVEL", 1, "CLOTH"); 
     }
     const databaseClothArmorGüncelleme = async () => {
-        databaseGüncelleme("3003", "HEAD_CLOTH_SET1", clothArmorv1ScholarPrices, "", 4, "SCHOLAR COWL");
-        databaseGüncelleme("3003", "HEAD_CLOTH_SET2", clothArmorv1ClericPrices, "", 4, "CLERIC COWL");
-        databaseGüncelleme("3003", "HEAD_CLOTH_SET3", clothArmorv1MagePrices, "", 4, "MAGE COWL");
-        databaseGüncelleme("3003", "ARMOR_CLOTH_SET1", clothArmorv2ScholarPrices, "", 4, "SCHOLAR ROBE");
-        databaseGüncelleme("3003", "ARMOR_CLOTH_SET2", clothArmorv2ClericPrices, "", 4, "CLERIC ROBE");
-        databaseGüncelleme("3003", "ARMOR_CLOTH_SET3", clothArmorv2MagePrices, "", 4, "MAGE ROBE");
-        databaseGüncelleme("3003", "SHOES_CLOTH_SET1", clothArmorv3ScholarPrices, "", 4, "SCHOLAR SHOES");
-        databaseGüncelleme("3003", "SHOES_CLOTH_SET2", clothArmorv3ClericPrices, "", 4, "CLERIC SHOES");
-        databaseGüncelleme("3003", "SHOES_CLOTH_SET3", clothArmorv3MagePrices, "", 4, "MAGE SHOES");
-
-        //druid
-        databaseGüncelleme("3003", "HEAD_CLOTH_KEEPER", clothArmorv1DruidPrices, "", 4, "DRUID COWL");
-        databaseGüncelleme("3003", "ARMOR_CLOTH_KEEPER", clothArmorv2DruidPrices, "", 4, "DRUID ROBE");
-        databaseGüncelleme("3003", "SHOES_CLOTH_KEEPER", clothArmorv3DruidPrices, "", 4, "DRUID SHOES");
-        //fiend
-        databaseGüncelleme("3003", "HEAD_CLOTH_HELL", clothArmorv1FiendPrices, "", 4, "FIEND COWL");
-        databaseGüncelleme("3003", "ARMOR_CLOTH_HELL", clothArmorv2FiendPrices, "", 4, "FIEND ROBE");
-        databaseGüncelleme("3003", "SHOES_CLOTH_HELL", clothArmorv3FiendPrices, "", 4, "FIEND SHOES");
-        //cultist
-        databaseGüncelleme("3003", "HEAD_CLOTH_MORGANA", clothArmorv1CultistPrices, "", 4, "CULTIST COWL");
-        databaseGüncelleme("3003", "ARMOR_CLOTH_MORGANA", clothArmorv2CultistPrices, "", 4, "CULTIST ROBE");
-        databaseGüncelleme("3003", "SHOES_CLOTH_MORGANA", clothArmorv3CultistPrices, "", 4, "CULTIST SHOES");
-        //purity
-        databaseGüncelleme("3003", "HEAD_CLOTH_AVALON", clothArmorv1PurityPrices, "", 4, "PURITY COWL");
-        databaseGüncelleme("3003", "ARMOR_CLOTH_AVALON", clothArmorv2PurityPrices, "", 4, "PURITY ROBE");
-        databaseGüncelleme("3003", "SHOES_CLOTH_AVALON", clothArmorv3PurityPrices, "", 4, "PURITY SHOES");
+        // All calls to databaseGüncelleme here rely on removed state variables
     }
-    const databaseHeartGüncelleme = () => {
-        const names = [
-            "FOREST_TOKEN_1",
-            "HIGHLAND_TOKEN_1",
-            "STEPPE_TOKEN_1",
-            "MOUNTAIN_TOKEN_1",
-            "SWAMP_TOKEN_1",
-            "CAERLEON_TOKEN_1"
+    const databaseHeartGüncelleme = () => { 
+        const names = [ 
+            "FOREST_TOKEN_1", 
+            "HIGHLAND_TOKEN_1", 
+            "STEPPE_TOKEN_1",   
+            "MOUNTAIN_TOKEN_1", 
+            "SWAMP_TOKEN_1",    
+            "CAERLEON_TOKEN_1"  
         ];
-        databaseHeartGüncellemeTipi("3005", names, 6);
+        databaseHeartGüncellemeTipi("3005", names, 6); 
     }
+
     const databaseHeartGüncellemeTipi = async (location: string, name: string[], heartNumber: number) => {
-        // 6866: T1_FACTION_FOREST_TOKEN_1   : Treeheart
-        // 6867: T1_FACTION_HIGHLAND_TOKEN_1 : Rockheart
-        // 6868: T1_FACTION_STEPPE_TOKEN_1   : Beastheart
-        // 6869: T1_FACTION_MOUNTAIN_TOKEN_1 : Mountainheart
-        // 6870: T1_FACTION_SWAMP_TOKEN_1    : Vineheart
-        // 6871: T1_FACTION_CAERLEON_TOKEN_1 : Shadowheart
-        var heartArr: any[] = [];
-        var bigger;
-        for (let i = 0; i < heartNumber; i++) {
-            var myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T1_FACTION_" + name[i] + ".json?locations=" + location;
-            // await limiter.schedule(() => axios.get(myURL)
-            //     .then(res => {
-            //         if (res.status === 200) {
-            //             console.log("SUCCESSFULL");
-            //         }
-            //         else {
-            //             console.log("ERROR");
-            //         }
-            //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-            //             bigger = res.data[0].sell_price_min;
-            //         }
-            //         else {
-            //             bigger = res.data[0].buy_price_min;
-            //         }
-            //         if (bigger === 0) {
-            //             bigger = 99999999;
-            //         }
-            //         heartArr[i] = bigger;
-            //     }))
-        }
-        setHearts(heartArr);
-    }
-
-    const databaseGüncelleme = async (location: string, itemName: string, prices: arr, levelli: string, starting: number, otherName: string) => {
-        var itemLevel = "";
-        var myURL = "";
-        var bigger;
-        for (let i = starting; i < 9; i++) {
-            for (let j = 0; j < 4; j++) {
-                if (j === 0) {
-                    itemLevel = "";
-                }
-                else {
-                    itemLevel = "@" + j;
-                }
-                if (levelli === "LEVEL" && j !== 0) {
-                    myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T" + i + "_" + itemName + "_LEVEL" + j + itemLevel + ".json?locations=" + location;
-                }
-                else {
-                    myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T" + i + "_" + itemName + itemLevel + ".json?locations=" + location;
-                }
-                console.log(myURL);
-                // await limiter.schedule(() => axios.get(myURL)
-                //     .then(res => {
-                //         if (res.status === 200) {
-                //             console.log("SUCCESSFULL");
-                //         }
-                //         else {
-                //             console.log("ERROR");
-                //         }
-                //         console.log(res.data[0].sell_price_min);
-                //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-                //             bigger = res.data[0].sell_price_min;
-                //         }
-                //         else {
-                //             bigger = res.data[0].buy_price_min;
-                //         }
-                //         if (bigger === 0) {
-                //             bigger = 99999999;
-                //         }
-                //         prices.arr[i][j] = bigger;
-                //     }))
+        const heartsKey = "HEART_PRICES_COLLECTION"; 
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: "HEART" } }); 
+        dispatch({ type: ActionType.CLEAR_ERROR });
+        try {
+            const heartsData = await firebaseService.readData("HEART");
+            if (heartsData && Array.isArray(heartsData)) { 
+                dispatch({ type: ActionType.SET_HEART_PRICES, payload: heartsData });
+            } else if (heartsData && heartsData.arr && Array.isArray(heartsData.arr)) { 
+                 dispatch({ type: ActionType.SET_HEART_PRICES, payload: heartsData.arr });
             }
-        }
-        console.log(itemName);
-        console.log(prices);
-        // await database.put('/' + itemName + '.json', prices).then(response => {
-        //     console.log(response);
-        // })
-    }
-    const databaseArtifactGüncelleme = async (location: string, itemName: string[], prices: arr, starting: number, artifactNumber: number) => {
-        var myURL = "";
-        var bigger;
-        for (let i = starting; i < 9; i++) {
-            for (let j = 0; j < artifactNumber; j++) {
-                myURL = "https://www.albion-online-data.com/api/v2/stats/Prices/T" + i + "_ARTEFACT_" + itemName[j] + ".json?locations=" + location;
-                // await limiter.schedule(() => axios.get(myURL)
-                //     .then(res => {
-                //         if (res.status === 200) {
-                //             console.log("SUCCESSFULL");
-                //         }
-                //         else {
-                //             console.log("ERROR");
-                //         }
-                //         console.log(res.data[0].sell_price_min);
-                //         if (res.data[0].sell_price_min > res.data[0].buy_price_min) {
-                //             bigger = res.data[0].sell_price_min;
-                //         }
-                //         else {
-                //             bigger = res.data[0].buy_price_min;
-                //         }
-                //         if (bigger === 0) {
-                //             bigger = 99999999;
-                //         }
-                //         prices.arr[j][i] = bigger;
-                //     }))
+            else { 
+                console.warn("Heart prices not found in Firebase or data is not in expected format. Original API call is currently disabled.");
+                dispatch({ type: ActionType.SET_HEART_PRICES, payload: [] }); 
             }
+        } catch (error) {
+            console.error("Error processing Heart prices from Firebase:", error);
+            dispatch({ type: ActionType.SET_ERROR, payload: "Error processing Heart prices." });
+            dispatch({ type: ActionType.SET_HEART_PRICES, payload: [] }); 
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "HEART" } }); 
         }
-        console.log(prices);
-        // await database.put('/ARTIFACT' + '.json', prices).then(response => {
-        //     console.log(response);
-        // })
-    }
-    const databaseClothArmorArtifactGüncelleme = async () => {
-        const names = [
-            "HEAD_CLOTH_KEEPER",
-            "ARMOR_CLOTH_KEEPER",
-            "SHOES_CLOTH_KEEPER",
-            "HEAD_CLOTH_HELL",
-            "ARMOR_CLOTH_HELL",
-            "SHOES_CLOTH_HELL",
-            "HEAD_CLOTH_MORGANA",
-            "ARMOR_CLOTH_MORGANA",
-            "SHOES_CLOTH_MORGANA",
-            "HEAD_CLOTH_AVALON",
-            "ARMOR_CLOTH_AVALON",
-            "SHOES_CLOTH_AVALON",
-        ];
-        databaseArtifactGüncelleme("3005", names, clothArmorArtifacts, 4, 12);
-    }
-    const denemeGüncelleme = async () => {
-        await axios.get("https://www.albion-online-data.com/api/v2/stats/Prices/T8_BAG@2.json?locations=3003")
-            .then(res => {
-                console.log(res);
-            })
-    }
-    const databasedenHerseyiCek = () => {
-        // database.get
-    }
-    const postDataHandler = () => {
-        // database.post('/marks.json',bagPrices).then(response =>{
-        //     console.log(response);
-        // })
-        // database.put('/marks.json', bagPrices).then(response => {
-        //     console.log(response);
-        // })
-    }
-    const getDataHandler = () => {
-        // database.get('marks.json')
-        //     .then(response => {
-        //         console.log(response);
-        //     })
     }
 
-    const deleteDatabase = async (itemName: string) => {
-        // await database.delete('/' + itemName + '.json').then(response => {
-        //     console.log(response);
-        // })
-    }
-    const deleteClothArmor = () => {
-        deleteDatabase("HEAD_CLOTH_SET1");
-        deleteDatabase("HEAD_CLOTH_SET2");
-        deleteDatabase("HEAD_CLOTH_SET3");
-        deleteDatabase("ARMOR_CLOTH_SET1");
-        deleteDatabase("ARMOR_CLOTH_SET2");
-        deleteDatabase("ARMOR_CLOTH_SET3");
-
-        deleteDatabase("SHOES_CLOTH_SET1");
-        deleteDatabase("SHOES_CLOTH_SET2");
-        deleteDatabase("SHOES_CLOTH_SET3");
-
-        deleteDatabase("HEAD_CLOTH_KEEPER");
-        deleteDatabase("ARMOR_CLOTH_KEEPER");
-        deleteDatabase("SHOES_CLOTH_KEEPER");
-
-        deleteDatabase("HEAD_CLOTH_HELL");
-        deleteDatabase("ARMOR_CLOTH_HELL");
-        deleteDatabase("SHOES_CLOTH_HELL");
-
-        deleteDatabase("HEAD_CLOTH_MORGANA");
-        deleteDatabase("ARMOR_CLOTH_MORGANA");
-        deleteDatabase("SHOES_CLOTH_MORGANA");
-
-        deleteDatabase("HEAD_CLOTH_AVALON");
-        deleteDatabase("ARMOR_CLOTH_AVALON");
-        deleteDatabase("SHOES_CLOTH_AVALON");
-    }
-    // works well getresources getclothmarketprices gettoolsmarketprices
     const getResources = async () => {
-        // Refactored Cloth Price Fetching
         dispatch({ type: ActionType.SET_LOADING, payload: { key: "CLOTH" } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
@@ -1384,6 +186,7 @@ function Profit() {
                     payload: { uniqueNameBase: "CLOTH", prices: clothData.arr, lastUpdated: new Date().toISOString() }
                 });
             } else {
+                console.warn("Cloth prices not found in Firebase or data is not in expected format.");
                 dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Cloth prices or data is empty." });
             }
         } catch (error) {
@@ -1393,7 +196,6 @@ function Profit() {
             dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "CLOTH" } });
         }
         
-        // Refactored Fiber Price Fetching
         dispatch({ type: ActionType.SET_LOADING, payload: { key: "FIBER" } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
@@ -1404,6 +206,7 @@ function Profit() {
                     payload: { uniqueNameBase: "FIBER", prices: fiberData.arr, lastUpdated: new Date().toISOString() }
                 });
             } else {
+                console.warn("Fiber prices not found in Firebase or data is not in expected format.");
                 dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Fiber prices or data is empty." });
             }
         } catch (error) {
@@ -1413,7 +216,6 @@ function Profit() {
             dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "FIBER" } });
         }
 
-        // Refactored Leather Price Fetching
         dispatch({ type: ActionType.SET_LOADING, payload: { key: "LEATHER" } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
@@ -1424,6 +226,7 @@ function Profit() {
                     payload: { uniqueNameBase: "LEATHER", prices: leatherData.arr, lastUpdated: new Date().toISOString() }
                 });
             } else {
+                console.warn("Leather prices not found in Firebase or data is not in expected format.");
                 dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Leather prices or data is empty." });
             }
         } catch (error) {
@@ -1433,7 +236,6 @@ function Profit() {
             dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "LEATHER" } });
         }
 
-        // Refactored Hide Price Fetching
         dispatch({ type: ActionType.SET_LOADING, payload: { key: "HIDE" } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
@@ -1444,6 +246,7 @@ function Profit() {
                     payload: { uniqueNameBase: "HIDE", prices: hideData.arr, lastUpdated: new Date().toISOString() }
                 });
             } else {
+                console.warn("Hide prices not found in Firebase or data is not in expected format.");
                 dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Hide prices or data is empty." });
             }
         } catch (error) {
@@ -1453,7 +256,6 @@ function Profit() {
             dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "HIDE" } });
         }
 
-        // Refactored Wood (Log) Price Fetching
         dispatch({ type: ActionType.SET_LOADING, payload: { key: "WOOD" } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
@@ -1464,6 +266,7 @@ function Profit() {
                     payload: { uniqueNameBase: "WOOD", prices: woodData.arr, lastUpdated: new Date().toISOString() }
                 });
             } else {
+                console.warn("Wood prices not found in Firebase or data is not in expected format.");
                 dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Wood prices or data is empty." });
             }
         } catch (error) {
@@ -1473,7 +276,6 @@ function Profit() {
             dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "WOOD" } });
         }
 
-        // Refactored Planks Price Fetching
         dispatch({ type: ActionType.SET_LOADING, payload: { key: "PLANKS" } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
@@ -1484,6 +286,7 @@ function Profit() {
                     payload: { uniqueNameBase: "PLANKS", prices: planksData.arr, lastUpdated: new Date().toISOString() }
                 });
             } else {
+                console.warn("Planks prices not found in Firebase or data is not in expected format.");
                 dispatch({ type: ActionType.SET_ERROR, payload: "Failed to load Planks prices or data is empty." });
             }
         } catch (error) {
@@ -1493,8 +296,8 @@ function Profit() {
             dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "PLANKS" } });
         }
     }
-    const getClothArmorMarketPrices = async () => {
-        const armorToFetch = [
+    const getClothArmorMarketPrices = async () => { 
+        const armorToFetch = [ 
             { firebaseKey: "HEAD_CLOTH_SET1", uniqueNameBase: "HEAD_CLOTH_SET1" },
             { firebaseKey: "ARMOR_CLOTH_SET1", uniqueNameBase: "ARMOR_CLOTH_SET1" },
             { firebaseKey: "SHOES_CLOTH_SET1", uniqueNameBase: "SHOES_CLOTH_SET1" },
@@ -1504,9 +307,9 @@ function Profit() {
             { firebaseKey: "HEAD_CLOTH_KEEPER", uniqueNameBase: "HEAD_CLOTH_KEEPER" },
             { firebaseKey: "ARMOR_CLOTH_KEEPER", uniqueNameBase: "ARMOR_CLOTH_KEEPER" },
             { firebaseKey: "SHOES_CLOTH_KEEPER", uniqueNameBase: "SHOES_CLOTH_KEEPER" },
-            { firebaseKey: "HEAD_CLOTH_SET3", uniqueNameBase: "HEAD_CLOTH_SET3" }, // Mage Cowl
-            { firebaseKey: "ARMOR_CLOTH_SET3", uniqueNameBase: "ARMOR_CLOTH_SET3" }, // Mage Robe
-            { firebaseKey: "SHOES_CLOTH_SET3", uniqueNameBase: "SHOES_CLOTH_SET3" }, // Mage Sandals
+            { firebaseKey: "HEAD_CLOTH_SET3", uniqueNameBase: "HEAD_CLOTH_SET3" }, 
+            { firebaseKey: "ARMOR_CLOTH_SET3", uniqueNameBase: "ARMOR_CLOTH_SET3" }, 
+            { firebaseKey: "SHOES_CLOTH_SET3", uniqueNameBase: "SHOES_CLOTH_SET3" }, 
             { firebaseKey: "HEAD_CLOTH_ROYAL", uniqueNameBase: "HEAD_CLOTH_ROYAL" },
             { firebaseKey: "ARMOR_CLOTH_ROYAL", uniqueNameBase: "ARMOR_CLOTH_ROYAL" },
             { firebaseKey: "SHOES_CLOTH_ROYAL", uniqueNameBase: "SHOES_CLOTH_ROYAL" },
@@ -1541,71 +344,8 @@ function Profit() {
                 dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: item.uniqueNameBase } });
             }
         }
-
-        // Keep existing fetches for non-refactored items
-        // await database.get("HEAD_CLOTH_SET3.json") // Mage Cowl
-        //     .then(response => {
-        //         setClothArmorv1MagePrices(response.data);
-        //     })
-        // await database.get("ARMOR_CLOTH_SET3.json") // Mage Robe
-        //     .then(response => {
-        //         setClothArmorv2MagePrices(response.data);
-        //     })
-        // await database.get("SHOES_CLOTH_SET3.json") // Mage Sandals
-        //     .then(response => {
-        //         setClothArmorv3MagePrices(response.data);
-        //     })
-        // await database.get("HEAD_CLOTH_ROYAL.json")
-        //     .then(response => {
-        //         setClothArmorv1RoyalPrices(response.data);
-        //     })
-        // await database.get("ARMOR_CLOTH_ROYAL.json")
-        //     .then(response => {
-        //         setClothArmorv2RoyalPrices(response.data);
-        //     })
-        // await database.get("SHOES_CLOTH_ROYAL.json")
-        //     .then(response => {
-        //         setClothArmorv3RoyalPrices(response.data);
-        //     })
-        // await database.get("HEAD_CLOTH_HELL.json")
-        //     .then(response => {
-        //         setClothArmorv1FiendPrices(response.data);
-        //     })
-        // await database.get("ARMOR_CLOTH_HELL.json")
-        //     .then(response => {
-        //         setClothArmorv2FiendPrices(response.data);
-        //     })
-        // await database.get("SHOES_CLOTH_HELL.json")
-        //     .then(response => {
-        //         setClothArmorv3FiendPrices(response.data);
-        //     })
-        // await database.get("HEAD_CLOTH_MORGANA.json")
-        //     .then(response => {
-        //         setClothArmorv1CultistPrices(response.data);
-        //     })
-        // await database.get("ARMOR_CLOTH_MORGANA.json")
-        //     .then(response => {
-        //         setClothArmorv2CultistPrices(response.data);
-        //     })
-        // await database.get("SHOES_CLOTH_MORGANA.json")
-        //     .then(response => {
-        //         setClothArmorv3CultistPrices(response.data);
-        //     })
-        // await database.get("HEAD_CLOTH_AVALON.json")
-        //     .then(response => {
-        //         setClothArmorv1PurityPrices(response.data);
-        //     })
-        // await database.get("ARMOR_CLOTH_AVALON.json")
-        //     .then(response => {
-        //         setClothArmorv2PurityPrices(response.data);
-        //     })
-        // await database.get("SHOES_CLOTH_AVALON.json")
-        //     .then(response => {
-        //         setClothArmorv3PurityPrices(response.data);
-        //     })
     }
     const getToolsMarketPrices = async () => {
-        // Refactored Bag Price Fetching
         dispatch({ type: ActionType.SET_LOADING, payload: { key: "BAG" } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
@@ -1625,11 +365,10 @@ function Profit() {
             dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: "BAG" } });
         }
 
-        // Refactored Satchel Price Fetching
         dispatch({ type: ActionType.SET_LOADING, payload: { key: "SATCHEL_INSIGHT" } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
-            const satchelData = await firebaseService.readData("BAG_INSIGHT"); // Firebase key is BAG_INSIGHT
+            const satchelData = await firebaseService.readData("BAG_INSIGHT"); 
             if (satchelData && satchelData.arr) {
                 dispatch({
                     type: ActionType.SET_ITEM_MARKET_PRICES,
@@ -1650,7 +389,7 @@ function Profit() {
         dispatch({ type: ActionType.SET_LOADING, payload: { key: artifactCollectionKey } });
         dispatch({ type: ActionType.CLEAR_ERROR });
         try {
-            const artifactData = await firebaseService.readData("ARTIFACT"); // Firebase key is ARTIFACT.json
+            const artifactData = await firebaseService.readData("ARTIFACT"); 
             if (artifactData && artifactData.arr) { 
                 dispatch({
                     type: ActionType.SET_ITEM_MARKET_PRICES, 
@@ -1671,130 +410,97 @@ function Profit() {
         }
     }
     const printPrices = () => {
-        // console.log(clothArmorv1ScholarPrices.arr[5][1]); // Replaced
         const scholarCowlPrices = state.marketPrices.get("HEAD_CLOTH_SET1");
         if (scholarCowlPrices && scholarCowlPrices.prices[5]) console.log(scholarCowlPrices.prices[5][1]);
-        // console.log(clothArmorv2ScholarPrices.arr[5][1]); // Replaced
         const scholarRobePrices = state.marketPrices.get("ARMOR_CLOTH_SET1");
         if (scholarRobePrices && scholarRobePrices.prices[5]) console.log(scholarRobePrices.prices[5][1]);
-        // console.log(clothArmorv3ScholarPrices.arr[5][1]); // Replaced
         const scholarSandalsPrices = state.marketPrices.get("SHOES_CLOTH_SET1");
         if (scholarSandalsPrices && scholarSandalsPrices.prices[5]) console.log(scholarSandalsPrices.prices[5][1]);
         
-        // console.log(clothArmorv1ClericPrices.arr[5][1]); // Replaced
         const clericCowlPrices = state.marketPrices.get("HEAD_CLOTH_SET2");
         if (clericCowlPrices && clericCowlPrices.prices[5]) console.log(clericCowlPrices.prices[5][1]);
-        // console.log(clothArmorv2ClericPrices.arr[5][1]); // Replaced
         const clericRobePrices = state.marketPrices.get("ARMOR_CLOTH_SET2");
         if (clericRobePrices && clericRobePrices.prices[5]) console.log(clericRobePrices.prices[5][1]);
-        // console.log(clothArmorv3ClericPrices.arr[5][1]); // Replaced
         const clericSandalsPrices = state.marketPrices.get("SHOES_CLOTH_SET2");
         if (clericSandalsPrices && clericSandalsPrices.prices[5]) console.log(clericSandalsPrices.prices[5][1]);
 
-        // console.log(clothArmorv1MagePrices.arr[5][1]); // Replaced
         const mageCowlPrices = state.marketPrices.get("HEAD_CLOTH_SET3");
         if (mageCowlPrices && mageCowlPrices.prices[5]) console.log(mageCowlPrices.prices[5][1]);
-        // console.log(clothArmorv2MagePrices.arr[5][1]); // Replaced
         const mageRobePrices = state.marketPrices.get("ARMOR_CLOTH_SET3");
         if (mageRobePrices && mageRobePrices.prices[5]) console.log(mageRobePrices.prices[5][1]);
-        // console.log(clothArmorv3MagePrices.arr[5][1]); // Replaced
         const mageSandalsPrices = state.marketPrices.get("SHOES_CLOTH_SET3");
         if (mageSandalsPrices && mageSandalsPrices.prices[5]) console.log(mageSandalsPrices.prices[5][1]);
 
-        // console.log(clothArmorv1RoyalPrices.arr[5][1]); // Replaced
         const royalCowlPrices = state.marketPrices.get("HEAD_CLOTH_ROYAL");
         if (royalCowlPrices && royalCowlPrices.prices[5]) console.log(royalCowlPrices.prices[5][1]);
-        // console.log(clothArmorv2RoyalPrices.arr[5][1]); // Replaced
         const royalRobePrices = state.marketPrices.get("ARMOR_CLOTH_ROYAL");
         if (royalRobePrices && royalRobePrices.prices[5]) console.log(royalRobePrices.prices[5][1]);
-        // console.log(clothArmorv3RoyalPrices.arr[5][1]); // Replaced
         const royalSandalsPrices = state.marketPrices.get("SHOES_CLOTH_ROYAL");
         if (royalSandalsPrices && royalSandalsPrices.prices[5]) console.log(royalSandalsPrices.prices[5][1]);
 
-        // console.log(clothArmorv1PurityPrices.arr[5][1]); // Replaced
         const purityCowlPrices = state.marketPrices.get("HEAD_CLOTH_AVALON");
         if (purityCowlPrices && purityCowlPrices.prices[5]) console.log(purityCowlPrices.prices[5][1]);
-        // console.log(clothArmorv2PurityPrices.arr[5][1]); // Replaced
         const purityRobePrices = state.marketPrices.get("ARMOR_CLOTH_AVALON");
         if (purityRobePrices && purityRobePrices.prices[5]) console.log(purityRobePrices.prices[5][1]);
-        // console.log(clothArmorv3PurityPrices.arr[5][1]); // Replaced
         const puritySandalsPrices = state.marketPrices.get("SHOES_CLOTH_AVALON");
         if (puritySandalsPrices && puritySandalsPrices.prices[5]) console.log(puritySandalsPrices.prices[5][1]);
 
-        // console.log(clothArmorv1CultistPrices.arr[5][1]); // Replaced
         const cultistCowlPrices = state.marketPrices.get("HEAD_CLOTH_MORGANA");
         if (cultistCowlPrices && cultistCowlPrices.prices[5]) console.log(cultistCowlPrices.prices[5][1]);
-        // console.log(clothArmorv2CultistPrices.arr[5][1]); // Replaced
         const cultistRobePrices = state.marketPrices.get("ARMOR_CLOTH_MORGANA");
         if (cultistRobePrices && cultistRobePrices.prices[5]) console.log(cultistRobePrices.prices[5][1]);
-        // console.log(clothArmorv3CultistPrices.arr[5][1]); // Replaced
         const cultistSandalsPrices = state.marketPrices.get("SHOES_CLOTH_MORGANA");
         if (cultistSandalsPrices && cultistSandalsPrices.prices[5]) console.log(cultistSandalsPrices.prices[5][1]);
 
-        // console.log(clothArmorv1FiendPrices.arr[5][1]); // Replaced
         const fiendCowlPrices = state.marketPrices.get("HEAD_CLOTH_HELL");
         if (fiendCowlPrices && fiendCowlPrices.prices[5]) console.log(fiendCowlPrices.prices[5][1]);
-        // console.log(clothArmorv2FiendPrices.arr[5][1]); // Replaced
         const fiendRobePrices = state.marketPrices.get("ARMOR_CLOTH_HELL");
         if (fiendRobePrices && fiendRobePrices.prices[5]) console.log(fiendRobePrices.prices[5][1]);
-        // console.log(clothArmorv3FiendPrices.arr[5][1]); // Replaced
         const fiendSandalsPrices = state.marketPrices.get("SHOES_CLOTH_HELL");
         if (fiendSandalsPrices && fiendSandalsPrices.prices[5]) console.log(fiendSandalsPrices.prices[5][1]);
         
-        // console.log(clothArmorv1DruidPrices.arr[5][1]); // Replaced
         const druidCowlPrices = state.marketPrices.get("HEAD_CLOTH_KEEPER");
         if (druidCowlPrices && druidCowlPrices.prices[5]) console.log(druidCowlPrices.prices[5][1]);
-        // console.log(clothArmorv2DruidPrices.arr[5][1]); // Replaced
         const druidRobePrices = state.marketPrices.get("ARMOR_CLOTH_KEEPER");
         if (druidRobePrices && druidRobePrices.prices[5]) console.log(druidRobePrices.prices[5][1]);
-        // console.log(clothArmorv3DruidPrices.arr[5][1]); // Replaced
         const druidSandalsPrices = state.marketPrices.get("SHOES_CLOTH_KEEPER");
         if (druidSandalsPrices && druidSandalsPrices.prices[5]) console.log(druidSandalsPrices.prices[5][1]);
 
-        // console.log(bagPrices.arr[5][1]); // Replaced
         const bagMarketPrices = state.marketPrices.get("BAG");
         if (bagMarketPrices && bagMarketPrices.prices[5]) {
             console.log(bagMarketPrices.prices[5][1]);
         }
-        // console.log(satchelPrices.arr[5][1]); // Replaced
         const satchelMarketPrices = state.marketPrices.get("SATCHEL_INSIGHT");
         if (satchelMarketPrices && satchelMarketPrices.prices[5]) {
             console.log(satchelMarketPrices.prices[5][1]);
         }
-        // console.log(clothPrices.arr[5][1]); // Replaced
         const clothMarketPrices = state.marketPrices.get("CLOTH");
         if (clothMarketPrices && clothMarketPrices.prices[5]) {
             console.log(clothMarketPrices.prices[5][1]);
         }
-        // console.log(fiberPrices.arr[5][1]); // Replaced
         const fiberMarketPrices = state.marketPrices.get("FIBER");
-        if (fiberMarketPrices && fiberMarketPrices.prices[5]) { // Check if row 5 exists
+        if (fiberMarketPrices && fiberMarketPrices.prices[5]) { 
              console.log(fiberMarketPrices.prices[5][1]);
         }
-        // console.log(hidePrices.arr[5][1]); // Replaced
         const hideMarketPrices = state.marketPrices.get("HIDE");
         if (hideMarketPrices && hideMarketPrices.prices[5]) {
             console.log(hideMarketPrices.prices[5][1]);
         }
-        // console.log(leatherPrices.arr[5][1]); // Replaced
         const leatherMarketPrices = state.marketPrices.get("LEATHER");
         if (leatherMarketPrices && leatherMarketPrices.prices[5]) {
             console.log(leatherMarketPrices.prices[5][1]);
         }
-        // console.log(logPrices.arr[5][1]); // Replaced
-        const logMarketPrices = state.marketPrices.get("WOOD"); // Assuming "WOOD" is the key for logPrices
+        const logMarketPrices = state.marketPrices.get("WOOD"); 
         if (logMarketPrices && logMarketPrices.prices[5]) {
             console.log(logMarketPrices.prices[5][1]);
         }
-        // console.log(plankPrices.arr[5][1]); // Replaced
         const plankMarketPrices = state.marketPrices.get("PLANKS");
         if (plankMarketPrices && plankMarketPrices.prices[5]) {
             console.log(plankMarketPrices.prices[5][1]);
         }
-        // console.log(clothArmorArtifacts.arr[5][1]); // Replaced
         const artifactPrices = state.marketPrices.get("CLOTH_ARMOR_ARTIFACT_PRICES");
-        if (artifactPrices && artifactPrices.prices[5]) console.log(artifactPrices.prices[5][1]);
-        console.log(hearts.arr[3]);
+        if (artifactPrices && artifactPrices.prices && artifactPrices.prices[5]) console.log(artifactPrices.prices[5][1]); 
+        if (state.heartPrices && state.heartPrices.length > 3) console.log(state.heartPrices[3]);
     }
     const componentDidMount = async () => {
         getResources();
@@ -1802,21 +508,20 @@ function Profit() {
         getToolsMarketPrices();
         getArtifactPrices();
 
-        resourceMount();
-        // clothArmorCraftMount();
-        // toolsCraftMount();
-        // setTableReady(true);
-
+        // resourceMount(); // Old calculation logic, removed
+        // clothArmorCraftMount(); // Old calculation logic, removed
+        // toolsCraftMount(); // Old calculation logic, removed
+        // setTableReady(true); // Potentially re-evaluate if needed for new display logic
     }
     const makeRecipes = async () => {
-        resourceMount();
-        clothArmorCraftMount();
-        toolsCraftMount();
-        // setTableReady(true);
+        // resourceMount(); // Old calculation logic, removed
+        // clothArmorCraftMount(); // Old calculation logic, removed
+        // toolsCraftMount(); // Old calculation logic, removed
+        // This function might be repurposed to trigger calculations or can be removed.
     }
     const seeResource = async () => {
-        resourceMount();
-        console.log(profitableFiber);
+        // resourceMount(); // Old calculation logic, removed
+        // console.log(profitableFiber); // Old state, removed
         setResourceReady(true);
     }
     const seeProfitable = async () => {
@@ -1826,74 +531,493 @@ function Profit() {
     useEffect(() => {
         componentDidMount();
     }, []);
+
+    const updateFiberPrices_OnClick = async () => {
+        const itemUniqueNameBase = "FIBER";
+        const loadingKey = `${itemUniqueNameBase}_UPDATE`;
+        const location = "3005"; // Example: Lymhurst for resources
+
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: loadingKey } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+
+        try {
+            const itemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === itemUniqueNameBase);
+            if (!itemDef) {
+                throw new Error(`Item definition not found for ${itemUniqueNameBase}`);
+            }
+
+            const newPriceMatrix: PriceMatrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+            // let allFetchesSuccessful = true; // Optional, depending on error handling strategy
+
+            for (const tier of itemDef.tiers) { 
+                if (!newPriceMatrix[tier]) newPriceMatrix[tier] = Array(4).fill(NaN);
+                const maxEnchant = itemDef.maxEnchantmentLvl !== undefined ? itemDef.maxEnchantmentLvl : 0; 
+                
+                for (let enchantment = 0; enchantment <= maxEnchant; enchantment++) {
+                    if (!itemDef.isLeveledResource && enchantment > 0) continue; 
+
+                    const price = await albionDataService.fetchItemPrice(
+                        location,
+                        itemDef.uniqueNameBase, 
+                        tier,
+                        enchantment,
+                        itemDef.isLeveledResource || false
+                    );
+                    
+                    if (price !== null) {
+                        newPriceMatrix[tier][enchantment] = price;
+                    } else {
+                        newPriceMatrix[tier][enchantment] = NaN; 
+                        // allFetchesSuccessful = false; 
+                    }
+                }
+            }
+
+            // if (!allFetchesSuccessful) {
+            //     throw new Error(`One or more price fetches failed for ${itemUniqueNameBase}. Data might be incomplete.`);
+            // }
+
+            await firebaseService.writeData(itemUniqueNameBase, { arr: newPriceMatrix }); 
+
+            dispatch({
+                type: ActionType.SET_ITEM_MARKET_PRICES,
+                payload: {
+                    uniqueNameBase: itemUniqueNameBase,
+                    prices: newPriceMatrix,
+                    lastUpdated: new Date().toISOString()
+                }
+            });
+
+            // calculateAllProfits(); // Optional: Trigger recalculation 
+
+            alert(`${itemUniqueNameBase} prices updated successfully!`);
+
+        } catch (error) {
+            console.error(`Error updating ${itemUniqueNameBase} prices:`, error);
+            dispatch({ type: ActionType.SET_ERROR, payload: `Failed to update ${itemUniqueNameBase} prices: ${(error as Error).message}` });
+            alert(`Error updating ${itemUniqueNameBase} prices. Check console.`);
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: loadingKey } });
+        }
+    };
+
+    const updateHidePrices_OnClick = async () => {
+        const itemUniqueNameBase = "HIDE";
+        const loadingKey = `${itemUniqueNameBase}_UPDATE`;
+        const location = "3005"; // Lymhurst
+
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: loadingKey } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+
+        try {
+            const itemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === itemUniqueNameBase);
+            if (!itemDef) {
+                throw new Error(`Item definition not found for ${itemUniqueNameBase}`);
+            }
+
+            const newPriceMatrix: PriceMatrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+            for (const tier of itemDef.tiers) {
+                if (!newPriceMatrix[tier]) newPriceMatrix[tier] = Array(4).fill(NaN);
+                const maxEnchant = itemDef.maxEnchantmentLvl !== undefined ? itemDef.maxEnchantmentLvl : 0; 
+                
+                for (let enchantment = 0; enchantment <= maxEnchant; enchantment++) {
+                    if (!itemDef.isLeveledResource && enchantment > 0) continue;
+
+                    const price = await albionDataService.fetchItemPrice(
+                        location,
+                        itemDef.uniqueNameBase,
+                        tier,
+                        enchantment,
+                        itemDef.isLeveledResource || false
+                    );
+                    newPriceMatrix[tier][enchantment] = price !== null ? price : NaN;
+                }
+            }
+
+            await firebaseService.writeData(itemUniqueNameBase, { arr: newPriceMatrix });
+            dispatch({
+                type: ActionType.SET_ITEM_MARKET_PRICES,
+                payload: {
+                    uniqueNameBase: itemUniqueNameBase,
+                    prices: newPriceMatrix,
+                    lastUpdated: new Date().toISOString()
+                }
+            });
+            alert(`${itemUniqueNameBase} prices updated successfully from ${location}!`);
+        } catch (error) {
+            console.error(`Error updating ${itemUniqueNameBase} prices:`, error);
+            dispatch({ type: ActionType.SET_ERROR, payload: `Failed to update ${itemUniqueNameBase} prices: ${(error as Error).message}` });
+            alert(`Error updating ${itemUniqueNameBase} prices from ${location}. Check console.`);
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: loadingKey } });
+        }
+    };
+
+    const updateWoodPrices_OnClick = async () => {
+        const itemUniqueNameBase = "WOOD";
+        const loadingKey = `${itemUniqueNameBase}_UPDATE`;
+        const location = "3005"; // Lymhurst
+
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: loadingKey } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+
+        try {
+            const itemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === itemUniqueNameBase);
+            if (!itemDef) {
+                throw new Error(`Item definition not found for ${itemUniqueNameBase}`);
+            }
+
+            const newPriceMatrix: PriceMatrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+            for (const tier of itemDef.tiers) {
+                if (!newPriceMatrix[tier]) newPriceMatrix[tier] = Array(4).fill(NaN);
+                const maxEnchant = itemDef.maxEnchantmentLvl !== undefined ? itemDef.maxEnchantmentLvl : 0;
+                
+                for (let enchantment = 0; enchantment <= maxEnchant; enchantment++) {
+                    if (!itemDef.isLeveledResource && enchantment > 0) continue;
+
+                    const price = await albionDataService.fetchItemPrice(
+                        location,
+                        itemDef.uniqueNameBase,
+                        tier,
+                        enchantment,
+                        itemDef.isLeveledResource || false
+                    );
+                    newPriceMatrix[tier][enchantment] = price !== null ? price : NaN;
+                }
+            }
+
+            await firebaseService.writeData(itemUniqueNameBase, { arr: newPriceMatrix });
+            dispatch({
+                type: ActionType.SET_ITEM_MARKET_PRICES,
+                payload: {
+                    uniqueNameBase: itemUniqueNameBase,
+                    prices: newPriceMatrix,
+                    lastUpdated: new Date().toISOString()
+                }
+            });
+            alert(`${itemUniqueNameBase} prices updated successfully from ${location}!`);
+        } catch (error) {
+            console.error(`Error updating ${itemUniqueNameBase} prices:`, error);
+            dispatch({ type: ActionType.SET_ERROR, payload: `Failed to update ${itemUniqueNameBase} prices: ${(error as Error).message}` });
+            alert(`Error updating ${itemUniqueNameBase} prices from ${location}. Check console.`);
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: loadingKey } });
+        }
+    };
+
+    const updateHidePrices_OnClick = async () => {
+        const itemUniqueNameBase = "HIDE";
+        const loadingKey = `${itemUniqueNameBase}_UPDATE`;
+        const location = "3005"; // Lymhurst
+
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: loadingKey } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+
+        try {
+            const itemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === itemUniqueNameBase);
+            if (!itemDef) {
+                throw new Error(`Item definition not found for ${itemUniqueNameBase}`);
+            }
+
+            const newPriceMatrix: PriceMatrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+            for (const tier of itemDef.tiers) {
+                if (!newPriceMatrix[tier]) newPriceMatrix[tier] = Array(4).fill(NaN);
+                const maxEnchant = itemDef.maxEnchantmentLvl !== undefined ? itemDef.maxEnchantmentLvl : 0; 
+                
+                for (let enchantment = 0; enchantment <= maxEnchant; enchantment++) {
+                     // Raw resources like HIDE are not "leveled" resources and typically only exist at .0
+                    if (!itemDef.isLeveledResource && enchantment > 0) continue;
+
+                    const price = await albionDataService.fetchItemPrice(
+                        location,
+                        itemDef.uniqueNameBase,
+                        tier,
+                        enchantment,
+                        itemDef.isLeveledResource || false
+                    );
+                    newPriceMatrix[tier][enchantment] = price !== null ? price : NaN;
+                }
+            }
+
+            await firebaseService.writeData(itemUniqueNameBase, { arr: newPriceMatrix });
+            dispatch({
+                type: ActionType.SET_ITEM_MARKET_PRICES,
+                payload: {
+                    uniqueNameBase: itemUniqueNameBase,
+                    prices: newPriceMatrix,
+                    lastUpdated: new Date().toISOString()
+                }
+            });
+            alert(`${itemUniqueNameBase} prices updated successfully from ${location}!`);
+        } catch (error) {
+            console.error(`Error updating ${itemUniqueNameBase} prices:`, error);
+            dispatch({ type: ActionType.SET_ERROR, payload: `Failed to update ${itemUniqueNameBase} prices: ${(error as Error).message}` });
+            alert(`Error updating ${itemUniqueNameBase} prices from ${location}. Check console.`);
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: loadingKey } });
+        }
+    };
+
+    const updateWoodPrices_OnClick = async () => {
+        const itemUniqueNameBase = "WOOD";
+        const loadingKey = `${itemUniqueNameBase}_UPDATE`;
+        const location = "3005"; // Lymhurst
+
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: loadingKey } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+
+        try {
+            const itemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === itemUniqueNameBase);
+            if (!itemDef) {
+                throw new Error(`Item definition not found for ${itemUniqueNameBase}`);
+            }
+
+            const newPriceMatrix: PriceMatrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+            for (const tier of itemDef.tiers) {
+                if (!newPriceMatrix[tier]) newPriceMatrix[tier] = Array(4).fill(NaN);
+                const maxEnchant = itemDef.maxEnchantmentLvl !== undefined ? itemDef.maxEnchantmentLvl : 0;
+                
+                for (let enchantment = 0; enchantment <= maxEnchant; enchantment++) {
+                    // Raw resources like WOOD are not "leveled" resources and typically only exist at .0
+                    if (!itemDef.isLeveledResource && enchantment > 0) continue;
+
+                    const price = await albionDataService.fetchItemPrice(
+                        location,
+                        itemDef.uniqueNameBase,
+                        tier,
+                        enchantment,
+                        itemDef.isLeveledResource || false
+                    );
+                    newPriceMatrix[tier][enchantment] = price !== null ? price : NaN;
+                }
+            }
+
+            await firebaseService.writeData(itemUniqueNameBase, { arr: newPriceMatrix });
+            dispatch({
+                type: ActionType.SET_ITEM_MARKET_PRICES,
+                payload: {
+                    uniqueNameBase: itemUniqueNameBase,
+                    prices: newPriceMatrix,
+                    lastUpdated: new Date().toISOString()
+                }
+            });
+            alert(`${itemUniqueNameBase} prices updated successfully from ${location}!`);
+        } catch (error) {
+            console.error(`Error updating ${itemUniqueNameBase} prices:`, error);
+            dispatch({ type: ActionType.SET_ERROR, payload: `Failed to update ${itemUniqueNameBase} prices: ${(error as Error).message}` });
+            alert(`Error updating ${itemUniqueNameBase} prices from ${location}. Check console.`);
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: loadingKey } });
+        }
+    };
+
+    const updateClothPrices_OnClick = async () => {
+        const itemUniqueNameBase = "CLOTH";
+        const loadingKey = `${itemUniqueNameBase}_UPDATE`;
+        // Common locations for cloth could be Lymhurst (3005) or Caerleon (3003)
+        // Let's use Lymhurst for refined resources for consistency with Fiber, unless specified otherwise.
+        const location = "3005"; 
+
+        dispatch({ type: ActionType.SET_LOADING, payload: { key: loadingKey } });
+        dispatch({ type: ActionType.CLEAR_ERROR });
+
+        try {
+            const itemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === itemUniqueNameBase);
+            if (!itemDef) {
+                throw new Error(`Item definition not found for ${itemUniqueNameBase}`);
+            }
+
+            const newPriceMatrix: PriceMatrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+            // Refined resources like cloth typically go from T2-T8, and .0 to .3 (or higher via rare drops/melds)
+            // The itemDef.tiers and itemDef.maxEnchantmentLvl should guide this.
+
+            for (const tier of itemDef.tiers) {
+                if (!newPriceMatrix[tier]) newPriceMatrix[tier] = Array(4).fill(NaN);
+                // Max enchantment for standard refined resources is usually 3.
+                const maxEnchant = itemDef.maxEnchantmentLvl !== undefined ? itemDef.maxEnchantmentLvl : 3; 
+                
+                for (let enchantment = 0; enchantment <= maxEnchant; enchantment++) {
+                    const price = await albionDataService.fetchItemPrice(
+                        location,
+                        itemDef.uniqueNameBase,
+                        tier,
+                        enchantment,
+                        itemDef.isLeveledResource || false // Cloth is not a 'leveled' resource like T4_FIBER_LEVEL1
+                    );
+                    
+                    newPriceMatrix[tier][enchantment] = price !== null ? price : NaN;
+                }
+            }
+
+            await firebaseService.writeData(itemUniqueNameBase, { arr: newPriceMatrix });
+            dispatch({
+                type: ActionType.SET_ITEM_MARKET_PRICES,
+                payload: {
+                    uniqueNameBase: itemUniqueNameBase,
+                    prices: newPriceMatrix,
+                    lastUpdated: new Date().toISOString()
+                }
+            });
+            // Optional: Trigger recalculation of profits
+            // calculateAllProfits(); 
+
+            alert(`${itemUniqueNameBase} prices updated successfully from ${location}!`);
+
+        } catch (error) {
+            console.error(`Error updating ${itemUniqueNameBase} prices:`, error);
+            dispatch({ type: ActionType.SET_ERROR, payload: `Failed to update ${itemUniqueNameBase} prices: ${(error as Error).message}` });
+            alert(`Error updating ${itemUniqueNameBase} prices from ${location}. Check console.`);
+        } finally {
+            dispatch({ type: ActionType.CLEAR_LOADING, payload: { key: loadingKey } });
+        }
+    };
+
+    const clothItemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === "CLOTH");
+    const clothCraftCostMatrix: PriceMatrix = useMemo(() => {
+        const matrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+        if (clothItemDef && clothItemDef.recipe) {
+            clothItemDef.tiers.forEach(tier => {
+                if (!matrix[tier]) matrix[tier] = Array(4).fill(NaN);
+                const maxEnchant = clothItemDef.maxEnchantmentLvl !== undefined ? clothItemDef.maxEnchantmentLvl : 3;
+                for (let ench = 0; ench <= maxEnchant; ench++) {
+                    const cost = calculateCraftingCost(clothItemDef, tier, ench, getPriceFromState);
+                    if (cost !== null) matrix[tier][ench] = cost;
+                }
+            });
+        }
+        return matrix;
+    }, [state.marketPrices, getPriceFromState]);
+
+    const leatherItemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === "LEATHER");
+    const leatherCraftCostMatrix: PriceMatrix = useMemo(() => {
+        const matrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+        if (leatherItemDef && leatherItemDef.recipe) {
+            leatherItemDef.tiers.forEach(tier => {
+                if (!matrix[tier]) matrix[tier] = Array(4).fill(NaN);
+                const maxEnchant = leatherItemDef.maxEnchantmentLvl !== undefined ? leatherItemDef.maxEnchantmentLvl : 3;
+                for (let ench = 0; ench <= maxEnchant; ench++) {
+                    const cost = calculateCraftingCost(leatherItemDef, tier, ench, getPriceFromState);
+                    if (cost !== null) matrix[tier][ench] = cost;
+                }
+            });
+        }
+        return matrix;
+    }, [state.marketPrices, getPriceFromState]);
+
+    const planksItemDef = ALL_ITEM_DEFINITIONS.find(def => def.uniqueNameBase === "PLANKS");
+    const planksCraftCostMatrix: PriceMatrix = useMemo(() => {
+        const matrix = Array(9).fill(null).map(() => Array(4).fill(NaN));
+        if (planksItemDef && planksItemDef.recipe) {
+            planksItemDef.tiers.forEach(tier => {
+                if (!matrix[tier]) matrix[tier] = Array(4).fill(NaN);
+                const maxEnchant = planksItemDef.maxEnchantmentLvl !== undefined ? planksItemDef.maxEnchantmentLvl : 3;
+                for (let ench = 0; ench <= maxEnchant; ench++) {
+                    const cost = calculateCraftingCost(planksItemDef, tier, ench, getPriceFromState);
+                    if (cost !== null) matrix[tier][ench] = cost;
+                }
+            });
+        }
+        return matrix;
+    }, [state.marketPrices, getPriceFromState]);
+
     return (
         <div className="profit">
             <div>
+                <button onClick={updateFiberPrices_OnClick}>Update Fiber Prices (Lymhurst)</button>
+                <button onClick={updateClothPrices_OnClick}>Update Cloth Prices (Lymhurst)</button>
+                <button onClick={updateHidePrices_OnClick}>Update Hide Prices (Lymhurst)</button>
+                <button onClick={updateWoodPrices_OnClick}>Update Wood Prices (Lymhurst)</button>
+                <button onClick={updateLeatherPrices_OnClick}>Update Leather Prices (Lymhurst)</button>
+                <button onClick={updatePlankPrices_OnClick}>Update Plank Prices (Lymhurst)</button>
                 {/* <button onClick={databaseToolsGüncelleme} >Tools güncelle</button>
                 <button onClick={databaseResourcev1Güncelleme} >Resource güncellev1</button>
                 <button onClick={databaseResourcev2Güncelleme} >Resource güncellev2</button>
                 <button onClick={databaseClothArmorGüncelleme} >Cloth armor güncelle</button>
-                <button onClick={databaseClothArmorArtifactGüncelleme} >Cloth Armor Artifact güncelle</button> */}
+                <button onClick={databaseClothArmorArtifactGüncelleme} >Cloth Armor Artifact güncelle</button>
+                <button onClick={databaseHeartGüncelleme} >heartGüncelle</button> */}
 
                 {/* <button onClick={denemeGüncelleme} >deneme</button>
-                <button onClick={databaseHeartGüncelleme} >heartGüncelle</button>
                 <button onClick={deleteClothArmor} >delete Cloth armor</button> */}
                 {/* <button onClick={getToolsMarketPrices} >getResources</button> */}
             </div>
 
             {/* {tableReady ? (<div>fiber marketplace</div>) : (<div>baban</div>)} */}
-            {resourceReady ? (<div>
-                {state.marketPrices.get("FIBER") ? printMultidimenstionalArray({ arr: state.marketPrices.get("FIBER")!.prices }) : <div>Loading Fiber prices...</div>}
-                <div>fiber craft v1</div>
-                {printMultidimenstionalArray(fiberCraftPricesv1)}
-                <div>fiber craft v2</div>
-                {printMultidimenstionalArray(fiberCraftPricesv2)}
-                <div>index</div>
-                {printMultidimenstionalArray(profitableFiberIndex)}
-                <div>profitable</div>
-                {printMultidimenstionalArray(profitableFiber)}</div>) : (<div>baban</div>)}
+            {resourceReady ? (
+                <div>
+                    <h4>FIBER Market Prices</h4>
+                    {state.marketPrices.get("FIBER") ? printMultidimenstionalArray({ arr: state.marketPrices.get("FIBER")!.prices }) : <p>Fiber prices not loaded.</p>}
+                    
+                    <h4>HIDE Market Prices</h4>
+                    {state.marketPrices.get("HIDE") ? printMultidimenstionalArray({ arr: state.marketPrices.get("HIDE")!.prices }) : <p>Hide prices not loaded.</p>}
+
+                    <h4>WOOD Market Prices (Logs)</h4>
+                    {state.marketPrices.get("WOOD") ? printMultidimenstionalArray({ arr: state.marketPrices.get("WOOD")!.prices }) : <p>Wood prices not loaded.</p>}
+
+                    <h4>CLOTH Market Prices</h4>
+                    {state.marketPrices.get("CLOTH") ? printMultidimenstionalArray({ arr: state.marketPrices.get("CLOTH")!.prices }) : <p>Cloth prices not loaded.</p>}
+                    <h4>CLOTH Craft Costs</h4>
+                    {printMultidimenstionalArray({ arr: clothCraftCostMatrix })}
+
+                    <h4>LEATHER Market Prices</h4>
+                    {state.marketPrices.get("LEATHER") ? printMultidimenstionalArray({ arr: state.marketPrices.get("LEATHER")!.prices }) : <p>Leather prices not loaded.</p>}
+                    <h4>LEATHER Craft Costs</h4>
+                    {printMultidimenstionalArray({ arr: leatherCraftCostMatrix })}
+
+                    <h4>PLANKS Market Prices</h4>
+                    {state.marketPrices.get("PLANKS") ? printMultidimenstionalArray({ arr: state.marketPrices.get("PLANKS")!.prices }) : <p>Planks prices not loaded.</p>}
+                    <h4>PLANKS Craft Costs</h4>
+                    {printMultidimenstionalArray({ arr: planksCraftCostMatrix })}
+                </div>
+            ) : (<div>Resources not loaded or 'See Resources' not clicked.</div>)}
 
             <button onClick={seeResource}>see resources</button>
 
-            <button onClick={makeRecipes}>make recipes</button>
+            {/* <button onClick={makeRecipes}>make recipes</button> */}
 
             <button onClick={seeProfitable}>see profitable</button>
 
             {profitableReady ? (<div>
-                <div>BAG </div>
-                {printMultidimenstionalArray(profitableBag)}
-                {printMultidimenstionalArray(profitableBagPercentage)}
-                <div>SATCHEL </div>
-                {printMultidimenstionalArray(profitableSatchel)}
-                {printMultidimenstionalArray(profitableSatchelPercentage)}
-                <div>SCHOLAR</div>
-                {printMultidimenstionalArray(profitableClothArmorv1ScholarPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv2ScholarPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv3ScholarPercentage)}
-                <div>Cleric</div>
-                {printMultidimenstionalArray(profitableClothArmorv1ClericPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv2ClericPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv3ClericPercentage)}
-                <div>Mage</div>
-                {printMultidimenstionalArray(profitableClothArmorv1MagePercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv2MagePercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv3MagePercentage)}
-                <div>Cultist</div>
-                {printMultidimenstionalArray(profitableClothArmorv1CultistPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv2CultistPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv3CultistPercentage)}
-                <div>Purity</div>
-                {printMultidimenstionalArray(profitableClothArmorv1PurityPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv2PurityPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv3PurityPercentage)}
-                <div>Fiend</div>
-                {printMultidimenstionalArray(profitableClothArmorv1FiendPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv2FiendPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv3FiendPercentage)}
-                <div>Druid</div>
-                {printMultidimenstionalArray(profitableClothArmorv1DruidPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv2DruidPercentage)}
-                {printMultidimenstionalArray(profitableClothArmorv3DruidPercentage)}</div>) : (<div>baban</div>)}
+                <ProfitDisplayTable title="BAG" itemUniqueNameBase="BAG" />
+                <ProfitDisplayTable title="SATCHEL" itemUniqueNameBase="BAG_INSIGHT" />
+                <ProfitDisplayTable title="SCHOLAR COWL" itemUniqueNameBase="HEAD_CLOTH_SET1" />
+                <ProfitDisplayTable title="SCHOLAR ROBE" itemUniqueNameBase="ARMOR_CLOTH_SET1" />
+                <ProfitDisplayTable title="SCHOLAR SANDALS" itemUniqueNameBase="SHOES_CLOTH_SET1" />
+
+                {/* Cleric Set */}
+                <ProfitDisplayTable title="CLERIC COWL" itemUniqueNameBase="HEAD_CLOTH_SET2" />
+                <ProfitDisplayTable title="CLERIC ROBE" itemUniqueNameBase="ARMOR_CLOTH_SET2" />
+                <ProfitDisplayTable title="CLERIC SANDALS" itemUniqueNameBase="SHOES_CLOTH_SET2" />
+
+                {/* Mage Set */}
+                <ProfitDisplayTable title="MAGE COWL" itemUniqueNameBase="HEAD_CLOTH_SET3" />
+                <ProfitDisplayTable title="MAGE ROBE" itemUniqueNameBase="ARMOR_CLOTH_SET3" />
+                <ProfitDisplayTable title="MAGE SANDALS" itemUniqueNameBase="SHOES_CLOTH_SET3" />
+
+                {/* Royal Set */}
+                <ProfitDisplayTable title="ROYAL COWL" itemUniqueNameBase="HEAD_CLOTH_ROYAL" />
+                <ProfitDisplayTable title="ROYAL ROBE" itemUniqueNameBase="ARMOR_CLOTH_ROYAL" />
+                <ProfitDisplayTable title="ROYAL SANDALS" itemUniqueNameBase="SHOES_CLOTH_ROYAL" />
+
+                {/* Druid Set */}
+                <ProfitDisplayTable title="DRUID COWL" itemUniqueNameBase="HEAD_CLOTH_KEEPER" />
+                <ProfitDisplayTable title="DRUID ROBE" itemUniqueNameBase="ARMOR_CLOTH_KEEPER" />
+                <ProfitDisplayTable title="DRUID SANDALS" itemUniqueNameBase="SHOES_CLOTH_KEEPER" />
+
+                {/* Fiend Set */}
+                <ProfitDisplayTable title="FIEND COWL" itemUniqueNameBase="HEAD_CLOTH_HELL" />
+                <ProfitDisplayTable title="FIEND ROBE" itemUniqueNameBase="ARMOR_CLOTH_HELL" />
+                <ProfitDisplayTable title="FIEND SANDALS" itemUniqueNameBase="SHOES_CLOTH_HELL" />
+
+                {/* Cultist Set */}
+                <ProfitDisplayTable title="CULTIST COWL" itemUniqueNameBase="HEAD_CLOTH_MORGANA" />
+                <ProfitDisplayTable title="CULTIST ROBE" itemUniqueNameBase="ARMOR_CLOTH_MORGANA" />
+                <ProfitDisplayTable title="CULTIST SANDALS" itemUniqueNameBase="SHOES_CLOTH_MORGANA" />
+
+                {/* Purity Set */}
+                <ProfitDisplayTable title="PURITY COWL" itemUniqueNameBase="HEAD_CLOTH_AVALON" />
+                <ProfitDisplayTable title="PURITY ROBE" itemUniqueNameBase="ARMOR_CLOTH_AVALON" />
+                <ProfitDisplayTable title="PURITY SANDALS" itemUniqueNameBase="SHOES_CLOTH_AVALON" />
+                </div>) : (<div>baban</div>)}
             {/* {printMultidimenstionalArray(profitableCloth)}
             {printMultidimenstionalArray(fiberCraftPricesv1)}
             {printMultidimenstionalArray(profitableFiberIndex)} */}
